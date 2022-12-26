@@ -28,6 +28,7 @@ model Account {
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -36,16 +37,20 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
+  id            String        @id @default(cuid())
+  name          String
+  email         String        @unique
   emailVerified DateTime?
-  image         String?
+  image         String
+  score         Int           @default(0)
   accounts      Account[]
   sessions      Session[]
+  subbmission   Subbmission[]
 }
 
 model VerificationToken {
@@ -56,8 +61,41 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Example {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+// Real Schema
+
+enum ProblemDifficulty {
+  easy
+  medium
+  hard
+}
+
+model Problem {
+  id           String            @id @default(cuid())
+  name         String
+  difficulty   ProblemDifficulty @default(easy)
+  desciption   String            @db.LongText
+  testCases    Json
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  subbmissions Subbmission[]
+}
+
+enum SubbmissionStatus {
+  completed
+  failed
+}
+
+model Subbmission {
+  id        String            @id @default(cuid())
+  code      String            @db.MediumText
+  status    SubbmissionStatus @default(failed)
+  problemId String
+  problem   Problem           @relation(fields: [problemId], references: [id])
+  userId    String
+  user      User              @relation(fields: [userId], references: [id])
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@index([problemId])
+  @@index([userId])
 }
