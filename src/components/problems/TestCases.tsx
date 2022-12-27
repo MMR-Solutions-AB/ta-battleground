@@ -37,14 +37,12 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
             ref={submitButtonRef}
             disabled={runCodeMutation.isLoading}
             className="rounded-md bg-primary px-4 py-1 text-white hover:opacity-80 disabled:opacity-50"
-            onClick={async (e) => {
+            onClick={async () => {
               const res = await runCodeMutation.mutateAsync({
                 problemId: Array.isArray(id) ? id[0] || "" : id,
                 code,
                 type: "submit",
               });
-              console.log("HELLLOO");
-              console.log(res);
               if (res.correctSolution && submitButtonRef.current) {
                 party.confetti(submitButtonRef.current, {
                   count: party.variation.range(70, 90),

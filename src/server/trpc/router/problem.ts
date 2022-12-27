@@ -7,6 +7,8 @@ export const problemRouter = router({
     const problems = await main();
     console.log(problems);
 
+    const allProblems = await ctx.prisma.problem.findMany({});
+
     return ctx.prisma.problem.findMany({});
     // return ctx.prisma.problem.createMany({ data: problems });
   }),
@@ -29,6 +31,9 @@ export const problemRouter = router({
           },
           take: 1,
         },
+      },
+      orderBy: {
+        number: "asc",
       },
     });
   }),

@@ -29,14 +29,7 @@ const ProblemsTable: React.FC = ({}) => {
           </thead>
           <tbody className="">
             {problems.map((problem) => (
-              <>
-                <ProblemsTableRow key={problem.id} problem={problem} />
-                <ProblemsTableRow key={problem.id} problem={problem} />
-                <ProblemsTableRow key={problem.id} problem={problem} />
-                <ProblemsTableRow key={problem.id} problem={problem} />
-                <ProblemsTableRow key={problem.id} problem={problem} />
-                <ProblemsTableRow key={problem.id} problem={problem} />
-              </>
+              <ProblemsTableRow key={problem.id} problem={problem} />
             ))}
           </tbody>
         </table>

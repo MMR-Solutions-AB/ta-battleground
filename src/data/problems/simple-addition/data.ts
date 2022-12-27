@@ -3,6 +3,7 @@ import type { Problem } from "../../Problem";
 export const data: Problem<number, number> = {
   name: "Simple Addition",
   difficulty: "easy",
+  number: 1,
   testCases: [
     {
       input: [1, 2],

@@ -74,12 +74,13 @@ model Problem {
   name        String            @unique
   difficulty  ProblemDifficulty @default(easy)
   description String            @db.LongText
+  number      Int               @unique
   testCases   Json
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
   submissions Submission[]
 
-  @@index([name, difficulty])
+  @@index([name, difficulty, number])
 }
 
 enum SubmissionStatus {
