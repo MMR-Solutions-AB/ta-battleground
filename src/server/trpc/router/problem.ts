@@ -11,6 +11,20 @@ export const problemRouter = router({
     // return ctx.prisma.problem.createMany({ data: problems });
   }),
   getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.problem.findMany();
+    return ctx.prisma.problem.findMany({
+      select: {
+        id: true,
+        name: true,
+        difficulty: true,
+        submissions: {
+          where: {
+            status: "completed",
+          },
+          select: {
+            createdAt: true,
+          },
+        },
+      },
+    });
   }),
 });
