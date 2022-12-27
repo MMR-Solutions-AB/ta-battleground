@@ -91,6 +91,7 @@ model Submission {
   id        String           @id @default(cuid())
   code      String           @db.MediumText
   status    SubmissionStatus @default(failed)
+  testCases Json
   problemId String
   problem   Problem          @relation(fields: [problemId], references: [id])
   userId    String
