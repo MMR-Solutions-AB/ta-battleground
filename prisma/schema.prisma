@@ -72,7 +72,7 @@ enum ProblemDifficulty {
 model Problem {
   id          String            @id @default(cuid())
   name        String            @unique
-  difficulty  ProblemDifficulty @default(easy)
+  difficulty  ProblemDifficulty
   description String            @db.LongText
   number      Int               @unique
   testCases   Json

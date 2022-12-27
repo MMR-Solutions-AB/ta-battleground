@@ -27,7 +27,7 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
             href={`/problems/${problem.id}`}
             className="overflow-hidden truncate hover:text-primary"
           >
-            {problem.name}
+            {problem.number} - {problem.name}
           </Link>
         </div>
       </td>

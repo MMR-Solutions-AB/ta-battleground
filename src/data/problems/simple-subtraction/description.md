@@ -1,16 +1,22 @@
 # Simple Subtraction
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis fugiat esse itaque officia aliquam ex inventore reprehenderit labore? _Eaque assumenda reprehenderit quisquam cum, laborum, libero, adipisci_ magni repudiandae quaerat consequatur cupiditate unde debitis pariatur eum **totam** animi. Iusto quidem accusamus fuga recusandae voluptas laboriosam pariatur, unde expedita alias, minus odit saepe rem totam corporis voluptatem qui blanditiis ullam tenetur. Ex, sit consequatur mollitia magnam vitae ducimus debitis incidunt dolores **repellat ea itaque ullam quaerat** illo ab rem obcaecati recusandae cumque doloremque culpa quia ad. Dolorem alias ipsam deserunt, earum, ad optio omnis dignissimos explicabo ea praesentium nesciunt vitae saepe reprehenderit!
+Givet två nummer, **a** och **b**, beräknade differensen av **a - b** och returnera det ur funktionen **main**. Alltså subtrahera **b** från **a** och returnera ditt svar
 
-> hello
+## Exempel
 
-```js
-const x = 5;
-console.log(x);
+### Input
+
+```bash
+a = 10
+b = 5
 ```
 
-## Now that was one thing
+### Output
 
-Corporis voluptatem qui blanditiis ullam tenetur. Ex, sit consequatur mollitia magnam vitae ducimus debitis incidunt dolores repellat ea
+```bash
+5
+```
 
-### Woooow
+### Förklaring
+
+**10 - 5** = **5**
