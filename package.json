@@ -10,7 +10,7 @@
     "lint": "next lint",
     "start": "next start",
     "format": "prettier --write ./src",
-    "gen:run": "tsc ./src/data/gen.ts && tsc ./src/data/problems/**/*.ts"
+    "gen:run": "tsc ./src/data/gen.ts && node ./src/data/gen.js"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",

@@ -1,20 +1,30 @@
-import { readdirSync, readFileSync } from "fs";
+import { readdirSync, readFileSync, writeFileSync } from "fs";
 import { join } from "path";
+import type { Problem, ProblemCreate } from "./Problem";
 
-async function main() {
-  const problems = readdirSync(join(__dirname, "./problems"));
-  console.log(problems);
-  for (let i = 0; i < problems.length; i++) {
-    const res = readFileSync(
-      join(__dirname, "./problems/" + problems[i] + "/description.md")
+export async function main() {
+  const problemsNames = readdirSync(
+    join(__dirname, "../../../../../src/data", "./problems")
+  );
+  const problems: ProblemCreate<any, any>[] = [];
+
+  console.log(problemsNames);
+  for (let i = 0; i < problemsNames.length; i++) {
+    const description = readFileSync(
+      join(
+        __dirname,
+        "../../../../../src/data",
+        "./problems/" + problemsNames[i] + "/description.md"
+      )
     ).toString();
-    const d = await import(
-      join(__dirname, "./problems/" + problems[i] + "/data.js")
+
+    const { data }: { data: Problem<any, any> } = await import(
+      "./problems/" + problemsNames[i] + "/data.ts"
     );
-    console.log(d);
+    console.log(data);
 
-    // console.log(res);
+    problems.push({ ...data, description });
   }
-}
 
-main();
+  return problems;
+}
