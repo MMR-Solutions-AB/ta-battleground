@@ -41,6 +41,7 @@ export const executeRouter = router({
       })[] = [];
 
       let correctSolution = true;
+      let numberOfFailedTestCAses = 0;
 
       for (let i = 0; i < testCases.length; i++) {
         console.log(`${input.code}\n main(${testCases[i]?.input})`);
@@ -76,6 +77,7 @@ export const executeRouter = router({
         });
         if (!completedTestCase) {
           correctSolution = false;
+          numberOfFailedTestCAses++;
         }
       }
 
@@ -91,8 +93,19 @@ export const executeRouter = router({
             code: input.code,
           },
         });
+      } else {
+        // Make this, not do this :)
+        await ctx.prisma.submission.create({
+          data: {
+            status: correctSolution ? "completed" : "failed",
+            testCases: ranTestCases,
+            problemId: input.problemId,
+            userId: ctx.session.user.id,
+            code: input.code,
+          },
+        });
       }
 
-      return { ranTestCases, correctSolution };
+      return { ranTestCases, correctSolution, numberOfFailedTestCAses };
     }),
 });
