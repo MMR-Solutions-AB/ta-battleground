@@ -28,7 +28,7 @@ const Problem: NextPage = () => {
           <Description description={problem.description} />
         </div>
       </div>
-      <div className="w-4 bg-black"></div>
+      {/* <div className="w-4 bg-black"></div> */}
       <div className="flex flex-1 flex-col bg-bg-dimmed">
         <div className="flex flex-shrink-0 bg-bg-dark pt-2 text-sm text-text-dimmed">
           <div className="rounded-t-md bg-bg-dimmed py-2 px-4 text-white">
