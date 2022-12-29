@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import party from "party-js";
 import type { RouterOutputs } from "@/utils/trpc";
 import classNames from "classnames";
+import _ from "lodash";
 
 interface TestCasesProps {
   code: string;
@@ -18,6 +19,8 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
     RouterOutputs["execute"]["runCode"] | null
   >(null);
   const [selectedTestCaseIndex, setSelectedTestCaseIndex] = useState(0);
+  const currentSelectedTestCase =
+    runCodeResponse?.ranTestCases[selectedTestCaseIndex];
 
   if (!id) return <></>;
 
@@ -104,28 +107,48 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                 </div>
               ))}
             </div>
-            <div className="prose prose-invert mt-5 prose-pre:mt-1 prose-pre:mb-4">
-              <b>Input</b>
-              <pre>
-                <code className="language-bash">a = 10</code>
-              </pre>
-              <b>Received output</b>
-              <pre>
-                <code className="language-bash">
-                  {
-                    runCodeResponse.ranTestCases[selectedTestCaseIndex]
-                      ?.receivedOutput
-                  }
-                </code>
-              </pre>
-              <b>Expected output</b>
-              <pre>
-                <code className="language-bash">
-                  {" "}
-                  {runCodeResponse.ranTestCases[selectedTestCaseIndex]?.output}
-                </code>
-              </pre>
-            </div>
+
+            {currentSelectedTestCase && (
+              <div className="prose prose-invert mt-5 prose-pre:mt-1 prose-pre:mb-4">
+                <b>Input</b>
+                <pre>
+                  <code className="language-bash">
+                    {runCodeResponse.arguments?.map(
+                      (arg, i) =>
+                        `${arg} = ${
+                          typeof currentSelectedTestCase.input[i] === "object"
+                            ? JSON.stringify(
+                                [currentSelectedTestCase.input[i]],
+                                null,
+                                2
+                              )
+                            : currentSelectedTestCase.input[i]
+                        }\n`
+                    )}
+                  </code>
+                </pre>
+                <b>Received output</b>
+                <pre>
+                  <code className="language-bash">
+                    {typeof currentSelectedTestCase.receivedOutput === "object"
+                      ? JSON.stringify(
+                          [currentSelectedTestCase.receivedOutput],
+                          null,
+                          2
+                        )
+                      : currentSelectedTestCase.receivedOutput}
+                    {typeof currentSelectedTestCase.receivedOutput}
+                  </code>
+                </pre>
+                <b>Expected output</b>
+                <pre>
+                  <code className="language-bash">
+                    {JSON.stringify(currentSelectedTestCase.output, null, 2)}{" "}
+                    {typeof currentSelectedTestCase?.output}
+                  </code>
+                </pre>
+              </div>
+            )}
             {JSON.stringify(runCodeResponse, null, 3)}
           </div>
         )}

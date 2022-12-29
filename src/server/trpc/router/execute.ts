@@ -2,7 +2,7 @@ import { z } from "zod";
 import { router, protectedProcedure } from "../trpc";
 import fetch from "node-fetch";
 import type { TestCase } from "@/data/Problem";
-// import type {JSONValue} from '@prisma/client'
+import _ from "lodash";
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -31,6 +31,7 @@ export const executeRouter = router({
         where: { id: input.problemId },
         select: {
           testCases: true,
+          arguments: true,
         },
       });
 
@@ -51,7 +52,11 @@ export const executeRouter = router({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             language: "javascript",
-            source: `${input.code}\n console.log(main(${testCases[i]?.input}))`,
+            source: `${input.code}\n console.log(main(${
+              typeof testCases[i]?.input === "object"
+                ? JSON.stringify(testCases[i]?.input)
+                : testCases[i]?.input
+            }))`,
             stdin: "",
             args: [],
           }),
@@ -68,7 +73,12 @@ export const executeRouter = router({
 
         console.log(data);
         const receivedOutput = data.output;
-        const completedTestCase = receivedOutput == testCases[i]?.output;
+        const completedTestCase = _.isEqual(
+          testCases[i]?.output,
+          typeof testCases[i]?.output === "number"
+            ? parseFloat(receivedOutput)
+            : receivedOutput
+        );
         ranTestCases.push({
           input: testCases[i]?.input || [],
           output: testCases[i]?.output,
@@ -106,6 +116,11 @@ export const executeRouter = router({
         });
       }
 
-      return { ranTestCases, correctSolution, numberOfFailedTestCAses };
+      return {
+        ranTestCases,
+        correctSolution,
+        numberOfFailedTestCAses,
+        arguments: problem.arguments as string[],
+      };
     }),
 });

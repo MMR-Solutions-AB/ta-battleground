@@ -7,19 +7,19 @@ export const data: Problem<string, boolean> = {
   arguments: ["s"],
   testCases: [
     {
-      input: ["racecar"],
+      input: [`"racecar"`],
       output: true,
     },
     {
-      input: ["adam"],
+      input: [`"adam"`],
       output: false,
     },
     {
-      input: ["abba"],
+      input: [`"abba"`],
       output: true,
     },
     {
-      input: ["pop pop"],
+      input: [`"pop pop"`],
       output: true,
     },
   ],
