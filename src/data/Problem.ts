@@ -6,5 +6,6 @@ export type ProblemCreate<I, O> = Omit<
   "id" | "createdAt" | "updatedAt"
 > & {
   testCases: TestCase<I, O>[];
+  arguments: string[];
 };
 export type Problem<I, O> = Omit<ProblemCreate<I, O>, "description">;

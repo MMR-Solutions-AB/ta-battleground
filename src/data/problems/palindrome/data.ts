@@ -4,6 +4,7 @@ export const data: Problem<string, boolean> = {
   name: "Palindrome",
   difficulty: "easy",
   number: 7,
+  arguments: ["s"],
   testCases: [
     {
       input: ["racecar"],

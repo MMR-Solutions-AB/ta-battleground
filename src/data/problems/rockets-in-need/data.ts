@@ -7,6 +7,7 @@ export const data: Problem<
   name: "Rockets in need",
   difficulty: "easy",
   number: 5,
+  arguments: ["rockets"],
   testCases: [
     {
       input: [

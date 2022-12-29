@@ -16,6 +16,7 @@ export const problemRouter = router({
         description: problem.description,
         name: problem.name,
         testCases: problem.testCases,
+        arguments: problem.arguments,
         number: problem.number,
         difficulty: problem.difficulty,
       });
@@ -26,12 +27,14 @@ export const problemRouter = router({
           description: problem.description,
           name: problem.name,
           testCases: problem.testCases,
+          arguments: problem.arguments,
           number: problem.number,
           difficulty: problem.difficulty,
         },
         create: {
           description: problem.description,
           name: problem.name,
+          arguments: problem.arguments,
           testCases: problem.testCases,
           number: problem.number,
           difficulty: problem.difficulty,

@@ -76,6 +76,7 @@ model Problem {
   description String            @db.LongText
   number      Int               @unique
   testCases   Json
+  arguments   Json
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
   submissions Submission[]

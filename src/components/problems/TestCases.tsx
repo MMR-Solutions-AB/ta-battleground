@@ -17,7 +17,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
   const [runCodeResponse, setRunCodeResponse] = useState<
     RouterOutputs["execute"]["runCode"] | null
   >(null);
-  const [selectedTestCase, setSelectedTestCase] = useState(0);
+  const [selectedTestCaseIndex, setSelectedTestCaseIndex] = useState(0);
 
   if (!id) return <></>;
 
@@ -91,7 +91,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
               {runCodeResponse.ranTestCases.map((testCase, i) => (
                 <div
                   key={i}
-                  onClick={() => setSelectedTestCase(i)}
+                  onClick={() => setSelectedTestCaseIndex(i)}
                   className="relative cursor-pointer rounded-md bg-bg-dark px-4 py-1 text-sm tracking-wider transition-opacity hover:opacity-80"
                 >
                   Test #{i}
@@ -104,7 +104,29 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                 </div>
               ))}
             </div>
-            {/* {JSON.stringify(runCodeResponse, null, 3)} */}
+            <div className="prose prose-invert mt-5 prose-pre:mt-1 prose-pre:mb-4">
+              <b>Input</b>
+              <pre>
+                <code className="language-bash">a = 10</code>
+              </pre>
+              <b>Received output</b>
+              <pre>
+                <code className="language-bash">
+                  {
+                    runCodeResponse.ranTestCases[selectedTestCaseIndex]
+                      ?.receivedOutput
+                  }
+                </code>
+              </pre>
+              <b>Expected output</b>
+              <pre>
+                <code className="language-bash">
+                  {" "}
+                  {runCodeResponse.ranTestCases[selectedTestCaseIndex]?.output}
+                </code>
+              </pre>
+            </div>
+            {JSON.stringify(runCodeResponse, null, 3)}
           </div>
         )}
       </div>
