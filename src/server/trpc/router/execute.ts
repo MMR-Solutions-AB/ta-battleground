@@ -3,6 +3,7 @@ import { router, protectedProcedure } from "../trpc";
 import fetch from "node-fetch";
 import type { TestCase } from "@/data/Problem";
 import _ from "lodash";
+import { generateScoreForProblem } from "@/utils/generateScoreForProblem";
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -32,6 +33,7 @@ export const executeRouter = router({
         select: {
           testCases: true,
           arguments: true,
+          difficulty: true,
         },
       });
 
@@ -45,18 +47,22 @@ export const executeRouter = router({
       let numberOfFailedTestCAses = 0;
 
       for (let i = 0; i < testCases.length; i++) {
-        console.log(`${input.code}\n main(${testCases[i]?.input})`);
+        console.log("hej hej hej hej");
+
+        console.log(
+          `${input.code}\n console.log(main(${testCases[i]?.input
+            .map((test) => test)
+            .join(", ")}))`
+        );
 
         const requestOptions = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             language: "javascript",
-            source: `${input.code}\n console.log(main(${
-              typeof testCases[i]?.input === "object"
-                ? JSON.stringify(testCases[i]?.input)
-                : testCases[i]?.input
-            }))`,
+            source: `${input.code}\n console.log(main(${testCases[i]?.input
+              .map((test) => test)
+              .join(", ")}))`,
             stdin: "",
             args: [],
           }),
@@ -92,29 +98,69 @@ export const executeRouter = router({
       }
 
       console.log(ranTestCases);
+      const problemScore = generateScoreForProblem(
+        input.code.length,
+        correctSolution,
+        problem.difficulty
+      );
 
-      if (input.type === "submit") {
-        await ctx.prisma.submission.create({
-          data: {
-            status: correctSolution ? "completed" : "failed",
-            testCases: ranTestCases,
-            problemId: input.problemId,
-            userId: ctx.session.user.id,
-            code: input.code,
-          },
-        });
-      } else {
-        // Make this, not do this :)
-        await ctx.prisma.submission.create({
-          data: {
-            status: correctSolution ? "completed" : "failed",
-            testCases: ranTestCases,
-            problemId: input.problemId,
-            userId: ctx.session.user.id,
-            code: input.code,
-          },
-        });
+      // Make this, not do this :)
+      if (correctSolution) {
+        const mostRecentSuccessfullySubmission =
+          await ctx.prisma.submission.findFirst({
+            where: {
+              userId: ctx.session.user.id,
+              status: "completed",
+            },
+            select: {
+              score: true,
+            },
+            orderBy: {
+              score: "desc",
+            },
+          });
+
+        console.log("wag1 wag1 wag1 wag1");
+        console.log(mostRecentSuccessfullySubmission);
+
+        if (!mostRecentSuccessfullySubmission) {
+          await ctx.prisma.user.update({
+            where: {
+              id: ctx.session.user.id,
+            },
+            data: {
+              score: {
+                increment: problemScore,
+              },
+            },
+          });
+        } else {
+          if (problemScore > mostRecentSuccessfullySubmission.score) {
+            await ctx.prisma.user.update({
+              where: {
+                id: ctx.session.user.id,
+              },
+              data: {
+                score: {
+                  increment:
+                    problemScore - mostRecentSuccessfullySubmission.score,
+                },
+              },
+            });
+          }
+        }
       }
+
+      await ctx.prisma.submission.create({
+        data: {
+          status: correctSolution ? "completed" : "failed",
+          testCases: ranTestCases,
+          problemId: input.problemId,
+          userId: ctx.session.user.id,
+          code: input.code,
+          score: problemScore,
+        },
+      });
 
       return {
         ranTestCases,

@@ -12,6 +12,9 @@ const Navbar: React.FC = ({}) => {
         Techover Battleground
       </Link>
       <div className="flex items-center gap-2 text-sm text-text-dimmed">
+        <Link href="/leaderboard" className="hover:text-white">
+          Leaderboard
+        </Link>
         <Link href="/problems" className="hover:text-white">
           Problems
         </Link>

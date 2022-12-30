@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["filteredRelationCount"]
 }
 
 datasource db {
@@ -47,10 +48,10 @@ model User {
   email         String       @unique
   emailVerified DateTime?
   image         String
-  score         Int          @default(0)
+  score         Float        @default(0)
   accounts      Account[]
   sessions      Session[]
-  submission    Submission[]
+  submissions   Submission[]
 }
 
 model VerificationToken {
@@ -92,7 +93,8 @@ enum SubmissionStatus {
 model Submission {
   id        String           @id @default(cuid())
   code      String           @db.MediumText
-  status    SubmissionStatus @default(failed)
+  status    SubmissionStatus
+  score     Float
   testCases Json
   problemId String
   problem   Problem          @relation(fields: [problemId], references: [id])
