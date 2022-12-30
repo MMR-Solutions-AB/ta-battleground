@@ -41,33 +41,29 @@ export const problemRouter = router({
           name: true,
           difficulty: true,
           description: true,
+          arguments: true,
+          number: true,
         },
       });
     }),
   getSubmissions: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
-      return ctx.prisma.problem.findUniqueOrThrow({
+      return ctx.prisma.submission.findMany({
         where: {
-          id: input.id,
+          userId: ctx.session.user.id,
+          problemId: input.id,
         },
         select: {
-          submissions: {
-            where: {
-              userId: ctx.session.user.id,
-            },
-            select: {
-              code: true,
-              updatedAt: true,
-              status: true,
-              testCases: true,
-            },
-            orderBy: {
-              updatedAt: "asc",
-            },
-            take: 30,
-          },
+          code: true,
+          updatedAt: true,
+          status: true,
+          testCases: true,
         },
+        orderBy: {
+          updatedAt: "asc",
+        },
+        take: 30,
       });
     }),
   seed: publicProcedure.query(async ({ ctx }) => {

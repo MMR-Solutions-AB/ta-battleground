@@ -141,14 +141,12 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                             2
                           )
                         : currentSelectedTestCase.receivedOutput}
-                      {typeof currentSelectedTestCase.receivedOutput}
                     </code>
                   </pre>
                   <b>Expected output</b>
                   <pre>
                     <code className="language-bash">
                       {JSON.stringify(currentSelectedTestCase.output, null, 2)}{" "}
-                      {typeof currentSelectedTestCase?.output}
                     </code>
                   </pre>
                 </div>

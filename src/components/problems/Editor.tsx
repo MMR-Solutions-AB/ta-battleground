@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import MonacoEditor, { useMonaco } from "@monaco-editor/react";
+import MonacoEditor from "@monaco-editor/react";
 import TestCases from "./TestCases";
-
+import { generateStarterCode } from "@/utils/generateStarterCode";
 interface EditorProps {
-  s?: "s";
+  problemArgs: string[];
 }
 
-const Editor: React.FC<EditorProps> = ({}) => {
-  const [code, setCode] = useState("function main() {\n\n}");
+const Editor: React.FC<EditorProps> = ({ problemArgs }) => {
+  const [code, setCode] = useState(() => generateStarterCode(problemArgs));
   return (
     <>
       <div className="flex flex-shrink-0 bg-bg-dark pt-4 pb-2 text-sm text-text-dimmed">

@@ -30,7 +30,7 @@ const Problem: NextPage = () => {
       </div>
       {/* <div className="w-4 bg-black"></div> */}
       <div className="flex flex-1 flex-col bg-bg-dimmed">
-        <Editor />
+        <Editor problemArgs={problem.arguments as string[]} />
       </div>
     </div>
   );
