@@ -46,7 +46,7 @@ export const problemRouter = router({
         },
       });
     }),
-  getSubmissions: protectedProcedure
+  getMySubmissions: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
       return ctx.prisma.submission.findMany({
@@ -55,13 +55,15 @@ export const problemRouter = router({
           problemId: input.id,
         },
         select: {
+          id: true,
           code: true,
           updatedAt: true,
           status: true,
           testCases: true,
+          score: true,
         },
         orderBy: {
-          updatedAt: "asc",
+          updatedAt: "desc",
         },
         take: 30,
       });

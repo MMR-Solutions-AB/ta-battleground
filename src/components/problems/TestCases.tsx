@@ -20,7 +20,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
   const [selectedTestCaseIndex, setSelectedTestCaseIndex] = useState(0);
   const currentSelectedTestCase =
     runCodeResponse?.ranTestCases[selectedTestCaseIndex];
-
+  const utils = trpc.useContext();
   if (!id) return <></>;
 
   return (
@@ -46,11 +46,18 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
             disabled={runCodeMutation.isLoading}
             className="rounded-md bg-primary px-4 py-1 text-white hover:opacity-80 disabled:opacity-50"
             onClick={async () => {
-              const res = await runCodeMutation.mutateAsync({
-                problemId: Array.isArray(id) ? id[0] || "" : id,
-                code,
-                type: "submit",
-              });
+              const res = await runCodeMutation.mutateAsync(
+                {
+                  problemId: Array.isArray(id) ? id[0] || "" : id,
+                  code,
+                  type: "submit",
+                },
+                {
+                  onSuccess() {
+                    utils.problem.getMySubmissions.invalidate();
+                  },
+                }
+              );
 
               setRunCodeResponse(res);
 
