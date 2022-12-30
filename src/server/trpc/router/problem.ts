@@ -3,6 +3,73 @@ import { main } from "../../../data/gen";
 import { router, publicProcedure, protectedProcedure } from "../trpc";
 
 export const problemRouter = router({
+  getAll: protectedProcedure.query(({ ctx }) => {
+    return ctx.prisma.problem.findMany({
+      select: {
+        id: true,
+        name: true,
+        number: true,
+        difficulty: true,
+        submissions: {
+          where: {
+            userId: ctx.session.user.id,
+          },
+          select: {
+            status: true,
+            createdAt: true,
+          },
+          orderBy: {
+            status: "asc",
+          },
+          take: 1,
+        },
+      },
+      orderBy: {
+        number: "asc",
+      },
+    });
+  }),
+  getById: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.problem.findUnique({
+        where: {
+          id: input.id,
+        },
+        select: {
+          id: true,
+          name: true,
+          difficulty: true,
+          description: true,
+        },
+      });
+    }),
+  getSubmissions: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.problem.findUniqueOrThrow({
+        where: {
+          id: input.id,
+        },
+        select: {
+          submissions: {
+            where: {
+              userId: ctx.session.user.id,
+            },
+            select: {
+              code: true,
+              updatedAt: true,
+              status: true,
+              testCases: true,
+            },
+            orderBy: {
+              updatedAt: "asc",
+            },
+            take: 30,
+          },
+        },
+      });
+    }),
   seed: publicProcedure.query(async ({ ctx }) => {
     const problems = await main();
     console.log(problems);
@@ -45,45 +112,4 @@ export const problemRouter = router({
     return ctx.prisma.problem.findMany({});
     // return ctx.prisma.problem.createMany({ data: problems });
   }),
-  getAll: protectedProcedure.query(({ ctx }) => {
-    return ctx.prisma.problem.findMany({
-      select: {
-        id: true,
-        name: true,
-        number: true,
-        difficulty: true,
-        submissions: {
-          where: {
-            userId: ctx.session.user.id,
-          },
-          select: {
-            status: true,
-            createdAt: true,
-          },
-          orderBy: {
-            status: "asc",
-          },
-          take: 1,
-        },
-      },
-      orderBy: {
-        number: "asc",
-      },
-    });
-  }),
-  getById: protectedProcedure
-    .input(z.object({ id: z.string() }))
-    .query(({ ctx, input }) => {
-      return ctx.prisma.problem.findUnique({
-        where: {
-          id: input.id,
-        },
-        select: {
-          id: true,
-          name: true,
-          difficulty: true,
-          description: true,
-        },
-      });
-    }),
 });
