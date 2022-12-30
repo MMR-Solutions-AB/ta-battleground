@@ -16,7 +16,7 @@ const Problem: NextPage = () => {
   if (!problem) return <p>hmm, error</p>;
 
   return (
-    <div className="flex h-[calc(100vh-56px)] gap-2 overflow-hidden bg-bg-dark">
+    <div className="flex h-[calc(100vh-56px)] w-screen gap-2 overflow-x-hidden bg-bg-dark">
       <div className="flex flex-1 flex-col bg-bg-dimmed">
         <div className="flex flex-shrink-0 bg-bg-dark pt-2 text-sm text-text-dimmed">
           <div className="rounded-t-md bg-bg-dimmed py-2 px-4 text-white">
@@ -30,15 +30,7 @@ const Problem: NextPage = () => {
       </div>
       {/* <div className="w-4 bg-black"></div> */}
       <div className="flex flex-1 flex-col bg-bg-dimmed">
-        <div className="flex flex-shrink-0 bg-bg-dark pt-2 text-sm text-text-dimmed">
-          <div className="rounded-t-md bg-bg-dimmed py-2 px-4 text-white">
-            Description
-          </div>
-          <div className="rounded-t-md py-2 px-4">Submissions</div>
-        </div>
-        <div className="h-full overflow-y-scroll">
-          <Editor />
-        </div>
+        <Editor />
       </div>
     </div>
   );

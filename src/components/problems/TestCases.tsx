@@ -4,8 +4,7 @@ import { useRouter } from "next/router";
 import party from "party-js";
 import type { RouterOutputs } from "@/utils/trpc";
 import classNames from "classnames";
-import _ from "lodash";
-
+import LoadingSpinner from "@/components/LoadingSpinner";
 interface TestCasesProps {
   code: string;
 }
@@ -67,92 +66,99 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
             Submit
           </button>
         </div>
-        {runCodeResponse && (
-          <div className="mt-3">
-            {runCodeResponse.correctSolution ? (
-              <>
-                <h3 className="text-xl font-bold text-green-500 md:text-2xl">
-                  Correct
-                </h3>
-                <p className="text-sm text-green-500">
-                  {runCodeResponse.numberOfFailedTestCAses} /{" "}
-                  {runCodeResponse.ranTestCases.length} testcases failed
-                </p>
-              </>
-            ) : (
-              <>
-                <h3 className="text-xl font-bold text-red-500 md:text-2xl">
-                  Fail
-                </h3>
-                <p className="text-sm text-red-500">
-                  {runCodeResponse.numberOfFailedTestCAses} /{" "}
-                  {runCodeResponse.ranTestCases.length} testcases failed
-                </p>
-              </>
-            )}
-            <div className="mt-3 flex flex-wrap gap-2">
-              {runCodeResponse.ranTestCases.map((testCase, i) => (
-                <div
-                  key={i}
-                  onClick={() => setSelectedTestCaseIndex(i)}
-                  className="relative cursor-pointer rounded-md bg-bg-dark px-4 py-1 text-sm tracking-wider transition-opacity hover:opacity-80"
-                >
-                  Test #{i}
-                  <div
-                    className={classNames(
-                      "absolute top-0.5 right-0.5 h-2 w-2 -translate-y-1/2 translate-x-1/2 rounded-full",
-                      testCase.valid ? "bg-green-500" : "bg-red-500"
-                    )}
-                  />
-                </div>
-              ))}
-            </div>
-
-            {currentSelectedTestCase && (
-              <div className="prose prose-invert mt-5 prose-pre:mt-1 prose-pre:mb-4">
-                <b>Input</b>
-                <pre>
-                  <code className="language-bash">
-                    {runCodeResponse.arguments?.map(
-                      (arg, i) =>
-                        `${arg} = ${
-                          typeof currentSelectedTestCase.input[i] === "object"
-                            ? JSON.stringify(
-                                [currentSelectedTestCase.input[i]],
-                                null,
-                                2
-                              )
-                            : currentSelectedTestCase.input[i]
-                        }\n`
-                    )}
-                  </code>
-                </pre>
-                <b>Received output</b>
-                <pre>
-                  <code className="language-bash">
-                    {typeof currentSelectedTestCase.receivedOutput === "object"
-                      ? JSON.stringify(
-                          [currentSelectedTestCase.receivedOutput],
-                          null,
-                          2
-                        )
-                      : currentSelectedTestCase.receivedOutput}
-                    {typeof currentSelectedTestCase.receivedOutput}
-                  </code>
-                </pre>
-                <b>Expected output</b>
-                <pre>
-                  <code className="language-bash">
-                    {JSON.stringify(currentSelectedTestCase.output, null, 2)}{" "}
-                    {typeof currentSelectedTestCase?.output}
-                  </code>
-                </pre>
-              </div>
-            )}
-            <pre className="text-sm">
-              {JSON.stringify(runCodeResponse, null, 3)}
-            </pre>
+        {runCodeMutation.isLoading ? (
+          <div className="my-4 flex justify-center">
+            <LoadingSpinner />
           </div>
+        ) : (
+          runCodeResponse && (
+            <div className="mt-3">
+              {runCodeResponse.correctSolution ? (
+                <>
+                  <h3 className="text-xl font-bold text-green-500 md:text-2xl">
+                    Correct
+                  </h3>
+                  <p className="text-sm text-green-500">
+                    {runCodeResponse.numberOfFailedTestCAses} /{" "}
+                    {runCodeResponse.ranTestCases.length} testcases failed
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h3 className="text-xl font-bold text-red-500 md:text-2xl">
+                    Fail
+                  </h3>
+                  <p className="text-sm text-red-500">
+                    {runCodeResponse.numberOfFailedTestCAses} /{" "}
+                    {runCodeResponse.ranTestCases.length} testcases failed
+                  </p>
+                </>
+              )}
+              <div className="mt-3 flex flex-wrap gap-2">
+                {runCodeResponse.ranTestCases.map((testCase, i) => (
+                  <div
+                    key={i}
+                    onClick={() => setSelectedTestCaseIndex(i)}
+                    className="relative cursor-pointer rounded-md bg-bg-dark px-4 py-1 text-sm tracking-wider transition-opacity hover:opacity-80"
+                  >
+                    Test #{i}
+                    <div
+                      className={classNames(
+                        "absolute top-0.5 right-0.5 h-2 w-2 -translate-y-1/2 translate-x-1/2 rounded-full",
+                        testCase.valid ? "bg-green-500" : "bg-red-500"
+                      )}
+                    />
+                  </div>
+                ))}
+              </div>
+              {currentSelectedTestCase && (
+                <div className="prose prose-invert mt-5 prose-pre:mt-1 prose-pre:mb-4">
+                  <b>Input</b>
+                  <pre>
+                    <code className="language-bash">
+                      {runCodeResponse.arguments?.map(
+                        (arg, i) =>
+                          `${arg} = ${
+                            typeof currentSelectedTestCase.input[i] === "object"
+                              ? JSON.stringify(
+                                  [currentSelectedTestCase.input[i]],
+                                  null,
+                                  2
+                                )
+                              : currentSelectedTestCase.input[i]
+                          }\n`
+                      )}
+                    </code>
+                  </pre>
+                  <b>Received output</b>
+                  <pre>
+                    <code className="language-bash">
+                      {typeof currentSelectedTestCase.receivedOutput ===
+                      "object"
+                        ? JSON.stringify(
+                            [currentSelectedTestCase.receivedOutput],
+                            null,
+                            2
+                          )
+                        : currentSelectedTestCase.receivedOutput}
+                      {typeof currentSelectedTestCase.receivedOutput}
+                    </code>
+                  </pre>
+                  <b>Expected output</b>
+                  <pre>
+                    <code className="language-bash">
+                      {JSON.stringify(currentSelectedTestCase.output, null, 2)}{" "}
+                      {typeof currentSelectedTestCase?.output}
+                    </code>
+                  </pre>
+                </div>
+              )}
+
+              <pre className="text-sm">
+                {JSON.stringify(runCodeResponse, null, 3)}
+              </pre>
+            </div>
+          )
         )}
       </div>
     </div>
