@@ -1,6 +1,6 @@
 import React from "react";
 import { trpc } from "@/utils/trpc";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import ProblemsTableRow from "./ProblemsTableRow";
 
 const ProblemsTable: React.FC = ({}) => {

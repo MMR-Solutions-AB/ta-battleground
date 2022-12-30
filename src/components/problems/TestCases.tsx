@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import party from "party-js";
 import type { RouterOutputs } from "@/utils/trpc";
 import classNames from "classnames";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import BouncingBalls from "../loaders/BouncingBalls";
 interface TestCasesProps {
   code: string;
 }
@@ -44,7 +44,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
           <button
             ref={submitButtonRef}
             disabled={runCodeMutation.isLoading}
-            className="rounded-md bg-primary px-4 py-1 text-white hover:opacity-80 disabled:opacity-50"
+            className="rounded-md bg-primary px-4 py-1 text-bg-dark hover:opacity-80 disabled:opacity-50"
             onClick={async () => {
               const res = await runCodeMutation.mutateAsync(
                 {
@@ -75,7 +75,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
         </div>
         {runCodeMutation.isLoading ? (
           <div className="my-4 flex justify-center">
-            <LoadingSpinner />
+            <BouncingBalls />
           </div>
         ) : (
           runCodeResponse && (

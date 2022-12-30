@@ -29,6 +29,19 @@ export const problemRouter = router({
       },
     });
   }),
+  getLeaderboard: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.user.findMany({
+        where: {
+          submissions: {
+            some: {
+              problemId: input.id,
+            },
+          },
+        },
+      });
+    }),
   getById: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {

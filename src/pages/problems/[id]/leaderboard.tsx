@@ -2,27 +2,30 @@ import React from "react";
 import ProblemsLayout from "@/components/layouts/ProblemsLayout";
 import { trpc } from "@/utils/trpc";
 import { useRouter } from "next/router";
-import Description from "@/components/problems/Description";
-import type { NextPageWithLayout } from "@/pages/_app";
 import BouncingBalls from "@/components/loaders/BouncingBalls";
+import type { NextPageWithLayout } from "@/pages/_app";
 
-const Problem: NextPageWithLayout = () => {
+const Leaderboard: NextPageWithLayout = () => {
   const router = useRouter();
-  const { data: problem, isLoading } = trpc.problem.getById.useQuery({
+  const { data: problem, isLoading } = trpc.problem.getLeaderboard.useQuery({
     id: router.query.id as string,
   });
 
   if (isLoading)
     return (
-      <div className="flex justify-center">
+      <div className="mt-10 flex justify-center">
         <BouncingBalls />
       </div>
     );
   if (!problem) return <p>hmm, error</p>;
 
-  return <Description description={problem.description} />;
+  return (
+    <>
+      <pre>{JSON.stringify(problem, null, 2)}</pre>;
+    </>
+  );
 };
 
-Problem.getLayout = (page) => <ProblemsLayout>{page}</ProblemsLayout>;
+Leaderboard.getLayout = (page) => <ProblemsLayout>{page}</ProblemsLayout>;
 
-export default Problem;
+export default Leaderboard;

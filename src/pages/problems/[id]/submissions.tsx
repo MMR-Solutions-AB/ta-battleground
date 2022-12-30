@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import ProblemsLayout from "@/components/layouts/ProblemsLayout";
 import type { NextPageWithLayout } from "@/pages/_app";
 import SubmissionCard from "@/components/problems/SubmissionCard";
+import BouncingBalls from "@/components/loaders/BouncingBalls";
 
 const Problem: NextPageWithLayout = () => {
   const router = useRouter();
@@ -13,7 +14,12 @@ const Problem: NextPageWithLayout = () => {
       id: router.query.id as string,
     });
 
-  if (isLoading) return <p>loading...</p>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center">
+        <BouncingBalls />
+      </div>
+    );
   if (!submissions) return <p>hmm, error</p>;
 
   return (

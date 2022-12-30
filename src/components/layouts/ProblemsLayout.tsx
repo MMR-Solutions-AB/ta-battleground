@@ -46,6 +46,17 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
           >
             Submissions
           </Link>
+          <Link
+            href={`/problems/${router.query.id}/leaderboard`}
+            className={classNames(
+              "rounded-t-md py-2 px-4",
+              router.pathname === "/problems/[id]/leaderboard"
+                ? "bg-bg-dimmed text-white"
+                : "transition-colors hover:bg-bg-dimmed/50"
+            )}
+          >
+            Leaderboard
+          </Link>
         </div>
         <div className="h-full overflow-scroll">{children}</div>
       </div>
