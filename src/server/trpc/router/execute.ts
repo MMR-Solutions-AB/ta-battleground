@@ -83,6 +83,8 @@ export const executeRouter = router({
           testCases[i]?.output,
           typeof testCases[i]?.output === "number"
             ? parseFloat(receivedOutput)
+            : typeof testCases[i]?.output === "boolean"
+            ? JSON.parse(receivedOutput.toLowerCase())
             : receivedOutput
         );
         ranTestCases.push({

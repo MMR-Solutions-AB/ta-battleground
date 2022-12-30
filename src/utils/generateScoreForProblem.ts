@@ -10,7 +10,7 @@ export function generateScoreForProblem(
   const baseScore =
     difficulty === "hard" ? 600 : difficulty === "medium" ? 400 : 200;
 
-  const addedScore = 200 * ((800 - codeLength) / 800);
+  const addedScore = parseFloat((200 * ((800 - codeLength) / 800)).toFixed(2));
 
   return baseScore + addedScore;
 }
