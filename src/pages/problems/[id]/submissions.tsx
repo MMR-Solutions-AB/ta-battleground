@@ -1,8 +1,8 @@
 import React from "react";
-import ProblemsLayout from "@/components/layouts/ProblemsLayout";
+import type { NextPage } from "next";
 import { trpc } from "@/utils/trpc";
 import { useRouter } from "next/router";
-import Description from "@/components/problems/Description";
+import ProblemsLayout from "@/components/layouts/ProblemsLayout";
 import type { NextPageWithLayout } from "@/pages/_app";
 
 const Problem: NextPageWithLayout = () => {
@@ -14,7 +14,7 @@ const Problem: NextPageWithLayout = () => {
   if (isLoading) return <p>loading...</p>;
   if (!problem) return <p>hmm, error</p>;
 
-  return <Description description={problem.description} />;
+  return <div className="bg-blue-600">hje</div>;
 };
 
 Problem.getLayout = (page) => <ProblemsLayout>{page}</ProblemsLayout>;

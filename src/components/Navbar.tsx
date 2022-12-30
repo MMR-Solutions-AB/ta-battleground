@@ -6,6 +6,7 @@ import Image from "next/image";
 const Navbar: React.FC = ({}) => {
   const { data: sessionData } = useSession();
   const user = sessionData?.user;
+
   return (
     <div className="flex items-center justify-between gap-2 bg-bg-dimmed px-4 py-2 md:px-10 md:py-3">
       <Link href="/" className="text-2xl font-black tracking-wider">
