@@ -51,7 +51,9 @@ export const executeRouter = router({
 
         console.log(
           `${input.code}\n console.log(main(${testCases[i]?.input
-            .map((test) => test)
+            .map((test) =>
+              typeof test === "object" ? JSON.stringify(test) : test
+            )
             .join(", ")}))`
         );
 
@@ -61,7 +63,9 @@ export const executeRouter = router({
           body: JSON.stringify({
             language: "javascript",
             source: `${input.code}\n console.log(main(${testCases[i]?.input
-              .map((test) => test)
+              .map((test) =>
+                typeof test === "object" ? JSON.stringify(test) : test
+              )
               .join(", ")}))`,
             stdin: "",
             args: [],
@@ -78,14 +82,16 @@ export const executeRouter = router({
         await sleep(500);
 
         console.log(data);
-        const receivedOutput = data.output;
+        // const receivedOutput = data.output;
+        const receivedOutput =
+          typeof testCases[i]?.output === "number"
+            ? parseFloat(data.output)
+            : typeof testCases[i]?.output === "boolean"
+            ? JSON.parse(data.output.toLowerCase())
+            : data.output;
         const completedTestCase = _.isEqual(
           testCases[i]?.output,
-          typeof testCases[i]?.output === "number"
-            ? parseFloat(receivedOutput)
-            : typeof testCases[i]?.output === "boolean"
-            ? JSON.parse(receivedOutput.toLowerCase())
-            : receivedOutput
+          receivedOutput
         );
         ranTestCases.push({
           input: testCases[i]?.input || [],
