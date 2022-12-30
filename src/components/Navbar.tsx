@@ -11,7 +11,14 @@ const Navbar: React.FC = ({}) => {
       <Link href="/" className="text-2xl font-black tracking-wider">
         Techover Battleground
       </Link>
-      <div className="flex items-center gap-2 text-sm text-text-dimmed">
+
+      <div className="flex items-center gap-4 text-sm text-text-dimmed">
+        <Link
+          href=" https://techover-css-battles-leaderboard.vercel.app/"
+          className="hover:text-white"
+        >
+          Css Battles
+        </Link>
         <Link href="/leaderboard" className="hover:text-white">
           Leaderboard
         </Link>

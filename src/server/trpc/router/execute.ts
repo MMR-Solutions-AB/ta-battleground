@@ -119,6 +119,7 @@ export const executeRouter = router({
             where: {
               userId: ctx.session.user.id,
               status: "completed",
+              problemId: input.problemId,
             },
             select: {
               score: true,
@@ -137,6 +138,9 @@ export const executeRouter = router({
               id: ctx.session.user.id,
             },
             data: {
+              completedProblems: {
+                increment: 1,
+              },
               score: {
                 increment: problemScore,
               },

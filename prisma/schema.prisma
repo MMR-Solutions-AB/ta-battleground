@@ -43,15 +43,16 @@ model Session {
 }
 
 model User {
-  id            String       @id @default(cuid())
-  name          String
-  email         String       @unique
-  emailVerified DateTime?
-  image         String
-  score         Float        @default(0)
-  accounts      Account[]
-  sessions      Session[]
-  submissions   Submission[]
+  id                String       @id @default(cuid())
+  name              String
+  email             String       @unique
+  emailVerified     DateTime?
+  image             String
+  score             Float        @default(0)
+  completedProblems Int          @default(0)
+  accounts          Account[]
+  sessions          Session[]
+  submissions       Submission[]
 }
 
 model VerificationToken {
