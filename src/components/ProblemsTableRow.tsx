@@ -11,6 +11,11 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
   return (
     <tr className="h-11 bg-bg-dark even:bg-bg-dimmed">
       <td className="relative h-full">
+        <div className="peer flex h-full min-w-[0rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2 font-bold text-text-dimmed">
+          {problem.number}
+        </div>
+      </td>
+      <td className="relative h-full">
         <div className="peer flex h-full min-w-[0rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
           {problem.submissions.length == 0 ? (
             ""
@@ -27,7 +32,7 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
             href={`/problems/${problem.id}`}
             className="overflow-hidden truncate hover:text-primary"
           >
-            {problem.number} - {problem.name}
+            {problem.name}
           </Link>
         </div>
       </td>
@@ -41,6 +46,12 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
           ) : (
             <span className="text-green-500">Enkel</span>
           )}
+        </div>
+      </td>
+
+      <td className="relative h-full">
+        <div className="h-ful peer flex max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
+          {problem._count.submissions}
         </div>
       </td>
     </tr>

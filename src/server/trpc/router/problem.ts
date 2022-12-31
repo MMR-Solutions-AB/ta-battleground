@@ -23,6 +23,15 @@ export const problemRouter = router({
           },
           take: 1,
         },
+        _count: {
+          select: {
+            submissions: {
+              where: {
+                status: "completed",
+              },
+            },
+          },
+        },
       },
       orderBy: {
         number: "asc",

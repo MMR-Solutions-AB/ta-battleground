@@ -6,6 +6,8 @@ import ProblemsTableRow from "./ProblemsTableRow";
 const ProblemsTable: React.FC = ({}) => {
   const { data: problems, isLoading } = trpc.problem.getAll.useQuery();
 
+  console.table(problems);
+
   if (isLoading)
     return (
       <div className="flex justify-center">
@@ -22,9 +24,11 @@ const ProblemsTable: React.FC = ({}) => {
         <table className="my-0 min-w-full rounded-md text-xs md:text-sm">
           <thead className="h-9 text-left text-text-dimmed">
             <tr>
+              <th className="h-full px-2 font-semibold text-text-dimmed">#</th>
               <th className="h-full px-2 font-normal">Status</th>
               <th className="h-full px-2 font-normal">Namn</th>
               <th className="h-full px-2 font-normal">Svårighet</th>
+              <th className="h-full px-2 font-normal">Submissions</th>
             </tr>
           </thead>
           <tbody className="">
