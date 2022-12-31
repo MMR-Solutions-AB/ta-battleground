@@ -4,12 +4,15 @@ import { trpc } from "@/utils/trpc";
 import { useRouter } from "next/router";
 import BouncingBalls from "@/components/loaders/BouncingBalls";
 import type { NextPageWithLayout } from "@/pages/_app";
+import Image from "next/image";
 
 const Leaderboard: NextPageWithLayout = () => {
   const router = useRouter();
-  const { data: problem, isLoading } = trpc.problem.getLeaderboard.useQuery({
-    id: router.query.id as string,
-  });
+  const { data: submissions, isLoading } = trpc.problem.getLeaderboard.useQuery(
+    {
+      id: router.query.id as string,
+    }
+  );
 
   if (isLoading)
     return (
@@ -17,12 +20,35 @@ const Leaderboard: NextPageWithLayout = () => {
         <BouncingBalls />
       </div>
     );
-  if (!problem) return <p>hmm, error</p>;
+  if (!submissions) return <p>hmm, error</p>;
 
   return (
-    <>
-      <pre>{JSON.stringify(problem, null, 2)}</pre>;
-    </>
+    <div className="p-5">
+      <div className="space-y-3">
+        {submissions.map((submission, i) => (
+          <div
+            key={submission.id}
+            className="flex items-center gap-4 rounded-md bg-bg-dark p-4 font-semibold"
+          >
+            <p className="font-black italic">#{i + 1}</p>
+
+            <div className="relative h-7 w-7">
+              <Image
+                src={submission.user.image}
+                alt={`${submission.user.name} profile image`}
+                fill={true}
+                className="rounded-full"
+              />
+            </div>
+            <p className="flex-1">{submission.user.name}</p>
+            <p className="text-sm text-text-dimmed">{submission.score}</p>
+            <p className="text-sm text-text-dimmed">
+              {`{ ${submission.code.length} }`}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

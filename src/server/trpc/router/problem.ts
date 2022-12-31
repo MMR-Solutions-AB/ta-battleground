@@ -39,7 +39,6 @@ export const problemRouter = router({
           id: true,
           code: true,
           score: true,
-
           user: {
             select: {
               id: true,
