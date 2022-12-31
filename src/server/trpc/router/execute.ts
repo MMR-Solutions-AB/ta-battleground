@@ -54,6 +54,12 @@ export const executeRouter = router({
             .map((test) =>
               typeof test === "object" ? JSON.stringify(test) : test
             )
+            .join(", ")}))\n \t\t console.log(${JSON.stringify(
+            testCases[i]?.output
+          )} == main(${testCases[i]?.input
+            .map((test) =>
+              typeof test === "object" ? JSON.stringify(test) : test
+            )
             .join(", ")}))`
         );
 
@@ -66,7 +72,25 @@ export const executeRouter = router({
               .map((test) =>
                 typeof test === "object" ? JSON.stringify(test) : test
               )
-              .join(", ")}))`,
+              .join(", ")}))\n \t\t console.log(JSON.stringify(${JSON.stringify(
+              testCases[i]?.output
+            )}) == JSON.stringify(main(${testCases[i]?.input
+              .map((test) =>
+                typeof test === "object" ? JSON.stringify(test) : test
+              )
+              .join(", ")})))
+              
+              \n\n \t\t console.log(JSON.stringify(${JSON.stringify(
+                testCases[i]?.output
+              )}))
+              \n\n \t\t
+              console.log(JSON.stringify(main(${testCases[i]?.input
+                .map((test) =>
+                  typeof test === "object" ? JSON.stringify(test) : test
+                )
+                .join(", ")})))
+
+              `,
             stdin: "",
             args: [],
           }),
@@ -82,22 +106,38 @@ export const executeRouter = router({
         await sleep(500);
 
         console.log(data);
-        // const receivedOutput = data.output;
-        const receivedOutput =
-          typeof testCases[i]?.output === "number"
-            ? parseFloat(data.output)
-            : typeof testCases[i]?.output === "boolean"
-            ? JSON.parse(data.output.toLowerCase())
-            : data.output;
-        const completedTestCase = _.isEqual(
-          testCases[i]?.output,
-          receivedOutput
-        );
+        const outputs = data.output.split("\n");
+        const expectedOutput = outputs[2];
+        const receivedOutput = outputs[3];
+
+        const completedTestCase =
+          _.isEqual(
+            JSON.parse(expectedOutput || ""),
+            JSON.parse(receivedOutput || "")
+          ) || outputs[1] == "true";
+
+        try {
+          console.log("öööööööööööööö");
+
+          console.log(JSON.parse(expectedOutput || ""));
+          console.log(JSON.parse(receivedOutput || ""));
+          console.log(
+            _.isEqual(
+              JSON.parse(expectedOutput || ""),
+              JSON.parse(receivedOutput || "")
+            )
+          );
+        } catch (error) {
+          console.log(error);
+
+          console.log("SHIIIITTTT");
+        }
+
         ranTestCases.push({
           input: testCases[i]?.input || [],
           output: testCases[i]?.output,
           valid: completedTestCase,
-          receivedOutput,
+          receivedOutput: receivedOutput || "undefined",
         });
         if (!completedTestCase) {
           correctSolution = false;

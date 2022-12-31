@@ -8,19 +8,19 @@ export const data: Problem<string, string> = {
   testCases: [
     {
       input: [`"hello world"`],
-      output: `"hElLo wOrLd"`,
+      output: "hElLo wOrLd",
     },
     {
       input: [`"Light tHEme SCARES me"`],
-      output: `"lIgHt tHeMe sCaReS Me"`,
+      output: "lIgHt tHeMe sCaReS Me",
     },
     {
       input: [`"abc"`],
-      output: `"aBc"`,
+      output: "aBc",
     },
     {
       input: [`"xyxyxyx"`],
-      output: `"xYxYxYx"`,
+      output: "xYxYxYx",
     },
   ],
 };

@@ -15,6 +15,7 @@ const Navbar: React.FC = ({}) => {
 
       <div className="flex items-center gap-4 text-sm text-text-dimmed">
         <Link
+          target="_blank"
           href=" https://techover-css-battles-leaderboard.vercel.app/"
           className="hover:text-white"
         >

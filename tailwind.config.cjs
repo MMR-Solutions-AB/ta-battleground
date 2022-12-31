@@ -13,7 +13,7 @@ module.exports = {
         // "bg-dimmed": "#1a1a1a",
 
         primary: "#eb5e28",
-        secondary: "#363073",
+        secondary: "#df2935",
         "bg-dark": "#252422",
         "bg-dimmed": "#403d39",
         "text-dimmed": "#eff2f699",

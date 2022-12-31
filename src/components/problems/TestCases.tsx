@@ -159,9 +159,9 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                 </div>
               )}
 
-              <pre className="text-sm">
+              <div className="text-sm">
                 {JSON.stringify(runCodeResponse, null, 3)}
-              </pre>
+              </div>
             </div>
           )
         )}
