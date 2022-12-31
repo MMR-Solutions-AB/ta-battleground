@@ -41,10 +41,11 @@ export const executeRouter = router({
       const ranTestCases: (TestCase<any, any> & {
         valid: boolean;
         receivedOutput: string;
+        timedOut: boolean;
       })[] = [];
 
       let correctSolution = true;
-      let numberOfFailedTestCAses = 0;
+      let numberOfFailedTestCases = 0;
 
       for (let i = 0; i < testCases.length; i++) {
         try {
@@ -78,6 +79,12 @@ export const executeRouter = router({
             requestOptions
           );
           const data = (await res.json()) as PistonResponse;
+          console.log(data);
+          let timedOut = false;
+          if (!data.ran) {
+            timedOut = true;
+            correctSolution = false;
+          }
 
           // piston api limits us to 2 request per secund, this stops us from exceeding that
           await sleep(500);
@@ -86,21 +93,25 @@ export const executeRouter = router({
           const expectedOutput = outputs[1];
           const receivedOutput = outputs[2];
 
-          const completedTestCase =
-            _.isEqual(
-              JSON.parse(expectedOutput || ""),
-              JSON.parse(receivedOutput || "")
-            ) || outputs[0] == "true";
+          const completedTestCase = timedOut
+            ? false
+            : _.isEqual(
+                JSON.parse(expectedOutput || ""),
+                JSON.parse(receivedOutput || "")
+              ) || outputs[0] == "true";
 
           ranTestCases.push({
             input: testCases[i]?.input || [],
             output: testCases[i]?.output,
             valid: completedTestCase,
             receivedOutput: receivedOutput || "undefined",
+            timedOut,
           });
+          console.log(ranTestCases);
+
           if (!completedTestCase) {
             correctSolution = false;
-            numberOfFailedTestCAses++;
+            numberOfFailedTestCases++;
           }
         } catch (error) {}
       }
@@ -170,7 +181,7 @@ export const executeRouter = router({
       return {
         ranTestCases,
         correctSolution,
-        numberOfFailedTestCAses,
+        numberOfFailedTestCases,
         arguments: problem.arguments as string[],
       };
     }),

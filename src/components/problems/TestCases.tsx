@@ -86,7 +86,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                     Correct
                   </h3>
                   <p className="text-sm text-green-500">
-                    {runCodeResponse.numberOfFailedTestCAses} /{" "}
+                    {runCodeResponse.numberOfFailedTestCases} /{" "}
                     {runCodeResponse.ranTestCases.length} testcases failed
                   </p>
                 </>
@@ -96,7 +96,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                     Fail
                   </h3>
                   <p className="text-sm text-red-500">
-                    {runCodeResponse.numberOfFailedTestCAses} /{" "}
+                    {runCodeResponse.numberOfFailedTestCases} /{" "}
                     {runCodeResponse.ranTestCases.length} testcases failed
                   </p>
                 </>
@@ -140,8 +140,10 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                   <b>Received output</b>
                   <pre>
                     <code className="language-bash">
-                      {typeof currentSelectedTestCase.receivedOutput ===
-                      "object"
+                      {currentSelectedTestCase.timedOut
+                        ? "Code timedout"
+                        : typeof currentSelectedTestCase.receivedOutput ===
+                          "object"
                         ? JSON.stringify(
                             [currentSelectedTestCase.receivedOutput],
                             null,
@@ -153,15 +155,15 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                   <b>Expected output</b>
                   <pre>
                     <code className="language-bash">
-                      {JSON.stringify(currentSelectedTestCase.output, null, 2)}{" "}
+                      {JSON.stringify(currentSelectedTestCase.output, null, 2)}
                     </code>
                   </pre>
                 </div>
               )}
 
-              <div className="text-sm">
+              {/* <div className="text-sm">
                 {JSON.stringify(runCodeResponse, null, 3)}
-              </div>
+              </div> */}
             </div>
           )
         )}

@@ -25,11 +25,7 @@ export const problemRouter = router({
         },
         _count: {
           select: {
-            submissions: {
-              where: {
-                status: "completed",
-              },
-            },
+            submissions: true,
           },
         },
       },
