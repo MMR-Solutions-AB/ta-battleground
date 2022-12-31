@@ -32,14 +32,28 @@ export const problemRouter = router({
   getLeaderboard: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
-      return ctx.prisma.user.findMany({
-        where: {
-          submissions: {
-            some: {
-              problemId: input.id,
+      return ctx.prisma.submission.findMany({
+        where: { problemId: input.id },
+        distinct: ["userId"],
+        select: {
+          id: true,
+          code: true,
+          score: true,
+
+          user: {
+            select: {
+              id: true,
+              name: true,
+              image: true,
             },
           },
         },
+        orderBy: [
+          {
+            score: "desc",
+          },
+          { createdAt: "asc" },
+        ],
       });
     }),
   getById: protectedProcedure
