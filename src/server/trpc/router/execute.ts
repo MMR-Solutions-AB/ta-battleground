@@ -47,113 +47,71 @@ export const executeRouter = router({
       let numberOfFailedTestCAses = 0;
 
       for (let i = 0; i < testCases.length; i++) {
-        console.log("hej hej hej hej");
-
-        console.log(
-          `${input.code}\n console.log(main(${testCases[i]?.input
+        try {
+          const functionInputs = testCases[i]?.input
             .map((test) =>
               typeof test === "object" ? JSON.stringify(test) : test
             )
-            .join(", ")}))\n \t\t console.log(${JSON.stringify(
-            testCases[i]?.output
-          )} == main(${testCases[i]?.input
-            .map((test) =>
-              typeof test === "object" ? JSON.stringify(test) : test
-            )
-            .join(", ")}))`
-        );
+            .join(", ");
 
-        const requestOptions = {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            language: "javascript",
-            source: `${input.code}\n console.log(main(${testCases[i]?.input
-              .map((test) =>
-                typeof test === "object" ? JSON.stringify(test) : test
-              )
-              .join(", ")}))\n \t\t console.log(JSON.stringify(${JSON.stringify(
-              testCases[i]?.output
-            )}) == JSON.stringify(main(${testCases[i]?.input
-              .map((test) =>
-                typeof test === "object" ? JSON.stringify(test) : test
-              )
-              .join(", ")})))
-              
-              \n\n \t\t console.log(JSON.stringify(${JSON.stringify(
+          const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              language: "javascript",
+              source: `${
+                input.code
+              }\nconsole.log(JSON.stringify(${JSON.stringify(
+                testCases[i]?.output
+              )}) == JSON.stringify(main(${functionInputs})))
+              \nconsole.log(JSON.stringify(${JSON.stringify(
                 testCases[i]?.output
               )}))
-              \n\n \t\t
-              console.log(JSON.stringify(main(${testCases[i]?.input
-                .map((test) =>
-                  typeof test === "object" ? JSON.stringify(test) : test
-                )
-                .join(", ")})))
+              \nconsole.log(JSON.stringify(main(${functionInputs})))`,
+              stdin: "",
+              args: [],
+            }),
+          };
 
-              `,
-            stdin: "",
-            args: [],
-          }),
-        };
+          const res = await fetch(
+            "https://emkc.org/api/v1/piston/execute",
+            requestOptions
+          );
+          const data = (await res.json()) as PistonResponse;
 
-        const res = await fetch(
-          "https://emkc.org/api/v1/piston/execute",
-          requestOptions
-        );
-        const data = (await res.json()) as PistonResponse;
+          // piston api limits us to 2 request per secund, this stops us from exceeding that
+          await sleep(500);
 
-        // piston api limits us to 2 request per secund, this stops us from exceeding that
-        await sleep(500);
+          const outputs = data.output.split("\n");
+          const expectedOutput = outputs[1];
+          const receivedOutput = outputs[2];
 
-        console.log(data);
-        const outputs = data.output.split("\n");
-        const expectedOutput = outputs[2];
-        const receivedOutput = outputs[3];
-
-        const completedTestCase =
-          _.isEqual(
-            JSON.parse(expectedOutput || ""),
-            JSON.parse(receivedOutput || "")
-          ) || outputs[1] == "true";
-
-        try {
-          console.log("öööööööööööööö");
-
-          console.log(JSON.parse(expectedOutput || ""));
-          console.log(JSON.parse(receivedOutput || ""));
-          console.log(
+          const completedTestCase =
             _.isEqual(
               JSON.parse(expectedOutput || ""),
               JSON.parse(receivedOutput || "")
-            )
-          );
-        } catch (error) {
-          console.log(error);
+            ) || outputs[0] == "true";
 
-          console.log("SHIIIITTTT");
-        }
-
-        ranTestCases.push({
-          input: testCases[i]?.input || [],
-          output: testCases[i]?.output,
-          valid: completedTestCase,
-          receivedOutput: receivedOutput || "undefined",
-        });
-        if (!completedTestCase) {
-          correctSolution = false;
-          numberOfFailedTestCAses++;
-        }
+          ranTestCases.push({
+            input: testCases[i]?.input || [],
+            output: testCases[i]?.output,
+            valid: completedTestCase,
+            receivedOutput: receivedOutput || "undefined",
+          });
+          if (!completedTestCase) {
+            correctSolution = false;
+            numberOfFailedTestCAses++;
+          }
+        } catch (error) {}
       }
 
-      console.log(ranTestCases);
       const problemScore = generateScoreForProblem(
         input.code.length,
         correctSolution,
         problem.difficulty
       );
 
-      // Make this, not do this :)
-      if (correctSolution) {
+      if (correctSolution && ranTestCases.length === testCases.length) {
         const mostRecentSuccessfullySubmission =
           await ctx.prisma.submission.findFirst({
             where: {
@@ -169,9 +127,6 @@ export const executeRouter = router({
             },
           });
 
-        console.log("wag1 wag1 wag1 wag1");
-        console.log(mostRecentSuccessfullySubmission);
-
         if (!mostRecentSuccessfullySubmission) {
           await ctx.prisma.user.update({
             where: {
@@ -186,20 +141,18 @@ export const executeRouter = router({
               },
             },
           });
-        } else {
-          if (problemScore > mostRecentSuccessfullySubmission.score) {
-            await ctx.prisma.user.update({
-              where: {
-                id: ctx.session.user.id,
+        } else if (problemScore > mostRecentSuccessfullySubmission.score) {
+          await ctx.prisma.user.update({
+            where: {
+              id: ctx.session.user.id,
+            },
+            data: {
+              score: {
+                increment:
+                  problemScore - mostRecentSuccessfullySubmission.score,
               },
-              data: {
-                score: {
-                  increment:
-                    problemScore - mostRecentSuccessfullySubmission.score,
-                },
-              },
-            });
-          }
+            },
+          });
         }
       }
 
