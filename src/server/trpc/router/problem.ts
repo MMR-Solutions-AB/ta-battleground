@@ -3,37 +3,64 @@ import { main } from "../../../data/gen";
 import { router, publicProcedure, protectedProcedure } from "../trpc";
 
 export const problemRouter = router({
-  getAll: protectedProcedure.query(({ ctx }) => {
-    return ctx.prisma.problem.findMany({
-      select: {
-        id: true,
-        name: true,
-        number: true,
-        difficulty: true,
-        submissions: {
-          where: {
-            userId: ctx.session.user.id,
+  getAll: protectedProcedure
+    .input(
+      z.object({
+        sortBy: z.string().optional(),
+        order: z.string().optional(),
+      })
+    )
+    .query(({ ctx, input }) => {
+      const { sortBy, order } = input;
+      console.log(sortBy, order);
+
+      const validOrdering = z.object({
+        sortBy: z.enum(["name", "number", "difficulty"]),
+        order: z.enum(["asc", "desc"]),
+      });
+
+      const isValidOrdering = validOrdering.safeParse({
+        sortBy,
+        order,
+      }).success;
+      console.log(isValidOrdering);
+
+      return ctx.prisma.problem.findMany({
+        select: {
+          id: true,
+          name: true,
+          number: true,
+          difficulty: true,
+          submissions: {
+            where: {
+              userId: ctx.session.user.id,
+            },
+            select: {
+              status: true,
+              createdAt: true,
+            },
+            orderBy: {
+              status: "asc",
+            },
+            take: 1,
           },
-          select: {
-            status: true,
-            createdAt: true,
+          _count: {
+            select: {
+              submissions: true,
+            },
           },
-          orderBy: {
-            status: "asc",
-          },
-          take: 1,
         },
-        _count: {
-          select: {
-            submissions: true,
-          },
-        },
-      },
-      orderBy: {
-        number: "asc",
-      },
-    });
-  }),
+        orderBy: !isValidOrdering
+          ? {
+              number: "asc",
+            }
+          : sortBy === "status"
+          ? {
+              submissions: { _count: "asc" },
+            }
+          : { [sortBy as z.infer<typeof validOrdering>["sortBy"]]: order },
+      });
+    }),
   getLeaderboard: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
