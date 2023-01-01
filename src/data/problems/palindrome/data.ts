@@ -11,7 +11,7 @@ export const data: Problem<string, boolean> = {
       output: true,
     },
     {
-      input: [`"adam"`],
+      input: [`"tand"`],
       output: false,
     },
     {
