@@ -12,7 +12,6 @@ interface ProblemsLayoutProps {
 const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
   const router = useRouter();
 
-  console.log(router.query);
   const { data: problem, isLoading } = trpc.problem.getById.useQuery({
     id: router.query.id as string,
   });

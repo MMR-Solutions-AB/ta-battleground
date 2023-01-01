@@ -50,21 +50,20 @@ export const problemRouter = router({
             },
           },
         },
-        orderBy:
-          !isValidOrdering && order
-            ? {
-                number: "asc",
-              }
-            : sortBy === "submissions"
-            ? {
-                submissions: {
-                  _count: order as z.infer<typeof validOrdering>["order"],
-                },
-              }
-            : {
-                [sortBy as z.infer<typeof validOrdering>["sortBy"]]:
-                  order as z.infer<typeof validOrdering>["order"],
+        orderBy: !isValidOrdering
+          ? {
+              number: "asc",
+            }
+          : sortBy === "submissions"
+          ? {
+              submissions: {
+                _count: order as z.infer<typeof validOrdering>["order"],
               },
+            }
+          : {
+              [sortBy as z.infer<typeof validOrdering>["sortBy"]]:
+                order as z.infer<typeof validOrdering>["order"],
+            },
       });
     }),
   getLeaderboard: protectedProcedure

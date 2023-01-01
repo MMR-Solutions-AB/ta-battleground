@@ -6,7 +6,6 @@ import { trpc } from "@/utils/trpc";
 
 const Home: NextPage = () => {
   const { data } = trpc.problem.seed.useQuery();
-  console.log(data);
 
   return (
     <>

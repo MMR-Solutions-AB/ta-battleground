@@ -8,7 +8,6 @@ export async function main() {
   );
   const problems: ProblemCreate<any, any>[] = [];
 
-  console.log(problemsNames);
   for (let i = 0; i < problemsNames.length; i++) {
     const description = readFileSync(
       join(
@@ -21,7 +20,6 @@ export async function main() {
     const { data }: { data: Problem<any, any> } = await import(
       "./problems/" + problemsNames[i] + "/data.ts"
     );
-    console.log(data);
 
     problems.push({ ...data, description });
   }

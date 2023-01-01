@@ -35,11 +35,10 @@ const ProblemsTableHeadRow: React.FC<ProblemsTableHeadRowProps> = ({
             },
           });
 
+          // toggle
+          setOrder(order === "asc" ? "desc" : "asc");
           // revalidate query
           utils.problem.getAll.invalidate();
-
-          // toggle
-          setOrder((c) => (c === "asc" ? "desc" : "asc"));
         }}
       >
         {children}
