@@ -132,43 +132,43 @@ export const problemRouter = router({
       });
     }),
   seed: publicProcedure.query(async ({ ctx }) => {
-    const problems = await main();
-    console.log(problems);
-    console.log("HEEEEEJE");
-    console.log(":;;;;;;;;;;;;;;;;;;;;;");
+    // const problems = await main();
+    // console.log(problems);
+    // console.log("HEEEEEJE");
+    // console.log(":;;;;;;;;;;;;;;;;;;;;;");
 
-    for (let i = 0; i < problems.length; i++) {
-      const problem = problems[i];
-      if (!problem) continue;
-      console.log({
-        description: problem.description,
-        name: problem.name,
-        testCases: problem.testCases,
-        arguments: problem.arguments,
-        number: problem.number,
-        difficulty: problem.difficulty,
-      });
+    // for (let i = 0; i < problems.length; i++) {
+    //   const problem = problems[i];
+    //   if (!problem) continue;
+    //   console.log({
+    //     description: problem.description,
+    //     name: problem.name,
+    //     testCases: problem.testCases,
+    //     arguments: problem.arguments,
+    //     number: problem.number,
+    //     difficulty: problem.difficulty,
+    //   });
 
-      await ctx.prisma.problem.upsert({
-        where: { number: problem.number },
-        update: {
-          description: problem.description,
-          name: problem.name,
-          testCases: problem.testCases,
-          arguments: problem.arguments,
-          number: problem.number,
-          difficulty: problem.difficulty,
-        },
-        create: {
-          description: problem.description,
-          name: problem.name,
-          arguments: problem.arguments,
-          testCases: problem.testCases,
-          number: problem.number,
-          difficulty: problem.difficulty,
-        },
-      });
-    }
+    // await ctx.prisma.problem.upsert({
+    //   where: { number: problem.number },
+    //   update: {
+    //     description: problem.description,
+    //     name: problem.name,
+    //     testCases: problem.testCases,
+    //     arguments: problem.arguments,
+    //     number: problem.number,
+    //     difficulty: problem.difficulty,
+    //   },
+    //   create: {
+    //     description: problem.description,
+    //     name: problem.name,
+    //     arguments: problem.arguments,
+    //     testCases: problem.testCases,
+    //     number: problem.number,
+    //     difficulty: problem.difficulty,
+    //   },
+    // });
+    // }
 
     return ctx.prisma.problem.findMany({});
     // return ctx.prisma.problem.createMany({ data: problems });
