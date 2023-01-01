@@ -15,6 +15,35 @@ const ProblemsTablesRows: React.FC = ({}) => {
   if (isLoading)
     return (
       <tbody>
+        <tr className="h-11 opacity-0">
+          <td className="relative h-full">
+            <div className="peer flex h-full min-w-[0rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2 font-bold text-text-dimmed">
+              12
+            </div>
+          </td>
+          <td className="relative h-full">
+            <div className="peer flex h-full min-w-[0rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
+              abc
+            </div>
+          </td>
+          <td className="relative h-full">
+            <div className="peer flex h-full min-w-[16rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
+              abcdefehgid
+            </div>
+          </td>
+
+          <td className="relative h-full">
+            <div className="peer flex h-full min-w-[16rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
+              Medel
+            </div>
+          </td>
+
+          <td className="relative h-full">
+            <div className="h-ful peer flex max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
+              45
+            </div>
+          </td>
+        </tr>
         <tr className="flex h-40 w-full justify-center pt-10">
           <td>
             <div className="absolute left-1/2 -translate-x-1/2">
