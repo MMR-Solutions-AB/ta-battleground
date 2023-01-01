@@ -6,13 +6,13 @@
     "build": "yarn db:seed:prod && next build",
     "dev": "next dev",
     "postinstall": "prisma generate",
+    "gen": "tsx ./src/scripts/generateNewProblem.ts",
     "db:push": "npx prisma db push",
     "db:seed": "NODE_ENV=development prisma db seed",
     "db:seed:prod": "NODE_ENV=production prisma db seed",
     "lint": "next lint",
     "start": "next start",
-    "format": "prettier --write ./src",
-    "gen:run": "tsc ./src/data/gen.ts && node ./src/data/gen.js"
+    "format": "prettier --write ./src"
   },
   "prisma": {
     "seed": "tsx ./prisma/seed.ts"
@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.8",
+    "@types/inquirer": "^9.0.3",
     "@types/lodash": "^4.14.191",
     "@types/marked": "^4.0.8",
     "@types/node": "^18.0.0",
@@ -51,6 +52,7 @@
     "autoprefixer": "^10.4.7",
     "eslint": "^8.26.0",
     "eslint-config-next": "13.0.2",
+    "inquirer": "^9.1.4",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",

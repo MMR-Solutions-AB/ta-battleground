@@ -1,8 +1,8 @@
 import { prisma } from "../src/server/db/client";
-import { gen } from "../src/data/gen";
+import { getAllProblems } from "../src/data/getAllProblems";
 
 async function main() {
-  const problems = await gen();
+  const problems = await getAllProblems();
 
   for (let i = 0; i < problems.length; i++) {
     const problem = problems[i];

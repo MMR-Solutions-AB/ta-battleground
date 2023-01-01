@@ -2,7 +2,7 @@ import { readdirSync, readFileSync } from "fs";
 import { join } from "path";
 import type { Problem, ProblemCreate } from "./Problem";
 
-export async function gen() {
+export async function getAllProblems() {
   const problemsNames = readdirSync(join(__dirname, "./problems"));
   const problems: ProblemCreate<string, string>[] = [];
 
