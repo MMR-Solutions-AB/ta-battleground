@@ -15,7 +15,7 @@ export const problemRouter = router({
       console.log(sortBy, order);
 
       const validOrdering = z.object({
-        sortBy: z.enum(["name", "number", "difficulty"]),
+        sortBy: z.enum(["name", "number", "difficulty", "submissions"]),
         order: z.enum(["asc", "desc"]),
       });
 
@@ -50,15 +50,21 @@ export const problemRouter = router({
             },
           },
         },
-        orderBy: !isValidOrdering
-          ? {
-              number: "asc",
-            }
-          : sortBy === "status"
-          ? {
-              submissions: { _count: "asc" },
-            }
-          : { [sortBy as z.infer<typeof validOrdering>["sortBy"]]: order },
+        orderBy:
+          !isValidOrdering && order
+            ? {
+                number: "asc",
+              }
+            : sortBy === "submissions"
+            ? {
+                submissions: {
+                  _count: order as z.infer<typeof validOrdering>["order"],
+                },
+              }
+            : {
+                [sortBy as z.infer<typeof validOrdering>["sortBy"]]:
+                  order as z.infer<typeof validOrdering>["order"],
+              },
       });
     }),
   getLeaderboard: protectedProcedure

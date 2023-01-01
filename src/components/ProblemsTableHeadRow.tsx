@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { ChevronDown, ChevronUp } from "react-feather";
 
 interface ProblemsTableHeadRowProps {
-  sortBy?: "status" | "name" | "difficulty";
+  sortBy?: "status" | "name" | "difficulty" | "submissions";
   children: React.ReactNode;
 }
 
@@ -43,11 +43,12 @@ const ProblemsTableHeadRow: React.FC<ProblemsTableHeadRowProps> = ({
         }}
       >
         {children}
-        {order === "desc" ? (
-          <ChevronUp className="ml-2 h-4 w-4" />
-        ) : (
-          <ChevronDown className="ml-2 h-4 w-4" />
-        )}
+        {sortBy &&
+          (order === "desc" ? (
+            <ChevronUp className="ml-2 h-4 w-4" />
+          ) : (
+            <ChevronDown className="ml-2 h-4 w-4" />
+          ))}
       </div>
     </th>
   );

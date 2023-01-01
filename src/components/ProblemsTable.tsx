@@ -40,14 +40,14 @@ const ProblemsTable: React.FC = ({}) => {
               <th className="h-full cursor-pointer px-2 font-semibold text-text-dimmed">
                 #
               </th>
-              <ProblemsTableHeadRow sortBy="status">
-                Status
-              </ProblemsTableHeadRow>
+              <ProblemsTableHeadRow>Status</ProblemsTableHeadRow>
               <ProblemsTableHeadRow sortBy="name">Namn</ProblemsTableHeadRow>
               <ProblemsTableHeadRow sortBy="difficulty">
                 Svårighet
               </ProblemsTableHeadRow>
-              <ProblemsTableHeadRow>Submissions</ProblemsTableHeadRow>
+              <ProblemsTableHeadRow sortBy="submissions">
+                Submissions
+              </ProblemsTableHeadRow>
             </tr>
           </thead>
           <tbody className="">
