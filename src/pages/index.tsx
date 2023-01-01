@@ -5,7 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "@/utils/trpc";
 
 const Home: NextPage = () => {
-  const { data } = trpc.problem.seed.useQuery();
+  // const { data } = trpc.problem.seed.useQuery();
 
   return (
     <>

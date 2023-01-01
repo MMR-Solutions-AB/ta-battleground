@@ -1,7 +1,7 @@
 import type { Problem as PrismaProblem } from "@prisma/client";
 
-export type TestCase<I, O> = { input: Array<I>; output: O };
-export type ProblemCreate<I, O> = Omit<
+export type TestCase<I = any, O = any> = { input: Array<I>; output: O };
+export type ProblemCreate<I = any, O = any> = Omit<
   PrismaProblem,
   "id" | "createdAt" | "updatedAt"
 > & {

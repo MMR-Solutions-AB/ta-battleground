@@ -1,5 +1,5 @@
 import type { ReactElement, ReactNode } from "react";
-import type { AppType, AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import type { NextPage } from "next";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";

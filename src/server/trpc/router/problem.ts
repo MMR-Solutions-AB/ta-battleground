@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { main } from "../../../data/gen";
 import { router, publicProcedure, protectedProcedure } from "../trpc";
+// import { main } from "../../../data/gen";
 
 export const problemRouter = router({
   getAll: protectedProcedure

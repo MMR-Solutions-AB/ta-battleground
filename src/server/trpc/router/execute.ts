@@ -37,8 +37,8 @@ export const executeRouter = router({
         },
       });
 
-      const testCases = problem.testCases as TestCase<any, any>[];
-      const ranTestCases: (TestCase<any, any> & {
+      const testCases = problem.testCases as TestCase[];
+      const ranTestCases: (TestCase & {
         valid: boolean;
         receivedOutput: string;
         timedOut: boolean;

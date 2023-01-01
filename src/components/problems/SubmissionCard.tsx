@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import type { RouterOutputs } from "@/utils/trpc";
 import classNames from "classnames";
 
@@ -7,7 +7,6 @@ interface SubmissionCardProps {
 }
 
 const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) => {
-  const [showFullCode, setShowFullCode] = useState(false);
   const time = new Intl.DateTimeFormat("sv-SE", {
     dateStyle: "medium",
     timeStyle: "short",
@@ -16,8 +15,7 @@ const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) => {
     <div className="rounded-md bg-bg-dark p-5">
       <div
         className={classNames(
-          "relative mb-5 overflow-y-hidden overflow-x-scroll",
-          !showFullCode && "max-h-[500px]"
+          "relative mb-5 overflow-y-hidden overflow-x-scroll"
         )}
       >
         <pre className="text-sm">{submission.code}</pre>
