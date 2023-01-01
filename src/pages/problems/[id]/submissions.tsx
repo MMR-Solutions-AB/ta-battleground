@@ -19,7 +19,12 @@ const Problem: NextPageWithLayout = () => {
         <BouncingBalls />
       </div>
     );
-  if (!submissions) return <p>hmm, error</p>;
+  if (!submissions || submissions.length === 0)
+    return (
+      <p className="p-6 text-xl font-bold">
+        Verkar som att du inte har kört denna uppgift tidigare
+      </p>
+    );
 
   return (
     <div className="space-y-3 px-4 py-6">

@@ -20,7 +20,14 @@ const Leaderboard: NextPageWithLayout = () => {
         <BouncingBalls />
       </div>
     );
-  if (!submissions) return <p>hmm, error</p>;
+
+  if (!submissions || submissions.length === 0)
+    return (
+      <p className="p-6 text-xl font-bold">
+        Verkar som att ingen kör denna uppgift redan, var först med att lösa
+        den!
+      </p>
+    );
 
   return (
     <div className="p-5">

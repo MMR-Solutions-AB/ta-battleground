@@ -12,22 +12,14 @@ const Navbar: React.FC = ({}) => {
       <Link href="/" className="text-2xl font-black tracking-wider">
         Techover Battleground
       </Link>
-
-      <div className="flex items-center gap-4 text-sm text-text-dimmed">
-        {/* <a
-          target="_blank"
-          href=" https://techover-css-battles-leaderboard.vercel.app/"
-          className="hover:text-white"
-        >
-          Css Battles
-        </a> */}
-        <Link href="/leaderboard" className="hover:text-white">
-          Leaderboard
-        </Link>
-        <Link href="/problems" className="hover:text-white">
-          Problems
-        </Link>
-        {user && user.image && (
+      {user && user.image && (
+        <div className="flex items-center gap-4 text-sm text-text-dimmed">
+          <Link href="/leaderboard" className="hover:text-white">
+            Leaderboard
+          </Link>
+          <Link href="/problems" className="hover:text-white">
+            Problems
+          </Link>
           <Link
             href="/me"
             className="group ml-5 flex items-center gap-2 md:ml-14"
@@ -42,8 +34,8 @@ const Navbar: React.FC = ({}) => {
               />
             </div>
           </Link>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
