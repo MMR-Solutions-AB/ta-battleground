@@ -47,6 +47,7 @@ model User {
   name              String
   email             String       @unique
   emailVerified     DateTime?
+  github_login      String
   image             String
   score             Float        @default(0)
   completedProblems Int          @default(0)

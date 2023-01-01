@@ -1,33 +1,57 @@
 import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "@/utils/trpc";
+import Image from "next/image";
+import Link from "next/link";
 
 const Home: NextPage = () => {
-  return <AuthShowcase />;
-};
-
-export default Home;
-
-const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();
 
-  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
-
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-white">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-        {secretMessage && <span> - {secretMessage}</span>}
-      </p>
-      <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-        onClick={sessionData ? () => signOut() : () => signIn()}
-      >
-        {sessionData ? "Sign out" : "Sign in"}
-      </button>
+    <div>
+      <div className="relative w-full py-20 px-10 text-center md:py-32">
+        <h1 className="mb-5 text-6xl font-black md:mb-8 md:text-8xl">
+          Techover
+          <br />
+          Battleground
+        </h1>
+        <p className="mb-5 text-text-dimmed">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam,
+          laudantium?
+        </p>
+        {sessionData ? (
+          <div className="flex justify-center gap-3">
+            <Link
+              className="rounded-full bg-bg-dimmed px-10 py-3 font-semibold text-white no-underline transition hover:bg-bg-dimmed/60"
+              href="/problems"
+            >
+              Start solving problems
+            </Link>
+            <button
+              className="rounded-full bg-bg-dimmed px-10 py-3 font-semibold text-white no-underline transition hover:bg-bg-dimmed/60"
+              onClick={() => signOut()}
+            >
+              Sign out
+            </button>
+          </div>
+        ) : (
+          <button
+            className="rounded-full bg-bg-dimmed px-10 py-3 font-semibold text-white no-underline transition hover:bg-bg-dimmed/60"
+            onClick={() => signIn()}
+          >
+            Sign in
+          </button>
+        )}
+
+        <Image
+          src={"/bg-blob.svg"}
+          fill={true}
+          style={{ objectFit: "cover", zIndex: -1 }}
+          alt="blob bg"
+        />
+      </div>
     </div>
   );
 };
+
+export default Home;
