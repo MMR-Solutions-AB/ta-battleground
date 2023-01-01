@@ -24,7 +24,13 @@ export const authOptions: NextAuthOptions = {
       clientSecret: env.GITHUB_CLIENT_SECRET,
       profile(profile) {
         console.log(profile);
-        return { ...profile, github_login: profile.login };
+        return {
+          id: profile.login, // will be set by prisma
+          github_login: profile.login,
+          email: profile.email,
+          image: profile.avatar_url,
+          name: profile.name,
+        };
       },
     }),
     // ...add more providers here
