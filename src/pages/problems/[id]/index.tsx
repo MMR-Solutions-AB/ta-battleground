@@ -20,7 +20,9 @@ const Problem: NextPageWithLayout = () => {
     );
   if (!problem) return <p>hmm, error</p>;
 
-  return <Description description={problem.description} />;
+  return (
+    <Description description={problem.description} problemName={problem.name} />
+  );
 };
 
 Problem.getLayout = (page) => <ProblemsLayout>{page}</ProblemsLayout>;
