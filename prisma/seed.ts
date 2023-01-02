@@ -18,6 +18,7 @@ async function main() {
         number: problem.number,
         difficulty: problem.difficulty,
         tags: {
+          set: [],
           connectOrCreate: problem.tags.map((tag) => ({
             where: { name: tag },
             create: {

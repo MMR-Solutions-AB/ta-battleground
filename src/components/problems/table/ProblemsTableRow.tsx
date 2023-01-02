@@ -102,7 +102,9 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
           {problem.submissions &&
             problem.submissions[0] &&
             problem.submissions[0].score > 0 &&
-            `${problem.submissions[0].score} - { ${problem.submissions[0].code.length} }`}
+            `${problem.submissions[0].score.toFixed(2)} - { ${
+              problem.submissions[0].code.length
+            } }`}
         </div>
       </td>
       <td className="relative h-full">
