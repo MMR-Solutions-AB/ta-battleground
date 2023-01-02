@@ -9,6 +9,12 @@ async function generateNewProblem() {
     type: "input",
     message: "Vad ska ditt problem heta?",
   });
+  const { difficulty } = await inquirer.prompt({
+    name: "difficulty",
+    type: "list",
+    message: "Vilken svårighetsgrad ska uppgiften vara?",
+    choices: ["easy", "medium", "hard"],
+  });
 
   const allProblems = await getAllProblems();
   let highestNumber = 0;
@@ -23,9 +29,10 @@ async function generateNewProblem() {
   const code = `import type { Problem } from "../../Problem";
 \nexport const data: Problem<string, string> = {
   name: "${problem_name}",
-  difficulty: "easy",
+  difficulty: "${difficulty}",
   number: ${highestNumber},
   arguments: ["s"],
+  tags: [""],
   testCases: [
     {
       input: [\`"s"\`],

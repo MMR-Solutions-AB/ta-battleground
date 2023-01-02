@@ -21,6 +21,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
   const currentSelectedTestCase =
     runCodeResponse?.ranTestCases[selectedTestCaseIndex];
   const utils = trpc.useContext();
+
   if (!id) return <></>;
 
   return (
