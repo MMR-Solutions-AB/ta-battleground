@@ -1,5 +1,8 @@
 import { z } from "zod";
 import { router, protectedProcedure } from "../trpc";
+import type { Tags } from "@/data/Problem";
+import _ from "lodash";
+import { tags as allTags } from "@/data/Problem";
 
 export const problemRouter = router({
   getAll: protectedProcedure
@@ -25,16 +28,19 @@ export const problemRouter = router({
       }).success;
       console.log(isValidOrdering);
 
+      const validTags = _.intersection(allTags, tags) as Tags[] | undefined;
+
       return ctx.prisma.problem.findMany({
-        where: tags
-          ? {
-              tags: {
-                some: {
-                  name: { in: tags as any },
+        where:
+          validTags && validTags.length > 0
+            ? {
+                tags: {
+                  some: {
+                    name: { in: validTags },
+                  },
                 },
-              },
-            }
-          : {},
+              }
+            : {},
         select: {
           id: true,
           name: true,

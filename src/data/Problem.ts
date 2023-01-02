@@ -4,6 +4,13 @@ import type {
 } from "@prisma/client";
 
 export type Tags = PrismaTag["name"];
+export const tags: Tags[] = [
+  "arrays",
+  "basics",
+  "numbers",
+  "objects",
+  "strings",
+];
 export type TestCase<I = any, O = any> = { input: Array<I>; output: O };
 export type ProblemCreate<I = any, O = any> = Omit<
   PrismaProblem,
