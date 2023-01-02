@@ -36,7 +36,6 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                 code,
                 type: "test",
               });
-              console.log(res);
             }}
           >
             Run

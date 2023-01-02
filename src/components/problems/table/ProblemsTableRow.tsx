@@ -3,12 +3,15 @@ import type { RouterOutputs } from "@/utils/trpc";
 import Link from "next/link";
 import { CheckCircle, Activity } from "react-feather";
 import classNames from "classnames";
+import { useRouter } from "next/router";
 
 interface ProblemsTableRowProps {
   problem: RouterOutputs["problem"]["getAll"][number];
 }
 
 const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
+  const router = useRouter();
+
   return (
     <tr className="h-11 bg-bg-dark even:bg-bg-dimmed">
       <td className="relative h-full">
@@ -40,8 +43,22 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
               {problem.tags.map((tag) => (
                 <div
                   key={tag.id}
+                  onClick={() => {
+                    console.log(
+                      Array.from(new Set([router.query.tags, tag.name])).filter(
+                        (a) => a
+                      )
+                    );
+
+                    router.push({
+                      query: {
+                        ...router.query,
+                        tags: [tag.name],
+                      },
+                    });
+                  }}
                   className={classNames(
-                    "rounded-full py-0.5 px-1.5 text-xs",
+                    "cursor-pointer rounded-full py-0.5 px-1.5 text-xs",
                     tag.name === "basics"
                       ? "bg-green-600"
                       : tag.name === "numbers"
@@ -64,7 +81,7 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
       </td>
 
       <td className="relative h-full">
-        <div className="peer flex h-full min-w-[16rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
+        <div className="peer flex h-full min-w-[8rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2 md:min-w-[16rem]">
           {problem.difficulty === "hard" ? (
             <span className="text-red-500">Svår</span>
           ) : problem.difficulty === "medium" ? (

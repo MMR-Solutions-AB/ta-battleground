@@ -7,10 +7,11 @@ export const problemRouter = router({
       z.object({
         sortBy: z.string().optional(),
         order: z.string().optional(),
+        tags: z.array(z.string()).nullable(),
       })
     )
     .query(({ ctx, input }) => {
-      const { sortBy, order } = input;
+      const { sortBy, order, tags } = input;
       console.log(sortBy, order);
 
       const validOrdering = z.object({
@@ -25,6 +26,15 @@ export const problemRouter = router({
       console.log(isValidOrdering);
 
       return ctx.prisma.problem.findMany({
+        where: tags
+          ? {
+              tags: {
+                some: {
+                  name: { in: tags as any },
+                },
+              },
+            }
+          : {},
         select: {
           id: true,
           name: true,

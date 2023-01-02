@@ -9,7 +9,7 @@ const Navbar: React.FC = ({}) => {
 
   return (
     <div className="flex items-center justify-between gap-2 bg-bg-dimmed px-4 py-2 md:px-10 md:py-3">
-      <Link href="/" className="text-2xl font-black tracking-wider">
+      <Link href="/" className="text-xl font-black tracking-wider md:text-2xl">
         Techover Battleground
       </Link>
       {user && user.image && (

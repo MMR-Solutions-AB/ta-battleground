@@ -6,11 +6,14 @@ import { useRouter } from "next/router";
 
 const ProblemsTablesRows: React.FC = ({}) => {
   const router = useRouter();
-  const { sortBy, order } = router.query;
+  const { sortBy, order, tags } = router.query;
   const { data: problems, isLoading } = trpc.problem.getAll.useQuery({
     sortBy: Array.isArray(sortBy) ? sortBy[0] : sortBy,
     order: Array.isArray(order) ? order[0] : order,
+    tags: tags ? (Array.isArray(tags) ? tags : [tags]) : null,
   });
+
+  console.log(router.query);
 
   if (isLoading)
     return (
@@ -31,13 +34,11 @@ const ProblemsTablesRows: React.FC = ({}) => {
               abcdefehgid
             </div>
           </td>
-
           <td className="relative h-full">
-            <div className="peer flex h-full min-w-[16rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
+            <div className="peer flex h-full min-w-[8rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2 md:min-w-[16rem]">
               Medel
             </div>
           </td>
-
           <td className="relative h-full">
             <div className="h-ful peer flex max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
               45
@@ -56,8 +57,6 @@ const ProblemsTablesRows: React.FC = ({}) => {
 
   if ((!problems || problems.length === 0) && !isLoading)
     return <p>hmmm, seems to be an error here</p>;
-
-  console.log(problems);
 
   return (
     <tbody className="">

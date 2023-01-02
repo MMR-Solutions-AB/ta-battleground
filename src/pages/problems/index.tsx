@@ -1,10 +1,10 @@
 import React from "react";
 import type { NextPage } from "next";
-import ProblemsTable from "@/components/ProblemsTable";
+import ProblemsTable from "@/components/problems/table/ProblemsTable";
 
 const Problems: NextPage = () => {
   return (
-    <div className="px-5 md:px-36">
+    <div>
       <ProblemsTable />
     </div>
   );

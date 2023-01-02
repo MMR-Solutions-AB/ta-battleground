@@ -5,8 +5,8 @@ import ProblemsTablesRows from "./ProblemsTablesRows";
 const ProblemsTable: React.FC = ({}) => {
   return (
     <div className="py-10 text-sm">
-      <div className="relative min-w-0 !overflow-y-visible overflow-x-scroll">
-        <table className="my-0 min-w-full rounded-md text-xs md:text-sm">
+      <div className="relative mx-auto min-w-0 max-w-6xl !overflow-y-visible overflow-x-scroll sm:px-5">
+        <table className="my-0 mx-5 min-w-full text-xs sm:mx-0 md:text-sm">
           <thead className="h-9 text-left text-text-dimmed">
             <tr>
               <th className="h-full cursor-pointer px-2 font-semibold text-text-dimmed">

@@ -30,6 +30,7 @@ const ProblemsTableHeadRow: React.FC<ProblemsTableHeadRowProps> = ({
           router.push({
             pathname: "/problems",
             query: {
+              ...router.query,
               sortBy,
               order,
             },
