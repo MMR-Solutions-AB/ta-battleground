@@ -159,6 +159,25 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                       {JSON.stringify(currentSelectedTestCase.output, null, 2)}
                     </code>
                   </pre>
+
+                  {currentSelectedTestCase.debugOutput.length > 0 && (
+                    <>
+                      <b>Debug output</b>
+                      <pre>
+                        <code className="language-bash">
+                          {currentSelectedTestCase.debugOutput.map((s) => (
+                            <p key={s}>{JSON.stringify(s, null, 2)}</p>
+                          ))}
+
+                          {/* {JSON.stringify(
+                            currentSelectedTestCase.debugOutput,
+                            null,
+                            2
+                          )} */}
+                        </code>
+                      </pre>
+                    </>
+                  )}
                 </div>
               )}
 

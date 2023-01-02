@@ -43,6 +43,7 @@ export const executeRouter = router({
         valid: boolean;
         receivedOutput: string | null;
         timedOut: boolean;
+        debugOutput: string[];
       })[] = [];
 
       let correctSolution = true;
@@ -61,19 +62,17 @@ export const executeRouter = router({
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               language: "javascript",
-              source: `${
-                input.code
-              }\nconsole.log(JSON.stringify(${JSON.stringify(
-                testCases[i]?.output
-              )}) == JSON.stringify(${_.camelCase(
+              source: `${input.code}\n
+              const MENDES_SUPER_SECRET_NAMN = JSON.stringify(${_.camelCase(
                 problem.name
-              )}(${functionInputs})))
+              )}(${functionInputs}))
+              console.log(JSON.stringify(${JSON.stringify(
+                testCases[i]?.output
+              )}) == MENDES_SUPER_SECRET_NAMN)
               \nconsole.log(JSON.stringify(${JSON.stringify(
                 testCases[i]?.output
               )}))
-              \nconsole.log(JSON.stringify(${_.camelCase(
-                problem.name
-              )}(${functionInputs})))`,
+              \nconsole.log(MENDES_SUPER_SECRET_NAMN)`,
               stdin: "",
               args: [],
             }),
@@ -95,15 +94,29 @@ export const executeRouter = router({
           await sleep(500);
 
           const outputs = data.output.split("\n");
-          const expectedOutput = outputs[1];
-          const receivedOutput = outputs[2];
+          const debugOutput = outputs.slice(0, outputs.length - 4);
+          const expectedOutput = outputs[outputs.length - 3];
+          const receivedOutput = outputs[outputs.length - 2];
 
-          const completedTestCase = timedOut
-            ? false
-            : _.isEqual(
-                JSON.parse(expectedOutput || ""),
-                JSON.parse(receivedOutput || "")
-              ) || outputs[0] == "true";
+          console.log(outputs);
+          console.log(debugOutput);
+
+          console.log(JSON.parse(expectedOutput || ""));
+          console.log("asdasd;;;;____;;;adasd");
+          console.log(receivedOutput);
+
+          console.log(JSON.parse(receivedOutput || ""));
+
+          const completedTestCase =
+            timedOut ||
+            !expectedOutput ||
+            !receivedOutput ||
+            receivedOutput === "undefined"
+              ? false
+              : _.isEqual(
+                  JSON.parse(expectedOutput),
+                  JSON.parse(receivedOutput)
+                ) || outputs[outputs.length - 4] == "true";
 
           ranTestCases.push({
             input: testCases[i]?.input || [],
@@ -111,6 +124,7 @@ export const executeRouter = router({
             valid: completedTestCase,
             receivedOutput: (timedOut ? data.stderr : receivedOutput) || null,
             timedOut,
+            debugOutput,
           });
           console.log(ranTestCases);
 
@@ -118,7 +132,11 @@ export const executeRouter = router({
             correctSolution = false;
             numberOfFailedTestCases++;
           }
-        } catch (error) {}
+        } catch (error) {
+          correctSolution = false;
+          numberOfFailedTestCases++;
+          console.log(error);
+        }
       }
 
       const problemScore = generateScoreForProblem(
