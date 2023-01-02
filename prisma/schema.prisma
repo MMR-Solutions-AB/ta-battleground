@@ -91,6 +91,10 @@ model Problem {
   tags        Tag[]
 
   @@index([name, difficulty, number])
+  @@index([name])
+  @@index([difficulty])
+  @@index([createdAt])
+  @@index([number])
 }
 
 enum TagNames {

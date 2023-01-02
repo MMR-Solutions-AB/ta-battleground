@@ -63,7 +63,7 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
                     });
                   }}
                   className={classNames(
-                    "cursor-pointer rounded-full py-0.5 px-1.5 text-xs",
+                    "cursor-pointer rounded-full py-0.5 px-1.5 text-xs transition-opacity hover:opacity-50",
                     tag.name === "basics"
                       ? "bg-green-600"
                       : tag.name === "numbers"
