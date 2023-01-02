@@ -39,6 +39,7 @@ async function generateNewProblem() {
   writeFileSync(
     join(__dirname, "../data/problems", problem_name, "description.md"),
     `# ${problem_name}
+
 ## Exempel 1
 
 **_Input_**
@@ -53,7 +54,7 @@ s = "racecar"
 true
 \`\`\`
     
-**_Output_**
+**_Förklaring_**
 
 En förklaring
 `
