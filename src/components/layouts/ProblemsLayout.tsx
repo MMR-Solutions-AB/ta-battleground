@@ -61,7 +61,10 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
       </div>
       {/* <div className="w-4 bg-black"></div> */}
       <div className="flex flex-1 flex-col bg-bg-dimmed">
-        <Editor problemArgs={problem.arguments as string[]} />
+        <Editor
+          problemName={problem.name}
+          problemArgs={problem.arguments as string[]}
+        />
       </div>
     </div>
   );

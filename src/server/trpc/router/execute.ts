@@ -34,6 +34,7 @@ export const executeRouter = router({
           testCases: true,
           arguments: true,
           difficulty: true,
+          name: true,
         },
       });
 
@@ -64,11 +65,15 @@ export const executeRouter = router({
                 input.code
               }\nconsole.log(JSON.stringify(${JSON.stringify(
                 testCases[i]?.output
-              )}) == JSON.stringify(main(${functionInputs})))
+              )}) == JSON.stringify(${_.camelCase(
+                problem.name
+              )}(${functionInputs})))
               \nconsole.log(JSON.stringify(${JSON.stringify(
                 testCases[i]?.output
               )}))
-              \nconsole.log(JSON.stringify(main(${functionInputs})))`,
+              \nconsole.log(JSON.stringify(${_.camelCase(
+                problem.name
+              )}(${functionInputs})))`,
               stdin: "",
               args: [],
             }),

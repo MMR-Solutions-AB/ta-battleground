@@ -3,11 +3,14 @@ import MonacoEditor from "@monaco-editor/react";
 import TestCases from "./TestCases";
 import { generateStarterCode } from "@/utils/generateStarterCode";
 interface EditorProps {
+  problemName: string;
   problemArgs: string[];
 }
 
-const Editor: React.FC<EditorProps> = ({ problemArgs }) => {
-  const [code, setCode] = useState(() => generateStarterCode(problemArgs));
+const Editor: React.FC<EditorProps> = ({ problemName, problemArgs }) => {
+  const [code, setCode] = useState(() =>
+    generateStarterCode(problemName, problemArgs)
+  );
   return (
     <>
       <div className="flex flex-shrink-0 bg-bg-dark pt-4 pb-2 text-sm text-text-dimmed">
