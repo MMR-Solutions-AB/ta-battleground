@@ -29,22 +29,9 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
       <div className="flex-shrink-0 rounded-md bg-bg-dimmed p-4">
         <div className="flex flex-wrap items-center justify-end gap-3 text-sm">
           <button
-            disabled={runCodeMutation.isLoading}
-            className="rounded-md bg-bg-dark px-4 py-1 hover:opacity-80 disabled:opacity-50"
-            onClick={async () => {
-              const res = runCodeMutation.mutate({
-                problemId: Array.isArray(id) ? id[0] || "" : id,
-                code,
-                type: "test",
-              });
-            }}
-          >
-            Run
-          </button>
-          <button
             ref={submitButtonRef}
             disabled={runCodeMutation.isLoading}
-            className="rounded-md bg-primary px-4 py-1 text-bg-dark hover:opacity-80 disabled:opacity-50"
+            className="rounded-md bg-primary px-4 py-1 text-white hover:opacity-80 disabled:opacity-50"
             onClick={async () => {
               const res = await runCodeMutation.mutateAsync(
                 {
@@ -101,6 +88,12 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                   </p>
                 </>
               )}
+
+              <h4 className="my-5 font-black italic md:text-xl">
+                score: {runCodeResponse.problemScore.toFixed(2)}{" "}
+                <span className="ml-1 text-text-dimmed">{`{ ${runCodeResponse.codeLength} }`}</span>
+              </h4>
+
               <div className="mt-3 flex flex-wrap gap-2">
                 {runCodeResponse.ranTestCases.map((testCase, i) => (
                   <div

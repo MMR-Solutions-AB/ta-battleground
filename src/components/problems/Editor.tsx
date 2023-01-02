@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import MonacoEditor from "@monaco-editor/react";
 import TestCases from "./TestCases";
 import { generateStarterCode } from "@/utils/generateStarterCode";
+import BouncingBalls from "@/components/loaders/BouncingBalls";
+
 interface EditorProps {
   problemName: string;
   problemArgs: string[];
@@ -18,8 +20,9 @@ const Editor: React.FC<EditorProps> = ({ problemName, problemArgs }) => {
       </div>
 
       <div className="flex h-full flex-col overflow-y-scroll">
-        <div className="h-full bg-green-500">
+        <div className="h-[calc(100%_-_0px)]">
           <MonacoEditor
+            loading={<BouncingBalls />}
             wrapperProps={{
               style: {
                 position: "relative",

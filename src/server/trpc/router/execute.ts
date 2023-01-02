@@ -204,6 +204,8 @@ export const executeRouter = router({
       return {
         ranTestCases,
         correctSolution,
+        problemScore,
+        codeLength: input.code.length,
         numberOfFailedTestCases,
         arguments: problem.arguments as string[],
       };
