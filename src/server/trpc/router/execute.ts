@@ -40,7 +40,7 @@ export const executeRouter = router({
       const testCases = problem.testCases as TestCase[];
       const ranTestCases: (TestCase & {
         valid: boolean;
-        receivedOutput: string;
+        receivedOutput: string | null;
         timedOut: boolean;
       })[] = [];
 
@@ -104,7 +104,7 @@ export const executeRouter = router({
             input: testCases[i]?.input || [],
             output: testCases[i]?.output,
             valid: completedTestCase,
-            receivedOutput: receivedOutput || "undefined",
+            receivedOutput: (timedOut ? data.stderr : receivedOutput) || null,
             timedOut,
           });
           console.log(ranTestCases);

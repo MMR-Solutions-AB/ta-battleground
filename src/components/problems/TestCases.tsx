@@ -141,7 +141,9 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                   <pre>
                     <code className="language-bash">
                       {currentSelectedTestCase.timedOut
-                        ? "Code timedout"
+                        ? currentSelectedTestCase.receivedOutput
+                          ? currentSelectedTestCase.receivedOutput
+                          : "Error: Code timedout\nChecka att du inte har någon loop som körs i oändligheten"
                         : typeof currentSelectedTestCase.receivedOutput ===
                           "object"
                         ? JSON.stringify(
