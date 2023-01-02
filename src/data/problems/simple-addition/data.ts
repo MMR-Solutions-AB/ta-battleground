@@ -5,6 +5,7 @@ export const data: Problem<number, number> = {
   difficulty: "easy",
   number: 1,
   arguments: ["a", "b"],
+  tags: ["basics", "numbers"],
   testCases: [
     {
       input: [1, 2],

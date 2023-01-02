@@ -5,6 +5,7 @@ export const data: Problem<string, boolean> = {
   difficulty: "easy",
   number: 7,
   arguments: ["s"],
+  tags: ["strings"],
   testCases: [
     {
       input: [`"racecar"`],

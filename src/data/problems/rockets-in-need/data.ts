@@ -8,6 +8,7 @@ export const data: Problem<
   difficulty: "easy",
   number: 5,
   arguments: ["rockets"],
+  tags: ["arrays", "objects"],
   testCases: [
     {
       input: [

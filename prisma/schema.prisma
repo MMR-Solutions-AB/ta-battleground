@@ -88,8 +88,28 @@ model Problem {
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
   submissions Submission[]
+  tags        Tag[]
 
   @@index([name, difficulty, number])
+}
+
+enum TagNames {
+  basics
+  strings
+  numbers
+  arrays
+  objects
+}
+
+model Tag {
+  id        String    @id @default(cuid())
+  name      TagNames
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  problems  Problem[]
+
+  @@unique([name])
+  @@index([name])
 }
 
 enum SubmissionStatus {
