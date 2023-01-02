@@ -5,6 +5,8 @@ import { generateStarterCode } from "@/utils/generateStarterCode";
 import BouncingBalls from "@/components/loaders/BouncingBalls";
 import { Code } from "react-feather";
 import { minify } from "terser";
+import { useEditorSettings } from "@/context/EditorContext";
+import { useModal } from "@/context/ModalContext";
 
 interface EditorProps {
   problemName: string;
@@ -12,6 +14,8 @@ interface EditorProps {
 }
 
 const Editor: React.FC<EditorProps> = ({ problemName, problemArgs }) => {
+  const { editorSettings } = useEditorSettings();
+  const { setShowModal } = useModal();
   const [code, setCode] = useState(() =>
     generateStarterCode(problemName, problemArgs)
   );
@@ -19,7 +23,7 @@ const Editor: React.FC<EditorProps> = ({ problemName, problemArgs }) => {
     <>
       <div className="flex flex-shrink-0 flex-wrap items-center justify-between bg-bg-dark pb-2 pr-2 pt-2 text-sm text-text-dimmed">
         <span>{`{ ${code.length} }`}</span>
-        <div>
+        <div className="flex gap-2">
           <button
             onClick={async () => {
               const r = await minify(code);
@@ -30,6 +34,14 @@ const Editor: React.FC<EditorProps> = ({ problemName, problemArgs }) => {
             className="flex items-center gap-2 rounded-md bg-bg-dimmed py-1 px-3"
           >
             <Code className="h-3 w-3" /> Minify code
+          </button>
+          <button
+            onClick={() => {
+              setShowModal(true);
+            }}
+            className="flex items-center gap-2 rounded-md bg-bg-dimmed py-1 px-3"
+          >
+            <Code className="h-3 w-3" /> Editor settings
           </button>
         </div>
       </div>
@@ -54,20 +66,20 @@ const Editor: React.FC<EditorProps> = ({ problemName, problemArgs }) => {
             language={"javascript"}
             value={code}
             onChange={(val) => setCode(val || "")}
-            theme={"vs-dark"}
+            theme={editorSettings.theme}
             options={{
               scrollBeyondLastLine: false,
               automaticLayout: true,
               minimap: {
-                enabled: false,
+                enabled: editorSettings.minimap,
               },
               scrollbar: {
                 alwaysConsumeMouseWheel: false,
               },
-              fontSize: 16,
-              cursorStyle: "block",
+              fontSize: editorSettings.fontSize,
+              cursorStyle: editorSettings.cursorStyle,
               wordWrap: "on",
-              lineNumbers: "on",
+              lineNumbers: editorSettings.showLineNumber ? "on" : "off",
               // wordWrap: 'wordWrapColumn',
               // wordWrapColumn: 90,
               // wordWrapBreakAfterCharacters: 'continue',
