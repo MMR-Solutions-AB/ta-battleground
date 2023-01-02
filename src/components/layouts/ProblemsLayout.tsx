@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Editor from "@/components/problems/Editor";
 import Link from "next/link";
 import classNames from "classnames";
+import BouncingBalls from "@/components/loaders/BouncingBalls";
 
 interface ProblemsLayoutProps {
   children: React.ReactNode;
@@ -16,7 +17,12 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
     id: router.query.id as string,
   });
 
-  if (isLoading) return <p>loading...</p>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center pt-20">
+        <BouncingBalls />
+      </div>
+    );
   if (!problem) return <p>hmm, error</p>;
 
   return (

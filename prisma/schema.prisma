@@ -54,6 +54,11 @@ model User {
   accounts          Account[]
   sessions          Session[]
   submissions       Submission[]
+
+  @@index([name])
+  @@index([email])
+  @@index([completedProblems])
+  @@index([score])
 }
 
 model VerificationToken {
@@ -107,4 +112,8 @@ model Submission {
 
   @@index([problemId])
   @@index([userId])
+  @@index([createdAt])
+  @@index([updatedAt])
+  @@index([score])
+  @@index([status])
 }
