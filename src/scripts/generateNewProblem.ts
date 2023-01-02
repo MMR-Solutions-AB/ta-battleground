@@ -51,7 +51,7 @@ async function generateNewProblem() {
 
 **_Input_**
     
-\`\`\`js
+\`\`\`bash
 s = "racecar"
 \`\`\`
     

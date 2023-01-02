@@ -6,8 +6,8 @@ Skriv en funktion **factorial(n)** som returnerar **n!**, det vill säga **n** f
 
 **_Input_**
 
-```js
-n = 3;
+```bash
+n = 3
 ```
 
 **_Output_**
@@ -24,8 +24,8 @@ n = 3;
 
 **_Input_**
 
-```js
-n = 5;
+```bash
+n = 5
 ```
 
 **_Output_**

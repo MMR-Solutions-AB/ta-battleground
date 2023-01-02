@@ -17,8 +17,8 @@ Din uppgift är att skriva en funktion som tar emot ett argument vilket ska vara
 
 **_Input_**
 
-```js
-s = "hello world";
+```bash
+s = "hello world"
 ```
 
 **_Output_**
@@ -31,8 +31,8 @@ s = "hello world";
 
 **_Input_**
 
-```js
-s = "Light tHEme SCARES me";
+```bash
+s = "Light tHEme SCARES me"
 ```
 
 **_Output_**
