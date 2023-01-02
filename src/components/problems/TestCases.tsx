@@ -128,7 +128,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                           `${arg} = ${
                             typeof currentSelectedTestCase.input[i] === "object"
                               ? JSON.stringify(
-                                  [currentSelectedTestCase.input[i]],
+                                  currentSelectedTestCase.input[i],
                                   null,
                                   2
                                 )
@@ -147,7 +147,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                         : typeof currentSelectedTestCase.receivedOutput ===
                           "object"
                         ? JSON.stringify(
-                            [currentSelectedTestCase.receivedOutput],
+                            currentSelectedTestCase.receivedOutput,
                             null,
                             2
                           )
