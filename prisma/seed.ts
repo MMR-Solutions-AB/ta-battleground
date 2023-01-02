@@ -17,6 +17,14 @@ async function main() {
         arguments: problem.arguments,
         number: problem.number,
         difficulty: problem.difficulty,
+        tags: {
+          connectOrCreate: problem.tags.map((tag) => ({
+            where: { name: tag },
+            create: {
+              name: tag,
+            },
+          })),
+        },
       },
       create: {
         description: problem.description,
@@ -25,6 +33,14 @@ async function main() {
         testCases: problem.testCases,
         number: problem.number,
         difficulty: problem.difficulty,
+        tags: {
+          connectOrCreate: problem.tags.map((tag) => ({
+            where: { name: tag },
+            create: {
+              name: tag,
+            },
+          })),
+        },
       },
     });
   }
