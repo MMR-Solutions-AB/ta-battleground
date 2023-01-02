@@ -2,14 +2,20 @@ import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-// import { generateScoreForProblem } from "@/utils";
+import { generateScoreForProblem } from "@/utils";
 
 const Home: NextPage = () => {
   const { data: sessionData } = useSession();
 
-  // for (let i = 0; i < 100; i++) {
-  //   console.log(150 - i, ":", generateScoreForProblem(150 - i, true, "easy"));
-  // }
+  for (let i = 0; i < 300; i++) {
+    console.log(350 - i, ":", generateScoreForProblem(350 - i, true, "easy"));
+  }
+  console.log(generateScoreForProblem(350, true, "easy"));
+  console.log(generateScoreForProblem(50, true, "easy"));
+  console.log(
+    generateScoreForProblem(50, true, "easy") -
+      generateScoreForProblem(350, true, "easy")
+  );
 
   return (
     <div>

@@ -8,9 +8,9 @@ export function generateScoreForProblem(
   if (!completed) return 0;
 
   const baseScore =
-    difficulty === "hard" ? 350 : difficulty === "medium" ? 200 : 0;
+    difficulty === "hard" ? 500 : difficulty === "medium" ? 300 : 50;
 
-  const addedScore = parseFloat((400 * ((400 - codeLength) / 193)).toFixed(2));
+  const addedScore = parseFloat((500 * ((550 - codeLength) / 400)).toFixed(2));
 
   return baseScore + addedScore;
 }
