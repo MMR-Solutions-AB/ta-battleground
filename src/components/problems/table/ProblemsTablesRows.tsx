@@ -13,7 +13,7 @@ const ProblemsTablesRows: React.FC = ({}) => {
     tags: tags ? (Array.isArray(tags) ? tags : [tags]) : null,
   });
 
-  console.log(router.query);
+  console.log(problems && problems[2]?.submissions);
 
   if (isLoading)
     return (

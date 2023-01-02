@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CheckCircle, Activity } from "react-feather";
 import classNames from "classnames";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 interface ProblemsTableRowProps {
   problem: RouterOutputs["problem"]["getAll"][number];
@@ -11,6 +12,8 @@ interface ProblemsTableRowProps {
 
 const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
   const router = useRouter();
+  const { data: sessionData } = useSession();
+  const user = sessionData?.user;
 
   return (
     <tr className="h-11 bg-bg-dark even:bg-bg-dimmed">
@@ -21,9 +24,17 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
       </td>
       <td className="relative h-full">
         <div className="peer flex h-full min-w-[0rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
-          {problem.submissions.length == 0 ? (
+          {!user || problem.submissions.length == 0 ? (
             ""
-          ) : problem.submissions[0]?.status == "completed" ? (
+          ) : problem.submissions[0]?.user.id === user.id ? (
+            problem.submissions[0]?.status == "completed" ? (
+              <CheckCircle className="h-4 w-4 text-green-500" />
+            ) : (
+              <Activity className="h-4 w-4 text-amber-500" />
+            )
+          ) : problem.submissions[1]?.user.id !== user.id ? (
+            ""
+          ) : problem.submissions[1]?.status == "completed" ? (
             <CheckCircle className="h-4 w-4 text-green-500" />
           ) : (
             <Activity className="h-4 w-4 text-amber-500" />
@@ -44,12 +55,6 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
                 <div
                   key={tag.id}
                   onClick={() => {
-                    console.log(
-                      Array.from(new Set([router.query.tags, tag.name])).filter(
-                        (a) => a
-                      )
-                    );
-
                     router.push({
                       query: {
                         ...router.query,
@@ -92,6 +97,14 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
         </div>
       </td>
 
+      <td className="relative h-full">
+        <div className="h-ful peer flex max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
+          {problem.submissions &&
+            problem.submissions[0] &&
+            problem.submissions[0].score > 0 &&
+            `${problem.submissions[0].score} - { ${problem.submissions[0].code.length} }`}
+        </div>
+      </td>
       <td className="relative h-full">
         <div className="h-ful peer flex max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
           {problem._count.submissions}

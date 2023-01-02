@@ -15,7 +15,6 @@ export const problemRouter = router({
     )
     .query(({ ctx, input }) => {
       const { sortBy, order, tags } = input;
-      console.log(sortBy, order);
 
       const validOrdering = z.object({
         sortBy: z.enum(["name", "number", "difficulty", "submissions"]),
@@ -26,7 +25,6 @@ export const problemRouter = router({
         sortBy,
         order,
       }).success;
-      console.log(isValidOrdering);
 
       const validTags = _.intersection(allTags, tags) as Tags[] | undefined;
 
@@ -48,16 +46,24 @@ export const problemRouter = router({
           difficulty: true,
           submissions: {
             where: {
-              userId: ctx.session.user.id,
+              OR: {
+                userId: ctx.session.user.id,
+              },
             },
             select: {
               status: true,
+              score: true,
+              code: true,
+              user: { select: { id: true, name: true } },
               createdAt: true,
             },
-            orderBy: {
-              status: "asc",
-            },
-            take: 1,
+            distinct: ["userId"],
+            orderBy: [
+              {
+                score: "desc",
+              },
+            ],
+            take: 2,
           },
           tags: {
             select: {
