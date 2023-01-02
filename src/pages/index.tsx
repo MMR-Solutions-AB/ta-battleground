@@ -1,11 +1,15 @@
 import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { trpc } from "@/utils/trpc";
 import Image from "next/image";
 import Link from "next/link";
+// import { generateScoreForProblem } from "@/utils";
 
 const Home: NextPage = () => {
   const { data: sessionData } = useSession();
+
+  // for (let i = 0; i < 100; i++) {
+  //   console.log(150 - i, ":", generateScoreForProblem(150 - i, true, "easy"));
+  // }
 
   return (
     <div>
