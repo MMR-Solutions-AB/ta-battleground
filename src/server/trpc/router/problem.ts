@@ -43,6 +43,12 @@ export const problemRouter = router({
             },
             take: 1,
           },
+          tags: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
           _count: {
             select: {
               submissions: true,

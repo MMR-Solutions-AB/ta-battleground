@@ -2,6 +2,7 @@ import React from "react";
 import type { RouterOutputs } from "@/utils/trpc";
 import Link from "next/link";
 import { CheckCircle, Activity } from "react-feather";
+import classNames from "classnames";
 
 interface ProblemsTableRowProps {
   problem: RouterOutputs["problem"]["getAll"][number];
@@ -34,6 +35,31 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
           >
             {problem.name}
           </Link>
+          {problem.tags.length > 0 && (
+            <div className="ml-3 flex items-center gap-2">
+              {problem.tags.map((tag) => (
+                <div
+                  key={tag.id}
+                  className={classNames(
+                    "rounded-full py-0.5 px-1.5 text-xs",
+                    tag.name === "basics"
+                      ? "bg-green-600"
+                      : tag.name === "numbers"
+                      ? "bg-red-600"
+                      : tag.name === "objects"
+                      ? "bg-amber-600"
+                      : tag.name === "strings"
+                      ? "bg-blue-600"
+                      : tag.name === "arrays"
+                      ? "bg-purple-600"
+                      : "bg-black"
+                  )}
+                >
+                  {tag.name}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </td>
 

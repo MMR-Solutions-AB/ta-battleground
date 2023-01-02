@@ -57,6 +57,8 @@ const ProblemsTablesRows: React.FC = ({}) => {
   if ((!problems || problems.length === 0) && !isLoading)
     return <p>hmmm, seems to be an error here</p>;
 
+  console.log(problems);
+
   return (
     <tbody className="">
       {problems.map((problem) => (

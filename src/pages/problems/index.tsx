@@ -4,7 +4,7 @@ import ProblemsTable from "@/components/ProblemsTable";
 
 const Problems: NextPage = () => {
   return (
-    <div className="px-40">
+    <div className="px-5 md:px-36">
       <ProblemsTable />
     </div>
   );
