@@ -12,9 +12,10 @@ module.exports = {
         // "bg-dark": "#000000",
         // "bg-dimmed": "#1a1a1a",
 
+        // "bg-dark": "#252422",
         primary: "#eb5e28",
         secondary: "#df2935",
-        "bg-dark": "#252422",
+        "bg-dark": "#1e1c1a",
         "bg-dimmed": "#403d39",
         "text-dimmed": "#eff2f699",
       },

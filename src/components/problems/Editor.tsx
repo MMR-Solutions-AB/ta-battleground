@@ -3,6 +3,8 @@ import MonacoEditor from "@monaco-editor/react";
 import TestCases from "./TestCases";
 import { generateStarterCode } from "@/utils/generateStarterCode";
 import BouncingBalls from "@/components/loaders/BouncingBalls";
+import { Code } from "react-feather";
+import { minify } from "terser";
 
 interface EditorProps {
   problemName: string;
@@ -15,8 +17,21 @@ const Editor: React.FC<EditorProps> = ({ problemName, problemArgs }) => {
   );
   return (
     <>
-      <div className="flex flex-shrink-0 bg-bg-dark pt-4 pb-2 text-sm text-text-dimmed">
+      <div className="flex flex-shrink-0 flex-wrap items-center justify-between bg-bg-dark pb-2 pr-2 pt-2 text-sm text-text-dimmed">
         <span>{`{ ${code.length} }`}</span>
+        <div>
+          <button
+            onClick={async () => {
+              const r = await minify(code);
+              console.log(r);
+              setCode(r.code || "");
+              // setCode((c) => c.split(" ").join(""));
+            }}
+            className="flex items-center gap-2 rounded-md bg-bg-dimmed py-1 px-3"
+          >
+            <Code className="h-3 w-3" /> Minify code
+          </button>
+        </div>
       </div>
 
       <div className="flex h-full flex-col overflow-y-scroll">
