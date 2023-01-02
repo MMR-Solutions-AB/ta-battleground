@@ -105,7 +105,7 @@ export const executeRouter = router({
           console.log("asdasd;;;;____;;;adasd");
           console.log(receivedOutput);
 
-          console.log(JSON.parse(receivedOutput || ""));
+          // console.log(JSON.parse(receivedOutput || ""));
 
           const completedTestCase =
             timedOut ||
