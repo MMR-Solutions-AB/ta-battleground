@@ -1,23 +1,27 @@
 import type { Problem } from "../../Problem";
 
 export const data: Problem<number, number> = {
-  name: "Simple subtraction",
+  name: "Simple multiplication",
   difficulty: "easy",
-  number: 2,
+  number: 4,
   arguments: ["a", "b"],
   tags: ["basics", "numbers"],
   testCases: [
     {
-      input: [10, 5],
-      output: 5,
+      input: [1, 2],
+      output: 2,
     },
     {
-      input: [78, 31],
-      output: 47,
+      input: [100, 12],
+      output: 1200,
     },
     {
-      input: [99, 0],
-      output: 99,
+      input: [87, 0],
+      output: 0,
+    },
+    {
+      input: [3, 3],
+      output: 9,
     },
   ],
 };

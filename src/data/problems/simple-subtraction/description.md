@@ -1,6 +1,6 @@
-# Simple Subtraction
+# Simple subtraction
 
-Givet två nummer, **a** och **b**, beräknade differensen av **a - b** och returnera det ur funktionen **main**. Alltså subtrahera **b** från **a** och returnera ditt svar
+Givet två nummer, **a** och **b**, beräknade differensen av **a - b** och returnera det ur funktionen **simpleSubtraction**. Alltså subtrahera **b** från **a** och returnera ditt svar
 
 ## Exempel
 

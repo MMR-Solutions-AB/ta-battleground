@@ -1,6 +1,6 @@
-# Simple Division
+# Simple division
 
-Givet två nummer, **a** och **b**, beräknade kvoten av **a / b** och returnera det ur funktionen **main**. Alltså dividera **a** med **b** och returnera ditt svar
+Givet två nummer, **a** och **b**, beräknade kvoten av **a / b** och returnera det ur funktionen **simpleDivision**. Alltså dividera **a** med **b** och returnera ditt svar
 
 ## Exempel
 

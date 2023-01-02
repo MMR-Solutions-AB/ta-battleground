@@ -1,7 +1,7 @@
 import type { Problem } from "../../Problem";
 
 export const data: Problem<number, number> = {
-  name: "Simple Addition",
+  name: "Simple addition",
   difficulty: "easy",
   number: 1,
   arguments: ["a", "b"],

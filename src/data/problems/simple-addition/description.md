@@ -1,6 +1,6 @@
-# Simple Addition
+# Simple addition
 
-Givet två nummer, **a** och **b**, beräknade summan av **a + b** och returnera det ur funktionen **main**. Alltså addera **a** och **b** och returnera ditt svar
+Givet två nummer, **a** och **b**, beräknade summan av **a + b** och returnera det ur funktionen **simpleAddition**. Alltså addera **a** och **b** och returnera ditt svar
 
 ## Exempel
 
