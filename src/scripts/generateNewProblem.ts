@@ -1,6 +1,8 @@
 import inquirer from "inquirer";
 import { join } from "path";
 import { writeFileSync, mkdirSync } from "fs";
+import { getAllProblems } from "../data/getAllProblems";
+
 async function generateNewProblem() {
   const { problem_name } = await inquirer.prompt({
     name: "problem_name",
@@ -8,13 +10,21 @@ async function generateNewProblem() {
     message: "Vad ska ditt problem heta?",
   });
 
+  const allProblems = await getAllProblems();
+  let highestNumber = 0;
+  for (let i = 0; i < allProblems.length; i++) {
+    if (highestNumber < (allProblems[i]?.number || 1)) {
+      highestNumber = (allProblems[i]?.number || 0) + 1;
+    }
+  }
+
   console.log(problem_name);
 
   const code = `import type { Problem } from "../../Problem";
 \nexport const data: Problem<string, string> = {
   name: "${problem_name}",
   difficulty: "easy",
-  number: ,
+  number: ${highestNumber},
   arguments: ["s"],
   testCases: [
     {
@@ -27,8 +37,26 @@ async function generateNewProblem() {
 
   mkdirSync(join(__dirname, "../data/problems", problem_name));
   writeFileSync(
-    join(__dirname, "../data/problems", problem_name, "data.md"),
-    `# ${problem_name}`
+    join(__dirname, "../data/problems", problem_name, "description.md"),
+    `# ${problem_name}
+## Exempel 1
+
+**_Input_**
+    
+\`\`\`js
+s = "racecar"
+\`\`\`
+    
+**_Output_**
+    
+\`\`\`bash
+true
+\`\`\`
+    
+**_Output_**
+
+En förklaring
+`
   );
   writeFileSync(
     join(__dirname, "../data/problems", problem_name, "data.ts"),
