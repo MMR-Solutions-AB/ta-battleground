@@ -27,9 +27,9 @@ const UserPage: NextPage = () => {
 
   return (
     <div className="p-5 md:py-20">
-      <div className="mx-auto max-w-7xl md:flex">
+      <div className="mx-auto max-w-7xl md:flex md:gap-6">
         <ProfileInfo user={user} />
-        <div className="mt-5 ml-3 flex-1 md:mt-0">
+        <div className="mt-5 flex-1 md:mt-0">
           <StatsBanner user={user} />
           {user.submissions.length === 0 ? (
             <h3 className="text-2xl font-semibold">
