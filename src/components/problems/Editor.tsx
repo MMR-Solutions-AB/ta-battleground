@@ -45,7 +45,7 @@ const Editor: React.FC<EditorProps> = ({ problemName, problemArgs }) => {
             }}
             className="flex items-center gap-2 rounded-md bg-bg-dimmed py-1 px-3"
           >
-            <Code className="h-3 w-3" /> Minify code {editorSettings.theme}
+            <Code className="h-3 w-3" /> Minify code
           </button>
           <button
             onClick={() => {
