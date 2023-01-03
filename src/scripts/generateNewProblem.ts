@@ -2,6 +2,7 @@ import inquirer from "inquirer";
 import { join } from "path";
 import { writeFileSync, mkdirSync } from "fs";
 import { getAllProblems } from "../data/getAllProblems";
+import chalk from "chalk";
 
 async function generateNewProblem() {
   const { problem_name } = await inquirer.prompt({
@@ -18,9 +19,9 @@ async function generateNewProblem() {
 
   const allProblems = await getAllProblems();
   let highestNumber = 0;
-  for (let i = 0; i < allProblems.length; i++) {
-    if (highestNumber < (allProblems[i]?.number || 1)) {
-      highestNumber = (allProblems[i]?.number || 0) + 1;
+  for (const problem of allProblems) {
+    if (highestNumber < problem.number) {
+      highestNumber = problem.number + 1;
     }
   }
 
@@ -70,6 +71,11 @@ En förklaring
     join(__dirname, "../data/problems", problem_name, "data.ts"),
     code
   );
+
+  console.log(chalk.blue("Skapade en ny map med följande info:"));
+  console.log(chalk.red("namn: " + problem_name));
+  console.log(chalk.red("difficulty: " + difficulty));
+  console.log(chalk.red("number: " + highestNumber));
 }
 
 generateNewProblem();
