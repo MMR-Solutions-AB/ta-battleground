@@ -36,23 +36,23 @@ async function generateNewProblem() {
     join(__dirname, "../data/problems", folderName, "description.md"),
     `# ${_.capitalize(problem_name)}
 
-  ## Exempel 1
+## Exempel 1
 
-  **_Input_**
+**_Input_**
 
-  \`\`\`bash
-  s = "racecar"
-  \`\`\`
+\`\`\`bash
+s = "racecar"
+\`\`\`
 
-  **_Output_**
+**_Output_**
 
-  \`\`\`bash
-  true
-  \`\`\`
+\`\`\`bash
+true
+\`\`\`
 
-  **_Förklaring_**
+**_Förklaring_**
 
-  En förklaring
+En förklaring
   `
   );
 
