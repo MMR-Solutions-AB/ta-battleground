@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
-export type FontSize = 10 | 12 | 14 | 16 | 18 | 20;
+export type FontSize = 10 | 12 | 14 | 16 | 18 | 20 | 22;
 export type CursorStyle =
   | "line"
   | "block"
@@ -13,7 +13,6 @@ export type CursorStyle =
 export type Theme =
   | "light"
   | "vs-dark"
-  | "hc-black"
   | "dracula"
   | "monokai"
   | "hallowsEve"
@@ -25,7 +24,6 @@ export interface Settings {
   showLineNumber: boolean;
   minimap: boolean;
   cursorStyle: CursorStyle;
-
   theme: Theme;
   zenMode: boolean;
 }
@@ -36,7 +34,7 @@ const defaultSettings: Settings = {
   showLineNumber: true,
   minimap: true,
   cursorStyle: "line",
-  theme: "light",
+  theme: "vs-dark",
   zenMode: false,
 };
 

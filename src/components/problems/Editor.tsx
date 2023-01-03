@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import MonacoEditor from "@monaco-editor/react";
+import React, { useEffect, useState } from "react";
+import MonacoEditor, { useMonaco } from "@monaco-editor/react";
 import TestCases from "./TestCases";
 import { generateStarterCode } from "@/utils/generateStarterCode";
 import BouncingBalls from "@/components/loaders/BouncingBalls";
-import { Code } from "react-feather";
+import { Code, Settings } from "react-feather";
 import { minify } from "terser";
 import { useEditorSettings } from "@/context/EditorContext";
 import { useModal } from "@/context/ModalContext";
+import { themes } from "@/themes";
 
 interface EditorProps {
   problemName: string;
@@ -19,6 +20,19 @@ const Editor: React.FC<EditorProps> = ({ problemName, problemArgs }) => {
   const [code, setCode] = useState(() =>
     generateStarterCode(problemName, problemArgs)
   );
+  const monaco = useMonaco();
+
+  useEffect(() => {
+    // all available themes - https://editor.bitwiser.in/
+    if (monaco) {
+      // adds alla themes to the editor instance
+      for (const [key, value] of Object.entries(themes)) {
+        monaco.editor.defineTheme(key, value);
+      }
+      monaco.editor.setTheme(editorSettings.theme);
+    }
+  }, [monaco, editorSettings.theme]);
+
   return (
     <>
       <div className="flex flex-shrink-0 flex-wrap items-center justify-between bg-bg-dark pb-2 pr-2 pt-2 text-sm text-text-dimmed">
@@ -27,13 +41,11 @@ const Editor: React.FC<EditorProps> = ({ problemName, problemArgs }) => {
           <button
             onClick={async () => {
               const r = await minify(code);
-              console.log(r);
               setCode(r.code || "");
-              // setCode((c) => c.split(" ").join(""));
             }}
             className="flex items-center gap-2 rounded-md bg-bg-dimmed py-1 px-3"
           >
-            <Code className="h-3 w-3" /> Minify code
+            <Code className="h-3 w-3" /> Minify code {editorSettings.theme}
           </button>
           <button
             onClick={() => {
@@ -41,7 +53,7 @@ const Editor: React.FC<EditorProps> = ({ problemName, problemArgs }) => {
             }}
             className="flex items-center gap-2 rounded-md bg-bg-dimmed py-1 px-3"
           >
-            <Code className="h-3 w-3" /> Editor settings
+            <Settings className="h-3 w-3" /> Editor settings
           </button>
         </div>
       </div>
@@ -66,6 +78,7 @@ const Editor: React.FC<EditorProps> = ({ problemName, problemArgs }) => {
             language={"javascript"}
             value={code}
             onChange={(val) => setCode(val || "")}
+            // theme={"vs-dark"}
             theme={editorSettings.theme}
             options={{
               scrollBeyondLastLine: false,
