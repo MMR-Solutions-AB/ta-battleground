@@ -2,6 +2,7 @@ import React from "react";
 import type { RouterOutputs } from "@/utils/trpc";
 import classNames from "classnames";
 import Image from "next/image";
+import Link from "next/link";
 
 interface CardProps {
   user: RouterOutputs["leaderboard"]["getAll"]["users"][number];
@@ -10,7 +11,8 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ user, index }) => {
   return (
-    <div
+    <Link
+      href={`/users/${user.id}`}
       className={classNames(
         "flex cursor-pointer flex-col gap-2 rounded-lg p-4 sm:flex-row",
         { "bg-[#424022]": index === 0 },
@@ -42,7 +44,7 @@ const Card: React.FC<CardProps> = ({ user, index }) => {
           {user.score.toFixed(2)} - {`(${user.completedProblems} targets)`}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

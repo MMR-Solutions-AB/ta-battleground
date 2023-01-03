@@ -14,7 +14,7 @@ datasource db {
 
 // Necessary for Next auth
 model Account {
-  id                String  @id @default(cuid())
+  id                String   @id @default(cuid())
   userId            String
   type              String
   provider          String
@@ -26,7 +26,9 @@ model Account {
   scope             String?
   id_token          String? // @db.Text
   session_state     String?
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @default(now()) @updatedAt
 
   @@unique([provider, providerAccountId])
   @@index([userId])
@@ -49,8 +51,11 @@ model User {
   emailVerified     DateTime?
   github_login      String
   image             String
+  batch             Int?         @db.SmallInt
   score             Float        @default(0)
   completedProblems Int          @default(0)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @default(now()) @updatedAt
   accounts          Account[]
   sessions          Session[]
   submissions       Submission[]

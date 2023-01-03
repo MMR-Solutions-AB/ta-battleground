@@ -21,7 +21,7 @@ const Navbar: React.FC = ({}) => {
             Problems
           </Link>
           <Link
-            href="/me"
+            href={`/users/${user.id}`}
             className="group ml-5 flex items-center gap-2 md:ml-14"
           >
             <p className="text-sm group-hover:text-white">{user.name}</p>

@@ -22,7 +22,7 @@ export const leaderboardRouter = router({
     //   },
     // });
 
-    const users = await ctx.prisma.user.findMany({
+    return ctx.prisma.user.findMany({
       select: {
         id: true,
         name: true,
@@ -34,10 +34,6 @@ export const leaderboardRouter = router({
         score: "desc",
       },
     });
-
-    return {
-      users,
-    };
   }),
 });
 

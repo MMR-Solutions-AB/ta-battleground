@@ -1,5 +1,5 @@
 import { type NextPage } from "next";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 // import { generateScoreForProblem } from "@/utils";
@@ -38,12 +38,6 @@ const Home: NextPage = () => {
             >
               Start solving problems
             </Link>
-            <button
-              className="rounded-full bg-bg-dimmed px-10 py-3 font-semibold text-white no-underline transition hover:bg-bg-dimmed/60 max-md:text-sm"
-              onClick={() => signOut()}
-            >
-              Sign out
-            </button>
           </div>
         ) : (
           <button

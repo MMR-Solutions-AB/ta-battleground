@@ -15,9 +15,7 @@ const ProblemsTable: React.FC = ({}) => {
         <table className="my-0 mx-5 min-w-full text-xs sm:mx-0 md:text-sm">
           <thead className="h-9 text-left text-text-dimmed">
             <tr>
-              <th className="h-full cursor-pointer px-2 font-semibold text-text-dimmed">
-                #
-              </th>
+              <th className="h-full px-2 font-semibold text-text-dimmed">#</th>
               <ProblemsTableHeadRow>Status</ProblemsTableHeadRow>
               <ProblemsTableHeadRow sortBy="name">Namn</ProblemsTableHeadRow>
               <ProblemsTableHeadRow sortBy="difficulty">
