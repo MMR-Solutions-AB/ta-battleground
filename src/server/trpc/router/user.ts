@@ -5,7 +5,7 @@ export const userRouter = router({
   getById: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
-      const user = await ctx.prisma.user.findFirstOrThrow({
+      const user = await ctx.prisma.user.findMany({
         where: { id: input.id },
         select: {
           id: true,
@@ -46,17 +46,21 @@ export const userRouter = router({
             orderBy: {
               score: "desc",
             },
+            take: 1,
           },
         },
       });
 
+      if (!user[0]) return null;
+
       const rank = await ctx.prisma.user.count({
         where: {
           score: {
-            gt: user.score,
+            gt: user[0].score,
           },
         },
       });
-      return { ...user, rank };
+
+      return { ...user[0], rank };
     }),
 });

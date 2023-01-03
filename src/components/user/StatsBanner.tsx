@@ -3,7 +3,7 @@ import type { RouterOutputs } from "@/utils";
 import classNames from "classnames";
 
 interface StatsBannerProps {
-  user: RouterOutputs["user"]["getById"];
+  user: NonNullable<RouterOutputs["user"]["getById"]>;
 }
 
 const StatsBanner: React.FC<StatsBannerProps> = ({ user }) => {
