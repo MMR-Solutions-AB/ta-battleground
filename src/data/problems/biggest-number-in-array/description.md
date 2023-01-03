@@ -2,6 +2,8 @@
 
 Skriv en funktion **biggestNumberInArray(arr)** som tar emot en array av nummer. Funktionen ska returnera det största numret i array:n.
 
+Denna uppgift är bra tillfälle att träna på **for loops**
+
 ## Exempel 1
 
 **_Input_**
