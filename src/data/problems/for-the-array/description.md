@@ -2,6 +2,8 @@
 
 Skriv en funktion **forTheArray(n)** som tar ett nummer **n** och returnerar en array med alla heltal från **1** till **n**.
 
+Denna uppgift är bra tillfälle att träna på **for loops** och **arrays**
+
 ## Exempel 1
 
 **_Input_**

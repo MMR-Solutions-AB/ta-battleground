@@ -2,6 +2,8 @@
 
 Skriv en funktion **isPositive(n)** som returnerar **true** om **n** är positivt, annars **false**.
 
+Denna uppgift är bra tillfälle att träna på **logiska operators** som **>** eller **<** och **booleanska** värden **(true eller false)**
+
 ## Exempel 1
 
 **_Input_**

@@ -2,6 +2,8 @@
 
 Skriv en funktion **sum(arr)** som summerar alla element i en array av heltal och returnerar summan.
 
+Denna uppgift är bra tillfälle att träna på **array.reduce** metoden
+
 ## Exempel 1
 
 **_Input_**

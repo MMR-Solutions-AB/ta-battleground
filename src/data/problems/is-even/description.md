@@ -2,7 +2,7 @@
 
 Skriv en funktion **isEven(n)** som returnerar **true** om n är jämnt, annars **false**.
 
-För att lösa det här problemet kan du använda **modulo-operatorn (%)** för att kontrollera om resten när **n** divideras med 2 är lika med 0.
+Denna uppgift är bra tillfälle att träna på **modulo-operatorn (%)**
 
 ## Exempel 1
 
