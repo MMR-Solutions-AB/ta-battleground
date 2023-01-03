@@ -3,7 +3,7 @@ import type { Problem } from "../../Problem";
 export const data: Problem<number[], number> = {
   name: "Max diff",
   difficulty: "easy",
-  number: 23,
+  number: 24,
   arguments: ["a"],
   tags: ["numbers", "arrays"],
   testCases: [
