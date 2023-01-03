@@ -63,7 +63,7 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
             Leaderboard
           </Link>
         </div>
-        <div className="flex-1 overflow-scroll">{children}</div>
+        <div className="flex-1 overflow-scroll bg-bg-dimmed">{children}</div>
       </div>
       {/* <div className="w-4 bg-black"></div> */}
       <div className="flex h-[calc(100vh-56px)] w-full flex-col bg-bg-dimmed">

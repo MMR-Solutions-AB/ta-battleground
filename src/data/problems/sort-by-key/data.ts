@@ -19,8 +19,8 @@ export const data: Problem<{ [key: string]: number }, [string, number][]> = {
       input: [{ matheus: 18, filip: 28, rasmus: 26 }],
       output: [
         ["matheus", 18],
-        ["filip", 28],
         ["rasmus", 26],
+        ["filip", 28],
       ],
     },
     {
