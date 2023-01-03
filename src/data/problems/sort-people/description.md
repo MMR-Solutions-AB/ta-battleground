@@ -16,32 +16,32 @@ people = [
 
 **_Output_**
 
-```js
+```bash
 [
   { name: "Matheus", age: 19 },
   { name: "Mr.Heavenstone", age: 21 },
   { name: "Filip", age: 28 },
-];
+]
 ```
 
 ## Exempel 2
 
 **_Input_**
 
-```js
+```bash
 people = [
   { name: "Bob", age: 25 },
   { name: "Alice", age: 20 },
   { name: "Charlie", age: 30 },
-];
+]
 ```
 
 **_Output_**
 
-```js
+```bash
 [
   { name: "Alice", age: 20 },
   { name: "Bob", age: 25 },
   { name: "Charlie", age: 30 },
-];
+]
 ```
