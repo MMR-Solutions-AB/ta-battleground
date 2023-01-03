@@ -2,10 +2,6 @@
 
 Skriv en funktion **swap2(s)** som byter plats på varannan bokstav i en sträng.
 
-**_Förklaring_**
-
-En förklaring
-
 ## Exempel 1
 
 **_Input_**

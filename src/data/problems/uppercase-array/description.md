@@ -2,6 +2,8 @@
 
 Skriv en funktion **uppercaseArray(arr)** som tar emot en array av strängar. Funktionen ska returnera en samma array fast med varje sträng med stora bokstäver
 
+Denna uppgift är bra tillfälle att träna på **array.map** metoden
+
 ## Exempel 1
 
 **_Input_**
