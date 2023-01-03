@@ -17,6 +17,8 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
     id: router.query.id as string,
   });
 
+  console.log(problem);
+
   if (isLoading)
     return (
       <div className="flex justify-center pt-20">
@@ -68,6 +70,7 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
       {/* <div className="w-4 bg-black"></div> */}
       <div className="flex h-[calc(100vh-56px)] w-full flex-col bg-bg-dimmed">
         <Editor
+          starterCode={problem.submissions[0]?.code}
           problemName={problem.name}
           problemArgs={problem.arguments as string[]}
         />

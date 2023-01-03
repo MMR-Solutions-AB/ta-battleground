@@ -10,15 +10,23 @@ import { useModal } from "@/context/ModalContext";
 import { themes } from "@/themes";
 
 interface EditorProps {
+  starterCode?: string;
   problemName: string;
   problemArgs: string[];
 }
 
-const Editor: React.FC<EditorProps> = ({ problemName, problemArgs }) => {
+const Editor: React.FC<EditorProps> = ({
+  starterCode,
+  problemName,
+  problemArgs,
+}) => {
+  console.log("asdadadasdasdasdds");
+  console.log(starterCode);
+
   const { editorSettings } = useEditorSettings();
   const { setShowModal } = useModal();
-  const [code, setCode] = useState(() =>
-    generateStarterCode(problemName, problemArgs)
+  const [code, setCode] = useState(
+    starterCode || generateStarterCode(problemName, problemArgs)
   );
   const monaco = useMonaco();
 

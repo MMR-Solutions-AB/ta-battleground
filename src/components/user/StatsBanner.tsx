@@ -17,7 +17,7 @@ const StatsBanner: React.FC<StatsBannerProps> = ({ user }) => {
       <div className="px-3">
         <p className="mb-1">Rank</p>
         <h5 className="text-2xl font-bold md:text-4xl">
-          {user.rank + 1} / {user._count.accounts + 1}
+          #{user.rank + 1} / {user.totalUsers}
         </h5>
       </div>
       <div className="px-3">

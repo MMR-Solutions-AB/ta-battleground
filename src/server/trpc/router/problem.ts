@@ -133,6 +133,16 @@ export const problemRouter = router({
           description: true,
           arguments: true,
           number: true,
+          submissions: {
+            where: { userId: ctx.session.user.id },
+            select: {
+              code: true,
+            },
+            take: 1,
+            orderBy: {
+              createdAt: "desc",
+            },
+          },
         },
       });
     }),

@@ -5,19 +5,10 @@ export const userRouter = router({
   getById: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
-      const user = await ctx.prisma.user.findMany({
+      const user = await ctx.prisma.user.findUniqueOrThrow({
         where: { id: input.id },
         select: {
           id: true,
-          _count: {
-            select: {
-              accounts: {
-                where: {
-                  userId: { not: input.id },
-                },
-              },
-            },
-          },
           image: true,
           github_login: true,
           completedProblems: true,
@@ -48,19 +39,18 @@ export const userRouter = router({
             },
           },
         },
-        take: 1,
       });
 
-      if (!user[0]) return null;
+      const totalUsers = await ctx.prisma.user.count({});
 
       const rank = await ctx.prisma.user.count({
         where: {
           score: {
-            gt: user[0].score,
+            gt: user.score,
           },
         },
       });
 
-      return { ...user[0], rank };
+      return { ...user, rank, totalUsers };
     }),
 });
