@@ -38,18 +38,19 @@ const UserPage: NextPage = () => {
           ) : (
             <>
               <SubmissionsTable submissions={user.submissions} />
-              {user.id === sessionData?.user?.id}
-              <div className="mt-10 rounded-md bg-red-100 p-4">
-                <h2 className="mb-2 text-2xl font-semibold text-red-600">
-                  Danger zone
-                </h2>
-                <button
-                  className="rounded-md bg-red-600 px-6 py-2 text-sm font-semibold text-white no-underline transition hover:opacity-80"
-                  onClick={() => signOut()}
-                >
-                  Sign out
-                </button>
-              </div>
+              {user.id === sessionData?.user?.id && (
+                <div className="mt-10 rounded-md bg-red-100 p-4">
+                  <h2 className="mb-2 text-2xl font-semibold text-red-600">
+                    Danger zone
+                  </h2>
+                  <button
+                    className="rounded-md bg-red-600 px-6 py-2 text-sm font-semibold text-white no-underline transition hover:opacity-80"
+                    onClick={() => signOut()}
+                  >
+                    Sign out
+                  </button>
+                </div>
+              )}
             </>
           )}
         </div>
