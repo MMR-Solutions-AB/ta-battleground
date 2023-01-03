@@ -36,6 +36,10 @@ async function generateNewProblem() {
     join(__dirname, "../data/problems", folderName, "description.md"),
     `# ${_.capitalize(problem_name)}
 
+Skriv en funktion **${_.camelCase(
+      problem_name
+    )}(s)** som tar emot en array av strängar. Funktionen ska returnera en samma array fast med varje sträng med stora bokstäver
+      
 ## Exempel 1
 
 **_Input_**
