@@ -21,9 +21,11 @@ async function generateNewProblem() {
   let highestNumber = 0;
   for (const problem of allProblems) {
     if (highestNumber < problem.number) {
-      highestNumber = problem.number + 1;
+      highestNumber = problem.number;
     }
   }
+
+  highestNumber += 1;
 
   console.log(problem_name);
 
@@ -73,9 +75,9 @@ En förklaring
   );
 
   console.log(chalk.blue("Skapade en ny map med följande info:"));
-  console.log(chalk.red("namn: " + problem_name));
-  console.log(chalk.red("difficulty: " + difficulty));
-  console.log(chalk.red("number: " + highestNumber));
+  console.log(chalk.green("namn: " + problem_name));
+  console.log(chalk.yellow("difficulty: " + difficulty));
+  console.log(chalk.cyan("number: " + highestNumber));
 }
 
 generateNewProblem();
