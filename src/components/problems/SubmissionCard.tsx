@@ -11,6 +11,7 @@ const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) => {
     dateStyle: "medium",
     timeStyle: "short",
   });
+
   return (
     <div className="rounded-md bg-bg-dark p-5">
       <div
@@ -18,7 +19,9 @@ const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) => {
           "relative mb-5 overflow-y-hidden overflow-x-scroll"
         )}
       >
-        <pre className="text-sm">{submission.code}</pre>
+        <pre className="whitespace-pre-wrap text-sm">
+          <code>{submission.code}</code>
+        </pre>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-text-dimmed">
         <p>

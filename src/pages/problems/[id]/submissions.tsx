@@ -27,7 +27,28 @@ const Problem: NextPageWithLayout = () => {
     );
 
   return (
-    <div className="space-y-3 px-4 py-6">
+    <div className="space-y-3 bg-bg-dimmed px-4 py-6">
+      {submissions?.map((submission) => (
+        <SubmissionCard key={submission.id} submission={submission} />
+      ))}
+      {submissions?.map((submission) => (
+        <SubmissionCard key={submission.id} submission={submission} />
+      ))}
+      {submissions?.map((submission) => (
+        <SubmissionCard key={submission.id} submission={submission} />
+      ))}
+      {submissions?.map((submission) => (
+        <SubmissionCard key={submission.id} submission={submission} />
+      ))}{" "}
+      {submissions?.map((submission) => (
+        <SubmissionCard key={submission.id} submission={submission} />
+      ))}{" "}
+      {submissions?.map((submission) => (
+        <SubmissionCard key={submission.id} submission={submission} />
+      ))}{" "}
+      {submissions?.map((submission) => (
+        <SubmissionCard key={submission.id} submission={submission} />
+      ))}{" "}
       {submissions?.map((submission) => (
         <SubmissionCard key={submission.id} submission={submission} />
       ))}

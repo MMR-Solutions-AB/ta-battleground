@@ -26,8 +26,8 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
   if (!problem) return <p>hmm, error</p>;
 
   return (
-    <div className="flex h-[calc(100vh-56px)] w-screen gap-2 overflow-x-hidden bg-bg-dark">
-      <div className="flex flex-1 flex-col bg-bg-dimmed">
+    <div className="grid h-[calc(100vh-56px)] w-screen grid-cols-[1fr_1fr] gap-2 bg-bg-dark">
+      <div className="flex h-[calc(100vh-56px)] flex-col">
         <div className="flex flex-shrink-0 bg-bg-dark pt-2 text-sm text-text-dimmed">
           <Link
             href={`/problems/${router.query.id}`}
@@ -63,10 +63,10 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
             Leaderboard
           </Link>
         </div>
-        <div className="h-full overflow-scroll">{children}</div>
+        <div className="flex-1 overflow-scroll">{children}</div>
       </div>
       {/* <div className="w-4 bg-black"></div> */}
-      <div className="flex flex-1 flex-col bg-bg-dimmed">
+      <div className="flex h-[calc(100vh-56px)] w-full flex-col bg-bg-dimmed">
         <Editor
           problemName={problem.name}
           problemArgs={problem.arguments as string[]}
