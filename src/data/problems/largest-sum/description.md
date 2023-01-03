@@ -1,6 +1,6 @@
 # Largest sum
 
-Skriv en funktion **largestSum(arr)** som hittar den största summan av kontinuerliga element i en lista.
+Skriv en funktion **largestSum(arr)** som hittar den största summan av kontinuerliga element i en array.
 
 ## Exempel 1
 

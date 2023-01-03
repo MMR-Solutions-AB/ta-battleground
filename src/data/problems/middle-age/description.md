@@ -1,6 +1,6 @@
 # Middle age
 
-Skriv en funktion **average(a)** som returnerar medelvärdet av alla element i listan **a**.
+Skriv en funktion **average(a)** som returnerar medelvärdet av alla element i array:n **a**.
 
 ## Exempel 1
 
@@ -18,7 +18,7 @@ a = [4, 5, 6];
 
 **_Förklaring_**
 
-Summan av listan **a** är, **4 + 5 + 6** = **15**. **15** delat på längden av **a** **(3)** är **5**
+Summan av array:n **a** är, **4 + 5 + 6** = **15**. **15** delat på längden av **a** **(3)** är **5**
 
 ## Exempel 2
 
@@ -36,4 +36,4 @@ a = [1, 11];
 
 **_Förklaring_**
 
-Summan av listan **a** är, **1 + 11** = **12**. **12** delat på längden av **a** **(2)** är **6**
+Summan av array:n **a** är, **1 + 11** = **12**. **12** delat på längden av **a** **(2)** är **6**

@@ -1,6 +1,6 @@
 # Top k-frequent
 
-Skriv en funktion **topKFrequent(nums, k)** som returnerar en lista med de **k** mest förekommande elementen i listan **nums**.
+Skriv en funktion **topKFrequent(nums, k)** som returnerar en array med de **k** mest förekommande elementen i array:n **nums**.
 
 ## Exempel 1
 
@@ -57,4 +57,4 @@ k = 3
 
 **_Förklaring_**
 
-Vår array **nums** har **5** unika värden, **0** som förekommer 2 gånger, **1** som förekommer 2 gånger, **2** som förekommer 2 gånger, **3** som förekommer 1 gång och **8** som förekommer 1 gång, och ifall vi ordnar det i ordning av mest förekommande får vi **[0, 1, 2, 3, 8]**, vi sorterar även listan här. Eftersom att **k** är **3** betyder det att vi ska enbart returnera det **3** första element, alltså **[0, 1, 2]**
+Vår array **nums** har **5** unika värden, **0** som förekommer 2 gånger, **1** som förekommer 2 gånger, **2** som förekommer 2 gånger, **3** som förekommer 1 gång och **8** som förekommer 1 gång, och ifall vi ordnar det i ordning av mest förekommande får vi **[0, 1, 2, 3, 8]**, vi sorterar även array:n här. Eftersom att **k** är **3** betyder det att vi ska enbart returnera det **3** första element, alltså **[0, 1, 2]**

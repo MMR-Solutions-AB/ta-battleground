@@ -4,7 +4,7 @@ Du jobbar på SpaceX och får in flera listor som rapporterar om en raket behöv
 
 Alla listor är i formen utav ett javascript objekt och har tre keys, först har det en key som är **name** vilket är namnet på raketen i form av en string, sen har det en **distance** key vilket är i form utav ett nummer och distansen från SpaceX HQ till raketen, sist men inte minst har det en **damaged** key vilket kommer ha ett värde utav en boolean.
 
-Ditt jobb går ut på att sammanställa en lista med alla raketer som behöver reparation, vilket kommer vara alla raketer med värdet true för **damaged** keyn.
+Ditt jobb går ut på att sammanställa en array med alla raketer som behöver reparation, vilket kommer vara alla raketer med värdet true för **damaged** keyn.
 
 Din funktion tar emot ett argument vilket kommer vara en array där all element är ett javascript objekt med den form som beskrivs ovan. Din funktion ska returnera ett javascript objekt där alla keys är namnet på raketen som behöver hjälp och alla dessa keys ska ha ett värde som är distansen till raketen.
 

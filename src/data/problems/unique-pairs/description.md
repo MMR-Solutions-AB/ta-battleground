@@ -1,6 +1,6 @@
 # Unique pairs
 
-Skriv en funktion **uniquePairs(n)** som genererar en lista med alla unika par av heltal **(i, j)** där **i** och **j** är heltal i intervallet **[0, n]** och **i <= j**.
+Skriv en funktion **uniquePairs(n)** som genererar en array med alla unika par av heltal **(i, j)** där **i** och **j** är heltal i intervallet **[0, n]** och **i <= j**.
 
 ## Exempel 1
 

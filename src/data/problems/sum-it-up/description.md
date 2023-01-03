@@ -1,6 +1,6 @@
 # Sum it up
 
-Skriv en funktion **sum(arr)** som summerar alla element i en lista av heltal och returnerar summan.
+Skriv en funktion **sum(arr)** som summerar alla element i en array av heltal och returnerar summan.
 
 ## Exempel 1
 

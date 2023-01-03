@@ -1,6 +1,6 @@
 # Counting Valleys
 
-_Bob_ den ivriga bergsbestigare för noggrant register över sina vandringar. Under den senaste vandringen som tog exakt **8** steg, noterades det för varje steg om det var en uppförsbacke, **U**, eller en nedförsbacke, **N**. Vandringar börjar och slutar alltid vid havsnivån, och varje steg upp eller ner representerar en **1** enhetsförändring i höjden. Din uppgift blir att med hjälp av det två variablerna, **s** för antalet steg _Bob_ tog under sin resa samt **path** vilket är en sträng som representerar ifall hans steg var en uppförsbacke eller en nerförsbacke, lista ut hur många gånger _Bob_ olika **dalar** _Bob_ begick.
+_Bob_ den ivriga bergsbestigare för noggrant register över sina vandringar. Under den senaste vandringen som tog exakt **8** steg, noterades det för varje steg om det var en uppförsbacke, **U**, eller en nedförsbacke, **N**. Vandringar börjar och slutar alltid vid havsnivån, och varje steg upp eller ner representerar en **1** enhetsförändring i höjden. Din uppgift blir att med hjälp av det två variablerna, **s** för antalet steg _Bob_ tog under sin resa samt **path** vilket är en sträng som representerar ifall hans steg var en uppförsbacke eller en nerförsbacke, array ut hur många gånger _Bob_ olika **dalar** _Bob_ begick.
 
 En **dal** definieras utav att _Bob_ går under havsnivå
 

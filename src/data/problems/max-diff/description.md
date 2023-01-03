@@ -1,6 +1,6 @@
 # Max diff
 
-Skriv en funktion **maxDiff(arr)** som hittar den största skillnaden mellan två element i en lista av heltal. Funktionen ska returnera skillnaden.
+Skriv en funktion **maxDiff(arr)** som hittar den största skillnaden mellan två element i en array av heltal. Funktionen ska returnera skillnaden.
 
 ## Exempel 1
 
