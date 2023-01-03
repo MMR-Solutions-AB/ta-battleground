@@ -23,11 +23,11 @@ const Leaderboard: NextPage = () => {
 
   return (
     <div className="p-10">
-      <div className="mx-auto">
+      <div className="mx-auto max-w-6xl">
         <h2 className="mb-5 text-center text-3xl font-bold italic">
           Top #{users.length}
         </h2>
-        <div className="grid max-w-6xl gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {users?.map((user, i) => (
             <Card key={user.id} user={user} index={i} />
           ))}
