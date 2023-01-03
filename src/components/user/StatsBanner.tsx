@@ -35,9 +35,7 @@ const StatsBanner: React.FC<StatsBannerProps> = ({ user }) => {
       {user.batch && (
         <div className="px-3">
           <p className="mb-1">Batch</p>
-          <h5 className="text-2xl font-bold md:text-4xl">
-            {user.rank + 1} / {user._count.accounts}
-          </h5>
+          <h5 className="text-2xl font-bold md:text-4xl">{user.batch}</h5>
         </div>
       )}
     </div>
