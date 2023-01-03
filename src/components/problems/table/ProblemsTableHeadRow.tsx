@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { ChevronDown, ChevronUp } from "react-feather";
 
 interface ProblemsTableHeadRowProps {
-  sortBy?: "status" | "name" | "difficulty" | "submissions";
+  sortBy?: "status" | "name" | "difficulty" | "submissions" | "number";
   children: React.ReactNode;
 }
 
