@@ -3,6 +3,7 @@ import { join } from "path";
 import { writeFileSync, mkdirSync } from "fs";
 import { getAllProblems } from "../data/getAllProblems";
 import chalk from "chalk";
+import _ from "lodash";
 
 async function generateNewProblem() {
   const { problem_name } = await inquirer.prompt({
@@ -10,6 +11,9 @@ async function generateNewProblem() {
     type: "input",
     message: "Vad ska ditt problem heta?",
   });
+
+  const folderName = problem_name.toLowerCase().split(" ").join("-");
+
   const { difficulty } = await inquirer.prompt({
     name: "difficulty",
     type: "list",
@@ -27,55 +31,54 @@ async function generateNewProblem() {
 
   highestNumber += 1;
 
-  console.log(problem_name);
+  mkdirSync(join(__dirname, "../data/problems", folderName));
+  writeFileSync(
+    join(__dirname, "../data/problems", folderName, "description.md"),
+    `# ${_.capitalize(problem_name)}
+
+  ## Exempel 1
+
+  **_Input_**
+
+  \`\`\`bash
+  s = "racecar"
+  \`\`\`
+
+  **_Output_**
+
+  \`\`\`bash
+  true
+  \`\`\`
+
+  **_Förklaring_**
+
+  En förklaring
+  `
+  );
 
   const code = `import type { Problem } from "../../Problem";
-\nexport const data: Problem<string, string> = {
-  name: "${problem_name}",
-  difficulty: "${difficulty}",
-  number: ${highestNumber},
-  arguments: ["s"],
-  tags: [""],
-  testCases: [
-    {
-      input: [\`"s"\`],
-      output: "a",
-    },
-  ],
-};
-  `;
-
-  mkdirSync(join(__dirname, "../data/problems", problem_name));
+  \nexport const data: Problem<string, string> = {
+    name: "${_.capitalize(problem_name)}",
+    difficulty: "${difficulty}",
+    number: ${highestNumber},
+    arguments: ["s"],
+    tags: [""],
+    testCases: [
+      {
+        input: [\`"s"\`],
+        output: "a",
+      },
+    ],
+  };
+    `;
   writeFileSync(
-    join(__dirname, "../data/problems", problem_name, "description.md"),
-    `# ${problem_name}
-
-## Exempel 1
-
-**_Input_**
-    
-\`\`\`bash
-s = "racecar"
-\`\`\`
-    
-**_Output_**
-    
-\`\`\`bash
-true
-\`\`\`
-    
-**_Förklaring_**
-
-En förklaring
-`
-  );
-  writeFileSync(
-    join(__dirname, "../data/problems", problem_name, "data.ts"),
+    join(__dirname, "../data/problems", folderName, "data.ts"),
     code
   );
 
   console.log(chalk.blue("Skapade en ny map med följande info:"));
-  console.log(chalk.green("namn: " + problem_name));
+  console.log(chalk.magenta("folder name: " + folderName));
+  console.log(chalk.green("namn: " + _.capitalize(problem_name)));
   console.log(chalk.yellow("difficulty: " + difficulty));
   console.log(chalk.cyan("number: " + highestNumber));
 }
