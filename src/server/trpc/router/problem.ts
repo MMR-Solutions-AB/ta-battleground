@@ -122,9 +122,16 @@ export const problemRouter = router({
   getById: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
-      return ctx.prisma.problem.findUnique({
+      return ctx.prisma.problem.findFirstOrThrow({
         where: {
-          id: input.id,
+          OR: [
+            {
+              id: input.id,
+            },
+            {
+              number: parseInt(input.id),
+            },
+          ],
         },
         select: {
           id: true,
