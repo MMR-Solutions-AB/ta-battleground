@@ -8,7 +8,7 @@
     "postinstall": "prisma generate",
     "gen": "tsx ./src/scripts/generateNewProblem.ts",
     "db:push": "npx prisma db push",
-    "db:seed": "NODE_ENV=development prisma db seed",
+    "db:seed": "NODE_ENV=development tsx ./prisma/seed-dev.ts",
     "db:seed:prod": "NODE_ENV=production prisma db seed",
     "lint": "next lint",
     "start": "next start",
