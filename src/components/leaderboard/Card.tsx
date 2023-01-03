@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface CardProps {
-  user: RouterOutputs["leaderboard"]["getAll"]["users"][number];
+  user: RouterOutputs["leaderboard"]["getAll"][number];
   index: number;
 }
 
