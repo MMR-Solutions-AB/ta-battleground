@@ -11,7 +11,11 @@ export const userRouter = router({
           id: true,
           _count: {
             select: {
-              accounts: true,
+              accounts: {
+                where: {
+                  userId: { not: input.id },
+                },
+              },
             },
           },
           image: true,
