@@ -46,9 +46,9 @@ export const userRouter = router({
             orderBy: {
               score: "desc",
             },
-            take: 1,
           },
         },
+        take: 1,
       });
 
       if (!user[0]) return null;
