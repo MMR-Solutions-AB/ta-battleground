@@ -26,7 +26,7 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
   if (!problem) return <p>hmm, error</p>;
 
   return (
-    <div className="grid h-[calc(100vh-56px)] w-screen grid-cols-[1fr_1fr] gap-2 bg-bg-dark">
+    <div className="grid h-[calc(100vh-56px)] w-screen grid-cols-[1fr_1fr] gap-2 bg-bg-dark prose-pre:bg-bg-dark">
       <div className="flex h-[calc(100vh-56px)] flex-col">
         <div className="flex flex-shrink-0 bg-bg-dark pt-2 text-sm text-text-dimmed">
           <Link

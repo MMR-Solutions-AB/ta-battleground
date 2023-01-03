@@ -20,7 +20,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <div className="relative w-full px-2 pt-8 text-center sm:py-20 md:px-10 md:py-32">
+      <div className="group relative w-full px-2 pt-8 text-center sm:py-20 md:px-10 md:py-32">
         <h1 className="mb-5 text-4xl font-black md:mb-8 md:text-8xl">
           Techover
           <br />
