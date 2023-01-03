@@ -6,7 +6,7 @@ import Link from "next/link";
 import classNames from "classnames";
 
 interface SubmissionsTableProps {
-  submissions: RouterOutputs["user"]["getById"]["submissions"];
+  submissions: NonNullable<RouterOutputs["user"]["getById"]>["submissions"];
 }
 
 const SubmissionsTable: React.FC<SubmissionsTableProps> = ({ submissions }) => {

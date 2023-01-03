@@ -4,7 +4,7 @@ import { GitHub } from "react-feather";
 import Image from "next/image";
 
 interface ProfileInfoProps {
-  user: RouterOutputs["user"]["getById"];
+  user: NonNullable<RouterOutputs["user"]["getById"]>;
 }
 
 const ProfileInfo: React.FC<ProfileInfoProps> = ({ user }) => {
