@@ -1,6 +1,6 @@
 # Middle age
 
-Skriv en funktion **average(a)** som returnerar medelvärdet av alla element i array:n **a**.
+Skriv en funktion **middleAge(a)** som returnerar medelvärdet av alla element i array:n **a**.
 
 Denna uppgift är bra tillfälle att träna på **for loops** eller **array.reduce** metoden
 

@@ -44,7 +44,7 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
       <td className="relative h-full">
         <div className="peer flex h-full min-w-[16rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
           <Link
-            href={`/problems/${problem.number}`}
+            href={`/problems/${problem.id}`}
             className="overflow-hidden truncate hover:text-primary"
           >
             {problem.name}

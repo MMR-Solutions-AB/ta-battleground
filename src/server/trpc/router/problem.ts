@@ -124,14 +124,7 @@ export const problemRouter = router({
     .query(({ ctx, input }) => {
       return ctx.prisma.problem.findFirstOrThrow({
         where: {
-          OR: [
-            {
-              id: input.id,
-            },
-            {
-              number: parseInt(input.id),
-            },
-          ],
+          id: input.id,
         },
         select: {
           id: true,

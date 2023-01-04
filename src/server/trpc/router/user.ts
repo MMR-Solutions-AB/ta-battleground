@@ -5,6 +5,8 @@ export const userRouter = router({
   getById: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
+      console.log(input);
+
       const user = await ctx.prisma.user.findUniqueOrThrow({
         where: { id: input.id },
         select: {
