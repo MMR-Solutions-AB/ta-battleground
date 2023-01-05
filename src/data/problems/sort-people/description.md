@@ -2,6 +2,8 @@
 
 Skriv en funktion **sortPeople(people)** som tar emot en array av personer som objekt, där varje person har två keys, **name** och **age**. Funktionen ska returnera en array av personerna sorterade efter ålder
 
+Denna uppgift är bra tillfälle att träna på **array.sort** och **objekt**
+
 ## Exempel 1
 
 **_Input_**

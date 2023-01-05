@@ -2,7 +2,7 @@
 
 Skriv en funktion **filterEvenNumbers(numbers)** som tar emot en array av heltal och returnerar en array med bara de jämna heltalen.
 
-Denna uppgift är bra tillfälle att träna på **array.filter** metoden
+Denna uppgift är bra tillfälle att träna på **array.filter** metoden och **modulo-operatorn (%)**
 
 ## Exempel 1
 

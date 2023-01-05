@@ -1,6 +1,6 @@
 # For the array
 
-Skriv en funktion **forTheArray(n)** som tar ett nummer **n** och returnerar en array med alla heltal från **1** till **n**.
+Skriv en funktion **forTheArray(n)** som tar ett nummer **n** och returnerar en array med alla heltal från **1** till och med **n**.
 
 Denna uppgift är bra tillfälle att träna på **for loops** och **arrays**
 

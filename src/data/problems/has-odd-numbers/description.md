@@ -2,7 +2,7 @@
 
 Skriv en funktion **hasEvenNumber(numbers)** som tar emot en array av heltal och returnerar **true** om array:n innehåller minst ett jämnt heltal, annars returnerar den **false**
 
-Denna uppgift är bra tillfälle att träna på **array.some** metoden
+Denna uppgift är bra tillfälle att träna på **array.some** metoden och **modulo-operatorn (%)**
 
 ## Exempel 1
 
