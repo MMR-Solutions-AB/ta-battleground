@@ -25,7 +25,7 @@ const SubmissionCard: React.FC<SubmissionCardProps> = ({ submission }) => {
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-text-dimmed">
         <p>
-          {`{ ${submission.code.length} }`} - {submission.score}
+          {`{ ${submission.code.length} }`} - {submission.score.toFixed(2)}
         </p>
         <p>{time.format(submission.updatedAt)}</p>
       </div>
