@@ -12,7 +12,7 @@ export function generateScoreForProblem(
 
   const addedScore = 3500 / (codeLength * 0.25);
 
-  return baseScore - addedScore;
+  return baseScore + addedScore;
 }
 
 // b = 0.25
