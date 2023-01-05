@@ -45,8 +45,14 @@ const Editor: React.FC<EditorProps> = ({
         <div className="flex gap-2">
           <button
             onClick={async () => {
-              const r = await minify(code);
-              setCode(r.code || "");
+              try {
+                const r = await minify(code);
+                setCode(r.code || "");
+              } catch (error) {
+                alert(
+                  "Kunde inte minify din kod eftersom att du har syntax errors, fixa dem och försök igen"
+                );
+              }
             }}
             className="flex items-center gap-2 rounded-md bg-bg-dimmed py-1 px-3"
           >
