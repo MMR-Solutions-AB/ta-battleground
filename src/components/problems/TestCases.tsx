@@ -147,6 +147,16 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                         : currentSelectedTestCase.receivedOutput}
                     </code>
                   </pre>
+                  {currentSelectedTestCase.timedOut && (
+                    <p className="mb-8 text-text-dimmed">
+                      Det verkar som att uppgiften time:a ut, alltså att koden
+                      aldrig slutade köras. Detta kan ha skett ifall du
+                      exempelvis har någon for-loop eller while som aldrig
+                      slutar, råkade call:a själva funktion i funktion eller
+                      något annat som kan ha fått din kod att köra i all
+                      oändlighet
+                    </p>
+                  )}
                   <b>Expected output</b>
                   <pre>
                     <code className="language-bash">

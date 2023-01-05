@@ -108,6 +108,7 @@ export const problemRouter = router({
               id: true,
               name: true,
               image: true,
+              batch: true,
             },
           },
         },

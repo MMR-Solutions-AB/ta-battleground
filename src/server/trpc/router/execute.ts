@@ -98,15 +98,6 @@ export const executeRouter = router({
           const expectedOutput = outputs[outputs.length - 3];
           const receivedOutput = outputs[outputs.length - 2];
 
-          // console.log(outputs);
-          // console.log(debugOutput);
-
-          // console.log(JSON.parse(expectedOutput || ""));
-          // console.log("asdasd;;;;____;;;adasd");
-          // console.log(receivedOutput);
-
-          // console.log(JSON.parse(receivedOutput || ""));
-
           const completedTestCase =
             timedOut ||
             !expectedOutput ||

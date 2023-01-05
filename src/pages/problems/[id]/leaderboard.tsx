@@ -35,11 +35,11 @@ const Leaderboard: NextPageWithLayout = () => {
         {submissions.map((submission, i) => (
           <div
             key={submission.id}
-            className="flex items-center gap-4 rounded-md bg-bg-dark p-4 font-semibold"
+            className="flex items-center gap-4 rounded-md bg-bg-dark p-4 font-semibold md:text-xl"
           >
             <p className="font-black italic">#{i + 1}</p>
 
-            <div className="relative h-7 w-7">
+            <div className="relative h-7 w-7 md:h-9 md:w-9">
               <Image
                 src={submission.user.image}
                 alt={`${submission.user.name} profile image`}
@@ -47,9 +47,18 @@ const Leaderboard: NextPageWithLayout = () => {
                 className="rounded-full"
               />
             </div>
-            <p className="flex-1">{submission.user.name}</p>
-            <p className="text-sm text-text-dimmed">{submission.score}</p>
-            <p className="text-sm text-text-dimmed">
+            <p className="flex-1">
+              {submission.user.name}{" "}
+              {submission.user.batch && (
+                <span className="text-base text-text-dimmed">
+                  (batch {submission.user.batch})
+                </span>
+              )}
+            </p>
+            <p className="text-base text-text-dimmed">
+              {submission.score.toFixed(2)}
+            </p>
+            <p className="text-base text-text-dimmed">
               {`{ ${submission.code.length} }`}
             </p>
           </div>
