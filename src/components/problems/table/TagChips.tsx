@@ -5,8 +5,11 @@ import { X } from "react-feather";
 const TagChips: React.FC = ({}) => {
   const router = useRouter();
   const { tags } = router.query;
+
+  if (!tags || tags.length === 0) return <></>;
+
   return tags ? (
-    <div className="mt-3 flex flex-wrap items-center gap-3">
+    <div className="flex flex-wrap items-center gap-3">
       {(Array.isArray(tags) ? tags : [tags]).map((tag) => (
         <div
           onClick={() => {

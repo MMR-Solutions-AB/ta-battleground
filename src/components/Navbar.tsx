@@ -17,6 +17,9 @@ const Navbar: React.FC = ({}) => {
           <Link href="/leaderboard" className="hover:text-white">
             Leaderboard
           </Link>
+          <Link href="/faq" className="hover:text-white">
+            FAQ
+          </Link>
           <Link href="/problems" className="hover:text-white">
             Problems
           </Link>
