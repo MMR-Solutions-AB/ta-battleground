@@ -73,8 +73,9 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                     Correct
                   </h3>
                   <p className="text-sm text-green-500">
-                    {runCodeResponse.numberOfFailedTestCases} /{" "}
-                    {runCodeResponse.ranTestCases.length} testcases failed
+                    {runCodeResponse.ranTestCases.length -
+                      runCodeResponse.numberOfFailedTestCases}{" "}
+                    / {runCodeResponse.ranTestCases.length} testcases passed
                   </p>
                 </>
               ) : (
