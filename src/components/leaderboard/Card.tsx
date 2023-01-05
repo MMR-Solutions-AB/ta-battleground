@@ -39,7 +39,14 @@ const Card: React.FC<CardProps> = ({ user, index }) => {
       </div>
 
       <div>
-        <h2 className="text-xl font-bold text-white">{user.name}</h2>
+        <h2 className="text-xl font-bold text-white">
+          {user.name}{" "}
+          {user.batch && (
+            <span className="text-base text-text-dimmed">
+              (batch {user.batch})
+            </span>
+          )}
+        </h2>
         <p className="text-sm text-gray-400">
           {user.score.toFixed(2)} - {`(${user.completedProblems} targets)`}
         </p>

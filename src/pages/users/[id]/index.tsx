@@ -58,9 +58,7 @@ const UserPage: NextPage = () => {
                 placeholder="vilken batch gick/går du i?"
                 value={selectedBatch}
                 onChange={(e) => {
-                  setSelectedBatch(
-                    Math.max(1, Math.min(7, Number(e.target.value)))
-                  );
+                  setSelectedBatch(Number(e.target.value));
                 }}
                 className="w-56 rounded-md border-2 border-bg-dimmed bg-bg-dimmed px-4 py-1 outline-none placeholder:text-sm focus:border-primary"
               />
