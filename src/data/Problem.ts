@@ -21,3 +21,8 @@ export type ProblemCreate<I = any, O = any> = Omit<
   tags: Tags[];
 };
 export type Problem<I, O> = Omit<ProblemCreate<I, O>, "description">;
+export const difficulties: Problem<any, any>["difficulty"][] = [
+  "easy",
+  "medium",
+  "hard",
+];

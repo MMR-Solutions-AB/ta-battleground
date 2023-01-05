@@ -12,7 +12,8 @@
     "db:seed:prod": "NODE_ENV=production prisma db seed",
     "lint": "next lint",
     "start": "next start",
-    "format": "prettier --write ./src"
+    "format": "prettier --write ./src",
+    "test": "vitest"
   },
   "prisma": {
     "seed": "tsx ./prisma/seed.ts"
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.8",
+    "@testing-library/react": "^13.4.0",
     "@types/inquirer": "^9.0.3",
     "@types/lodash": "^4.14.191",
     "@types/marked": "^4.0.8",
@@ -51,11 +53,13 @@
     "@types/react-dom": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
+    "@vitejs/plugin-react": "^3.0.1",
     "autoprefixer": "^10.4.7",
     "chalk": "^5.2.0",
     "eslint": "^8.26.0",
     "eslint-config-next": "13.0.2",
     "inquirer": "^9.1.4",
+    "jsdom": "^20.0.3",
     "monaco-editor": "^0.34.1",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
@@ -63,7 +67,8 @@
     "prisma": "^4.5.0",
     "tailwindcss": "^3.2.0",
     "tsx": "^3.12.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "vitest": "^0.26.3"
   },
   "ct3aMetadata": {
     "initVersion": "6.11.4"
