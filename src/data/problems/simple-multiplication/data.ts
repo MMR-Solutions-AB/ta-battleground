@@ -3,7 +3,7 @@ import type { Problem } from "../../Problem";
 export const data: Problem<number, number> = {
   name: "Simple multiplication",
   difficulty: "easy",
-  number: 18,
+  number: 4,
   arguments: ["a", "b"],
   tags: ["basics", "numbers"],
   testCases: [

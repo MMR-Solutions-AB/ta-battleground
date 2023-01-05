@@ -3,7 +3,7 @@ import type { Problem } from "../../Problem";
 export const data: Problem<number[], number> = {
   name: "Biggest number in array",
   difficulty: "easy",
-  number: 36,
+  number: 6,
   arguments: ["arr"],
   tags: ["basics", "numbers", "arrays"],
   testCases: [
