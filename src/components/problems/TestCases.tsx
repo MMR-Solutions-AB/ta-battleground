@@ -66,13 +66,13 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
           </div>
         ) : (
           runCodeResponse && (
-            <div className="mt-3">
+            <div className="-mt-7">
               {runCodeResponse.correctSolution ? (
                 <>
-                  <h3 className="text-xl font-bold text-green-500 md:text-2xl">
+                  <h3 className="text-xl font-bold text-green-500 md:text-3xl">
                     Correct
                   </h3>
-                  <p className="text-sm text-green-500">
+                  <p className="text-green-500">
                     {runCodeResponse.ranTestCases.length -
                       runCodeResponse.numberOfFailedTestCases}{" "}
                     / {runCodeResponse.ranTestCases.length} testcases passed
@@ -92,7 +92,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
               )}
 
               <h4 className="my-5 font-black italic md:text-xl">
-                score: {runCodeResponse.problemScore.toFixed(2)}{" "}
+                Score: {runCodeResponse.problemScore.toFixed(2)}{" "}
                 <span className="ml-1 text-text-dimmed">{`{ ${runCodeResponse.codeLength} }`}</span>
               </h4>
 

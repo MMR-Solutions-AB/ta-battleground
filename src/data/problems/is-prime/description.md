@@ -1,6 +1,8 @@
 # is-prime
 
-Skriv en funktion **isPrime(n)** som returnerar **true** om **n** är ett primtal, annars **false**.
+Skriv en funktion **isPrime(n)** som returnerar **true** om **n** är ett **primtal**, annars **false**.
+
+Ett **primtal** är ett nummer som inte går att jämt dela på något annat heltal förutom sig själv och **1**. Exemplvis är **17** ett primtal då det inte finns något heltal som du kan dela **17** med för att få ett annat heltal
 
 ## Exempel 1
 
