@@ -1,7 +1,7 @@
 import type { Problem } from "../../Problem";
 
 export const data: Problem<string, boolean> = {
-  name: "Palindrome",
+  name: "Is palindrome",
   difficulty: "easy",
   number: 7,
   arguments: ["s"],
