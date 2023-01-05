@@ -2,7 +2,7 @@ import type { Problem } from "../../Problem";
 
 export const data: Problem<string, { [key: string]: number }> = {
   name: "Count words",
-  difficulty: "easy",
+  difficulty: "medium",
   number: 19,
   arguments: ["s"],
   tags: ["strings", "objects"],

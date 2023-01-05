@@ -1,30 +1,30 @@
 import type { Problem } from "../../Problem";
 
-export const data: Problem<number | string, number> = {
+export const data: Problem<string, number> = {
   name: "Counting Valleys",
   difficulty: "medium",
   number: 4,
-  arguments: ["s", "path"],
+  arguments: ["path"],
   tags: ["strings"],
   testCases: [
     {
-      input: [8, `"UNNNUNUU"`],
+      input: [`"UNNNUNUU"`],
       output: 1,
     },
     {
-      input: [6, `"NUNUNU"`],
+      input: [`"NUNUNU"`],
       output: 3,
     },
     {
-      input: [26, `"NNUNUUUUNNUUNNUNUNUNUNUNNU"`],
+      input: [`"NNUNUUUUNNUUNNUNUNUNUNUNNU"`],
       output: 2,
     },
     {
-      input: [16, `"UUUUUUUUNNNNNNNN"`],
+      input: [`"UUUUUUUUNNNNNNNN"`],
       output: 0,
     },
     {
-      input: [48, `"NUNUNUNUNUNUNUNUNUNUNUNUNUNUNUNUNNUNNUNUNUNUNUUU"`],
+      input: [`"NUNUNUNUNUNUNUNUNUNUNUNUNUNUNUNUNNUNNUNUNUNUNUUU"`],
       output: 17,
     },
   ],
