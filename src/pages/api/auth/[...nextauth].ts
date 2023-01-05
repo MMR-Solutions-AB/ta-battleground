@@ -33,7 +33,7 @@ export const authOptions: NextAuthOptions = {
           github_login: profile.login,
           email: profile.email,
           image: profile.avatar_url,
-          name: profile.name,
+          name: profile.name || profile.login,
         };
       },
     }),
