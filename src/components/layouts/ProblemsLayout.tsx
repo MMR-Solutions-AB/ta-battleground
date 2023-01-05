@@ -17,8 +17,6 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
     id: router.query.id as string,
   });
 
-  console.log(problem);
-
   if (isLoading)
     return (
       <div className="flex justify-center pt-20">
@@ -28,8 +26,8 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
   if (!problem) return <p>hmm, error</p>;
 
   return (
-    <div className="grid h-[calc(100vh-56px)] w-screen grid-cols-[1fr_1fr] gap-2 bg-bg-dark prose-pre:bg-bg-dark">
-      <div className="flex h-[calc(100vh-56px)] flex-col">
+    <div className="w-screen grid-cols-[1fr_1fr] gap-2 bg-bg-dark prose-pre:bg-bg-dark lg:grid lg:h-[calc(100vh-56px)]">
+      <div className="flex flex-col lg:h-[calc(100vh-56px)]">
         <div className="flex flex-shrink-0 bg-bg-dark pt-2 text-sm text-text-dimmed">
           <Link
             href={`/problems/${router.query.id}`}
@@ -68,12 +66,22 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
         <div className="flex-1 overflow-scroll bg-bg-dimmed">{children}</div>
       </div>
       {/* <div className="w-4 bg-black"></div> */}
-      <div className="flex h-[calc(100vh-56px)] w-full flex-col bg-bg-dimmed">
+      <div className="hidden h-[calc(100vh-56px)] w-full flex-col bg-bg-dimmed lg:flex">
         <Editor
           starterCode={problem.submissions[0]?.code}
           problemName={problem.name}
           problemArgs={problem.arguments as string[]}
         />
+      </div>
+
+      <div className="px-4 py-14 lg:hidden">
+        <h2 className="text-center text-2xl font-bold">
+          Varför ser jag inte text editorn?
+        </h2>
+        <p className="text-center text-text-dimmed">
+          Din skärmstorlek är för liten för att editorn ska visas. Din skärm
+          måste vavra 1024px eller större
+        </p>
       </div>
     </div>
   );

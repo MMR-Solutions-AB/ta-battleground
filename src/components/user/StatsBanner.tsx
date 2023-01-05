@@ -10,7 +10,7 @@ const StatsBanner: React.FC<StatsBannerProps> = ({ user }) => {
   return (
     <div
       className={classNames(
-        "mb-4 grid grid-cols-2 gap-2 rounded-md bg-gradient-to-tr from-secondary to-primary p-8 text-center italic",
+        "mb-4 grid grid-cols-2 gap-6 rounded-md bg-gradient-to-tr from-primary to-secondary p-8 text-center italic",
         user.batch ? "md:grid-cols-4" : "md:grid-cols-3"
       )}
     >

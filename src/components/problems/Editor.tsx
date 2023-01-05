@@ -20,9 +20,6 @@ const Editor: React.FC<EditorProps> = ({
   problemName,
   problemArgs,
 }) => {
-  console.log("asdadadasdasdasdds");
-  console.log(starterCode);
-
   const { editorSettings } = useEditorSettings();
   const { setShowModal } = useModal();
   const [code, setCode] = useState(

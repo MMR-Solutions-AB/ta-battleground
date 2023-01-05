@@ -31,27 +31,6 @@ const Problem: NextPageWithLayout = () => {
       {submissions?.map((submission) => (
         <SubmissionCard key={submission.id} submission={submission} />
       ))}
-      {submissions?.map((submission) => (
-        <SubmissionCard key={submission.id} submission={submission} />
-      ))}
-      {submissions?.map((submission) => (
-        <SubmissionCard key={submission.id} submission={submission} />
-      ))}
-      {submissions?.map((submission) => (
-        <SubmissionCard key={submission.id} submission={submission} />
-      ))}{" "}
-      {submissions?.map((submission) => (
-        <SubmissionCard key={submission.id} submission={submission} />
-      ))}{" "}
-      {submissions?.map((submission) => (
-        <SubmissionCard key={submission.id} submission={submission} />
-      ))}{" "}
-      {submissions?.map((submission) => (
-        <SubmissionCard key={submission.id} submission={submission} />
-      ))}{" "}
-      {submissions?.map((submission) => (
-        <SubmissionCard key={submission.id} submission={submission} />
-      ))}
     </div>
   );
 };

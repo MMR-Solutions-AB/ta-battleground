@@ -22,7 +22,7 @@ const Navbar: React.FC = ({}) => {
           </Link>
           <Link
             href={`/users/${user.id}`}
-            className="group ml-5 flex items-center gap-2 md:ml-14"
+            className="group flex items-center gap-2 lg:ml-14"
           >
             <p className="text-sm group-hover:text-white">{user.name}</p>
             <div className="relative h-8 w-8">

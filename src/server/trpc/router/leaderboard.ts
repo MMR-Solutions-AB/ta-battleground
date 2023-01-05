@@ -28,6 +28,7 @@ export const leaderboardRouter = router({
         name: true,
         image: true,
         score: true,
+        batch: true,
         completedProblems: true,
       },
       orderBy: {

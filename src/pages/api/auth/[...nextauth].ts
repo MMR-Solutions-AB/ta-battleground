@@ -16,6 +16,10 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+  pages: {
+    signIn: "/auth/sign-in",
+    error: "/auth/error", // Error code passed in query string as ?error=
+  },
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   providers: [
