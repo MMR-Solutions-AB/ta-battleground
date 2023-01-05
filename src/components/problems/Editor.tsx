@@ -3,7 +3,7 @@ import MonacoEditor, { useMonaco } from "@monaco-editor/react";
 import TestCases from "./TestCases";
 import { generateStarterCode } from "@/utils/generateStarterCode";
 import BouncingBalls from "@/components/loaders/BouncingBalls";
-import { Code, Settings } from "react-feather";
+import { Code, Settings, RefreshCw } from "react-feather";
 import { minify } from "terser";
 import { useEditorSettings } from "@/context/EditorContext";
 import { useModal } from "@/context/ModalContext";
@@ -43,6 +43,15 @@ const Editor: React.FC<EditorProps> = ({
       <div className="flex flex-shrink-0 flex-wrap items-center justify-between bg-bg-dark pb-2 pr-2 pt-2 text-sm text-text-dimmed">
         <span>{`{ ${code.length} }`}</span>
         <div className="flex gap-2">
+          <button
+            onClick={async () => {
+              setCode(generateStarterCode(problemName, problemArgs));
+            }}
+            className="flex items-center gap-2 rounded-md bg-bg-dimmed py-1 px-3"
+          >
+            <RefreshCw className="h-3 w-3" />
+            Reset code
+          </button>
           <button
             onClick={async () => {
               try {
