@@ -1,6 +1,6 @@
 # Objectively freaky friday
 
-Skriv en funktion **invertDictionary(d)** som omvandlar ett object med strängar som nycklar och heltal som värden till en dictionary med heltal som nycklar och listor med strängar som värden. I det nya objektet ska varje tal nyckel vara ett värde i det ursprungliga objektet, och värdet för nyckeln ska vara en array med alla strängar som hade detta värde i det ursprungliga objektet.
+Skriv en funktion **objectivelyFreakyFriday(d)** som omvandlar ett object med strängar som nycklar och heltal som värden till en dictionary med heltal som nycklar och listor med strängar som värden. I det nya objektet ska varje tal nyckel vara ett värde i det ursprungliga objektet, och värdet för nyckeln ska vara en array med alla strängar som hade detta värde i det ursprungliga objektet.
 
 ## Exempel 1
 
