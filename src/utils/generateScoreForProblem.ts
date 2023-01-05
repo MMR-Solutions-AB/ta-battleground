@@ -12,7 +12,7 @@ export function generateScoreForProblem(
 
   const addedScore = 3500 / (codeLength * 0.75);
 
-  return baseScore + addedScore + 600;
+  return Number((baseScore + addedScore + 600).toFixed(2));
 }
 
 // b = 0.25

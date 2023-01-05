@@ -1,6 +1,6 @@
 # Can enter club
 
-Skriv en funktion **canEnterClub(ages)** som tar emot en array av nummer som representerar åldrar och avgör om alla personer i array får komma in på klubben, då det finns en åldersgräns på 18 år. Funktionen ska returnera **true** om alla personer i array är över 18 år, annars ska den returnera **false**.
+Skriv en funktion **canEnterClub(ages)** som tar emot en array av nummer som representerar åldrar och avgör om alla personer i array:n får komma in på klubben, då det finns en åldersgräns på 18 år. Funktionen ska returnera **true** om alla personer i array är 18 år eller äldre, annars ska den returnera **false**.
 
 Denna uppgift är bra tillfälle att träna på **array.every** metoden
 
