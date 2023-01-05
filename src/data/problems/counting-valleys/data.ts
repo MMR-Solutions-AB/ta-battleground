@@ -1,5 +1,5 @@
 import type { Problem } from "../../Problem";
-
+[].reduce;
 export const data: Problem<string, number> = {
   name: "Counting Valleys",
   difficulty: "medium",
