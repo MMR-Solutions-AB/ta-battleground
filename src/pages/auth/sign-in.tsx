@@ -11,7 +11,7 @@ const SignIn: NextPage<any> = ({ providers }) => {
         <h2 className="mb-3 text-4xl font-bold md:text-6xl">
           Sign in to Battleground
         </h2>
-        <p className="mb-8 text-text-dimmed">
+        <p className="mb-8 text-text-dimmed 2xl:text-xl">
           Battleground är en plats där du kommer kunna träna på dina Javascript
           kunskaper
         </p>
@@ -19,7 +19,7 @@ const SignIn: NextPage<any> = ({ providers }) => {
           <div key={provider.name}>
             <button
               className="mx-auto flex items-center gap-2 rounded bg-white py-3 px-6 tracking-wider text-black md:text-xl"
-              onClick={() => signIn(provider.id, { callbackUrl: "/problems" })}
+              onClick={() => signIn(provider.id, { callbackUrl: "/me" })}
             >
               <GitHub /> Sign in with {provider.name}
             </button>

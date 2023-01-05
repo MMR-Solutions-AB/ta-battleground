@@ -21,7 +21,7 @@ export const data: Problem<number, number> = {
     },
     {
       input: [-40892],
-      output: -29802,
+      output: -29804,
     },
   ],
 };
