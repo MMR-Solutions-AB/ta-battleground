@@ -12,7 +12,7 @@ async function main() {
 
     promises.push(
       prisma.problem.upsert({
-        where: { number: problem.number },
+        where: { name: problem.name },
         update: {
           description: problem.description,
           name: problem.name,

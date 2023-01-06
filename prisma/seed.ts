@@ -9,7 +9,7 @@ async function main() {
     if (!problem) continue;
 
     await prisma.problem.upsert({
-      where: { number: problem.number },
+      where: { name: problem.name },
       update: {
         description: problem.description,
         name: problem.name,

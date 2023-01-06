@@ -51,6 +51,7 @@ model User {
   emailVerified     DateTime?
   github_login      String
   image             String
+  isTechoverStaff   Boolean      @default(false)
   batch             Int?         @db.SmallInt
   score             Float        @default(0)
   completedProblems Int          @default(0)
