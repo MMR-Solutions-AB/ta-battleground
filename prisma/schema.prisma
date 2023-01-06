@@ -88,7 +88,7 @@ model Problem {
   name        String            @unique
   difficulty  ProblemDifficulty
   description String            @db.LongText
-  number      Int
+  number      Int               @unique
   testCases   Json
   arguments   Json
   createdAt   DateTime          @default(now())

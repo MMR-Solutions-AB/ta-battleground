@@ -29,23 +29,23 @@ const Home: NextPage = () => {
         Battleground är en plats där du kommer kunna träna på dina Javascript
         kunskaper
       </p>
-      {sessionData ? (
-        <div className="flex flex-col justify-center gap-3 sm:flex-row">
+      <div className="flex flex-col justify-center gap-3 sm:flex-row">
+        {sessionData ? (
           <Link
             className="rounded-full bg-bg-dimmed px-10 py-3 font-semibold text-white no-underline transition hover:bg-bg-dimmed/60 max-md:text-sm"
             href="/problems"
           >
             Start solving problems
           </Link>
-        </div>
-      ) : (
-        <button
-          className="rounded-full bg-bg-dimmed px-10 py-3 font-semibold text-white no-underline transition hover:bg-bg-dimmed/60"
-          onClick={() => signIn()}
-        >
-          Sign in
-        </button>
-      )}
+        ) : (
+          <button
+            className="rounded-full bg-bg-dimmed px-10 py-3 font-semibold text-white no-underline transition hover:bg-bg-dimmed/60"
+            onClick={() => signIn()}
+          >
+            Sign in
+          </button>
+        )}
+      </div>
 
       <Image
         src={"/bg-blob.svg"}
