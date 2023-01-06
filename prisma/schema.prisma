@@ -93,8 +93,9 @@ model Problem {
   arguments   Json
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
-  submissions Submission[]
+  submissions Submission[]      @relation("submsissions")
   tags        Tag[]
+  topSolution Submission?       @relation("topSolution")
 
   @@index([name, difficulty, number])
   @@index([name])
@@ -128,19 +129,22 @@ enum SubmissionStatus {
 }
 
 model Submission {
-  id        String           @id @default(cuid())
-  code      String           @db.MediumText
-  status    SubmissionStatus
-  score     Float
-  testCases Json
-  problemId String
-  problem   Problem          @relation(fields: [problemId], references: [id])
-  userId    String
-  user      User             @relation(fields: [userId], references: [id])
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
+  id                   String           @id @default(cuid())
+  code                 String           @db.MediumText
+  status               SubmissionStatus
+  score                Float
+  testCases            Json
+  problemId            String
+  problem              Problem          @relation("submsissions", fields: [problemId], references: [id])
+  topSolutionProblemId String?          @unique
+  topSolutionProblem   Problem?         @relation("topSolution", fields: [topSolutionProblemId], references: [id])
+  userId               String
+  user                 User             @relation(fields: [userId], references: [id])
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
 
   @@index([problemId])
+  @@index([topSolutionProblemId])
   @@index([userId])
   @@index([createdAt])
   @@index([updatedAt])

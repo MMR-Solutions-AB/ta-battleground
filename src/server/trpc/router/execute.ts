@@ -35,6 +35,13 @@ export const executeRouter = router({
           arguments: true,
           difficulty: true,
           name: true,
+          topSolution: {
+            select: {
+              id: true,
+              score: true,
+              createdAt: true,
+            },
+          },
         },
       });
 
@@ -181,7 +188,7 @@ export const executeRouter = router({
         }
       }
 
-      await ctx.prisma.submission.create({
+      const submission = await ctx.prisma.submission.create({
         data: {
           status: correctSolution ? "completed" : "failed",
           testCases: ranTestCases,
@@ -191,6 +198,22 @@ export const executeRouter = router({
           score: problemScore,
         },
       });
+
+      if (
+        !problem.topSolution ||
+        submission.score > problem.topSolution?.score
+      ) {
+        await ctx.prisma.problem.update({
+          where: { id: input.problemId },
+          data: {
+            topSolution: {
+              connect: {
+                id: submission.id,
+              },
+            },
+          },
+        });
+      }
 
       return {
         ranTestCases,
