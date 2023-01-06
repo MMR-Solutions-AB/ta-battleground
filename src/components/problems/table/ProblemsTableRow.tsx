@@ -24,17 +24,9 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
       </td>
       <td className="relative h-full">
         <div className="peer flex h-full min-w-[0rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
-          {!user || problem.submissions.length == 0 ? (
+          {problem.submissions.length === 0 ? (
             ""
-          ) : problem.submissions[0]?.user.id === user.id ? (
-            problem.submissions[0]?.status == "completed" ? (
-              <CheckCircle className="h-4 w-4 text-green-500" />
-            ) : (
-              <Activity className="h-4 w-4 text-amber-500" />
-            )
-          ) : problem.submissions[1]?.user.id !== user.id ? (
-            ""
-          ) : problem.submissions[1]?.status == "completed" ? (
+          ) : problem.submissions[0]?.status == "completed" ? (
             <CheckCircle className="h-4 w-4 text-green-500" />
           ) : (
             <Activity className="h-4 w-4 text-amber-500" />
@@ -99,11 +91,9 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
 
       <td className="relative h-full">
         <div className="h-ful peer flex max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
-          {problem.submissions &&
-            problem.submissions[0] &&
-            problem.submissions[0].score > 0 &&
-            `${problem.submissions[0].score.toFixed(2)} - { ${
-              problem.submissions[0].code.length
+          {problem.topSolution &&
+            `${problem.topSolution.score.toFixed(2)} - { ${
+              problem.topSolution.code.length
             } }`}
         </div>
       </td>

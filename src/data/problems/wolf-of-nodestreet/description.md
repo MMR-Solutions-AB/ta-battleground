@@ -1,6 +1,6 @@
 # Wolf of nodestreet
 
-Skriv en funktion **maxProfit(prices)** som hittar den maximala vinsten som kan uppnås genom att köpa och sälja en aktie. Du kan endast göra en köp- och säljtransaktion. **prices** argument är en **array** av positiva heltal.
+Skriv en funktion **maxProfit(prices)** som hittar den maximala vinsten som kan uppnås genom att köpa och sälja en aktie. Du kan endast göra en köp- och säljtransaktion. **prices** argument är en **array** av positiva heltal, array representerar olika priser en aktie har i ordning. Ifall ingen vinst kan göras ska du returnera **false**.
 
 ## Exempel 1
 

@@ -19,17 +19,17 @@ const ProblemsTablesRows: React.FC = ({}) => {
         <tr className="h-11 opacity-0">
           <td className="relative h-full">
             <div className="peer flex h-full min-w-[0rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2 font-bold text-text-dimmed">
-              12
+              1
             </div>
           </td>
           <td className="relative h-full">
             <div className="peer flex h-full min-w-[0rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
-              abc
+              ab
             </div>
           </td>
           <td className="relative h-full">
             <div className="peer flex h-full min-w-[16rem] max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
-              abcdefehgid
+              abcdefehgiikf
             </div>
           </td>
           <td className="relative h-full">
@@ -39,7 +39,12 @@ const ProblemsTablesRows: React.FC = ({}) => {
           </td>
           <td className="relative h-full">
             <div className="h-ful peer flex max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
-              45
+              999.999
+            </div>
+          </td>
+          <td className="relative h-full">
+            <div className="h-ful peer flex max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
+              99
             </div>
           </td>
         </tr>

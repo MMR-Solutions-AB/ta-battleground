@@ -44,26 +44,28 @@ export const problemRouter = router({
           name: true,
           number: true,
           difficulty: true,
+          topSolution: {
+            select: {
+              code: true,
+              score: true,
+            },
+          },
           submissions: {
             where: {
-              OR: {
-                userId: ctx.session.user.id,
-              },
+              userId: ctx.session.user.id,
             },
             select: {
               status: true,
               score: true,
               code: true,
-              user: { select: { id: true, name: true } },
               createdAt: true,
             },
-            distinct: ["userId"],
             orderBy: [
               {
                 score: "desc",
               },
             ],
-            take: 2,
+            take: 1,
           },
           tags: {
             select: {

@@ -14,9 +14,3 @@ export function generateScoreForProblem(
 
   return Number((baseScore + addedScore + 600).toFixed(2));
 }
-
-// b = 0.25
-// a = 3500
-
-// 0.75
-// 11 000
