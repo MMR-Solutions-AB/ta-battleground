@@ -2,21 +2,21 @@ import { type NextPage } from "next";
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { generateScoreForProblem } from "@/utils";
+// import { generateScoreForProblem } from "@/utils";
 
 const Home: NextPage = () => {
   const { data: sessionData } = useSession();
 
   // testing scoring function
-  for (let i = 0; i < 375; i++) {
-    console.log(400 - i, ":", generateScoreForProblem(400 - i, true, "easy"));
-  }
-  console.log(generateScoreForProblem(400, true, "easy"));
-  console.log(generateScoreForProblem(25, true, "easy"));
-  console.log(
-    generateScoreForProblem(25, true, "easy") -
-      generateScoreForProblem(350, true, "easy")
-  );
+  // for (let i = 0; i < 375; i++) {
+  //   console.log(400 - i, ":", generateScoreForProblem(400 - i, true, "easy"));
+  // }
+  // console.log(generateScoreForProblem(400, true, "easy"));
+  // console.log(generateScoreForProblem(25, true, "easy"));
+  // console.log(
+  //   generateScoreForProblem(25, true, "easy") -
+  //     generateScoreForProblem(350, true, "easy")
+  // );
 
   return (
     <div className="group relative flex w-full flex-col justify-center px-2 pt-8 text-center sm:py-20 md:px-10 md:py-32">
