@@ -110,6 +110,7 @@ enum TagNames {
   numbers
   arrays
   objects
+  functions
 }
 
 model Tag {

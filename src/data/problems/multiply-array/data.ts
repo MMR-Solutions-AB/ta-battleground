@@ -5,7 +5,7 @@ export const data: Problem<number[] | string, number[]> = {
   difficulty: "easy",
   number: 42,
   arguments: ["arr", "cb"],
-  tags: ["basics", "numbers", "arrays"],
+  tags: ["basics", "numbers", "arrays", "functions"],
   testCases: [
     {
       input: [[1, 2, 3], "(x) => x * 2"],

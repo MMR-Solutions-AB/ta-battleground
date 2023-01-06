@@ -10,6 +10,7 @@ export const tags: Tags[] = [
   "numbers",
   "objects",
   "strings",
+  "functions",
 ];
 export type TestCase<I = any, O = any> = { input: Array<I>; output: O };
 export type ProblemCreate<I = any, O = any> = Omit<

@@ -62,6 +62,8 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
                       ? "bg-red-600"
                       : tag.name === "objects"
                       ? "bg-amber-600"
+                      : tag.name === "functions"
+                      ? "bg-pink-500"
                       : tag.name === "strings"
                       ? "bg-blue-600"
                       : tag.name === "arrays"
