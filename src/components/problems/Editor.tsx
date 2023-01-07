@@ -30,7 +30,7 @@ const Editor: React.FC<EditorProps> = ({
   console.log(editorSettings.themeName);
 
   return (
-    <>
+    <div className="grid grid-rows-[auto_1fr] overflow-y-scroll">
       <div className="flex flex-shrink-0 flex-wrap items-center justify-between bg-bg-dark pb-2 pr-2 pt-2 text-sm text-text-dimmed">
         <span>{`{ ${code.length} }`}</span>
         <div className="flex gap-2">
@@ -69,19 +69,23 @@ const Editor: React.FC<EditorProps> = ({
         </div>
       </div>
 
-      <div className="flex h-full flex-col overflow-y-scroll">
-        <div className="grid h-[calc(100%_-_0px)]">
+      <div className="w-full overflow-y-scroll">
+        <div className="grid h-[calc(100vh-200px)] w-full flex-1 flex-shrink-0 overflow-y-scroll">
           <CodeMirror
             value={code}
             onChange={setCode}
             height="100%"
+            style={{
+              width: "50vw",
+              fontSize: editorSettings.fontSize,
+            }}
             theme={themes[editorSettings.themeName] as any}
             extensions={[javascript()]}
           />
         </div>
         <TestCases code={code} />
       </div>
-    </>
+    </div>
   );
 };
 
