@@ -113,7 +113,7 @@ const Editor: React.FC<EditorProps> = ({
             }}
             className={""}
             height={"100%"}
-            language={"typescript"}
+            language={"javascript"}
             value={code}
             onChange={(val) => setCode(val || "")}
             theme={editorSettings.theme}
