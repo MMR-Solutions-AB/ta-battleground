@@ -51,6 +51,36 @@ const EditorSettingsModal: React.FC = ({}) => {
           <div className="space-y-5">
             <div className="flex items-end">
               <div className="mr-auto pr-2">
+                <h4 className="m-0 -mb-1 text-base md:text-lg">
+                  Show line number
+                </h4>
+                <p className="m-0 text-xs text-text-dimmed md:text-sm">
+                  Line numbers will be displayed on the left of your code
+                </p>
+              </div>
+
+              <div
+                className="relative h-6 w-12 rounded-full bg-bg-dark"
+                onClick={() => {
+                  setEditorSettings({
+                    ...editorSettings,
+                    showLineNumber: !editorSettings.showLineNumber,
+                  });
+                }}
+              >
+                <div
+                  className={classNames(
+                    "absolute mt-1 h-4 w-4 rounded-full transition-all",
+                    editorSettings.showLineNumber
+                      ? "left-7 bg-primary"
+                      : "left-1 bg-text-dimmed"
+                  )}
+                ></div>
+              </div>
+            </div>
+
+            <div className="flex items-end">
+              <div className="mr-auto pr-2">
                 <h4 className="-mb-1 text-base md:text-lg">Font size</h4>
                 <p className="text-xs text-text-dimmed md:text-sm">
                   Ändrar text storleken på din kod
