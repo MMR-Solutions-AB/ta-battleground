@@ -14,20 +14,14 @@ export const themeNames = [
   "light",
   "vs-dark",
   "hc-black",
-  "dracula",
-  "monokai",
-  "hallowsEve",
   "cobalt",
+  "dracula",
+  "github",
+  "hallowsEve",
+  "monokai",
   "pastel",
 ] as const;
 export type Theme = typeof themeNames[number];
-// | "light"
-// | "vs-dark"
-// | "dracula"
-// | "monokai"
-// | "hallowsEve"
-// | "cobalt"
-// | "pastel";
 
 export interface Settings {
   fontSize: FontSize;
