@@ -31,6 +31,11 @@ export const authOptions: NextAuthOptions = {
         return {
           id: profile.login, // will be set by prisma
           github_login: profile.login,
+          bio: profile.bio,
+          blog: profile.blog,
+          company: profile.company,
+          location: profile.location,
+          twitter_username: profile.twitter_username,
           email: profile.email,
           image: profile.avatar_url,
           name: profile.name || profile.login,
