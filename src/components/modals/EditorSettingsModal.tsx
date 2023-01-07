@@ -1,4 +1,4 @@
-import { useEditorSettings } from "@/context/EditorContext";
+import { useEditorSettings, themeNames } from "@/context/EditorContext";
 import { useModal } from "@/context/ModalContext";
 import classNames from "classnames";
 import React from "react";
@@ -178,22 +178,22 @@ const EditorSettingsModal: React.FC = ({}) => {
                 <select
                   name="editor-theme"
                   id="editor-theme"
-                  value={editorSettings.theme}
-                  onChange={(e) =>
+                  value={editorSettings.themeName}
+                  onChange={(e) => {
+                    console.log(e.target.value);
+
                     setEditorSettings({
                       ...editorSettings,
-                      theme: e.target.value as any,
-                    })
-                  }
+                      themeName: e.target.value as any,
+                    });
+                  }}
                   className="rounded-lg bg-bg-dark py-1.5 pl-6 text-xs shadow-sm md:pl-7 md:text-sm"
                 >
-                  <option value="light">Light</option>
-                  <option value="vs-dark">Dark</option>
-                  <option value="dracula">Dracula</option>
-                  <option value="monokai">Monokai</option>
-                  <option value="hallowsEve">Hallows Eve</option>
-                  <option value="cobalt">Cobalt</option>
-                  <option value="pastel">Pastel</option>
+                  {themeNames.map((theme) => (
+                    <option key={theme} value={theme}>
+                      {theme}
+                    </option>
+                  ))}
                 </select>
                 <Droplet className="absolute top-1/2 left-1.5 h-3.5 w-3.5 -translate-y-1/2 text-text-dimmed md:h-4 md:w-4" />
               </div>
