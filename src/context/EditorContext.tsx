@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
-import * as themes from "thememirror";
+import * as themes from "@uiw/codemirror-themes-all";
 
 export type FontSize = 10 | 12 | 14 | 16 | 18 | 20 | 22;
 export type CursorStyle =
@@ -12,10 +12,13 @@ export type CursorStyle =
   | "underline-thin";
 
 export type ThemeNames = keyof typeof themes;
-export type Theme = typeof themes["amy"];
+export type Theme = typeof themes["vscodeDark"];
 export const themeNames = Object.keys(themes).filter(
   (t) => t !== "createTheme"
-);
+) as ThemeNames[];
+export const allThemes = themes;
+
+console.log(themes);
 
 export interface Settings {
   fontSize: FontSize;
@@ -32,7 +35,7 @@ const defaultSettings: Settings = {
   showLineNumber: true,
   minimap: true,
   cursorStyle: "line",
-  themeName: "ayuLight",
+  themeName: "vscodeDark",
   zenMode: false,
 };
 

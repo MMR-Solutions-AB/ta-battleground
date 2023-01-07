@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import TestCases from "./TestCases";
 import { generateStarterCode } from "@/utils/generateStarterCode";
-import BouncingBalls from "@/components/loaders/BouncingBalls";
 import { Code, Settings, RefreshCw } from "react-feather";
 import { minify } from "terser";
-import { useEditorSettings } from "@/context/EditorContext";
+import { useEditorSettings, allThemes } from "@/context/EditorContext";
 import { useModal } from "@/context/ModalContext";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
-import * as themes from "thememirror";
+import { EditorView } from "codemirror";
 
 interface EditorProps {
   starterCode?: string;
@@ -28,6 +27,7 @@ const Editor: React.FC<EditorProps> = ({
   );
 
   console.log(editorSettings.themeName);
+  console.log(editorSettings);
 
   return (
     <div className="grid grid-rows-[auto_1fr] overflow-y-scroll">
@@ -76,11 +76,20 @@ const Editor: React.FC<EditorProps> = ({
             onChange={setCode}
             height="100%"
             style={{
-              width: "50vw",
+              width: "calc(50vw-8px)",
               fontSize: editorSettings.fontSize,
+              lineBreak: "anywhere",
             }}
-            theme={themes[editorSettings.themeName] as any}
-            extensions={[javascript()]}
+            basicSetup={{
+              crosshairCursor: true,
+            }}
+            theme={
+              (typeof allThemes[editorSettings.themeName] === "function"
+                ? (allThemes[editorSettings.themeName] as () => any)()
+                : allThemes[editorSettings.themeName] ||
+                  allThemes["abcdef"]) as any
+            }
+            extensions={[javascript(), EditorView.lineWrapping]}
           />
         </div>
         <TestCases code={code} />
