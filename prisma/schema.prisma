@@ -48,6 +48,11 @@ model User {
   id                String       @id @default(cuid())
   name              String
   email             String       @unique
+  bio               String?
+  blog              String?
+  company           String?
+  location          String?
+  twitter_username  String?
   emailVerified     DateTime?
   github_login      String
   image             String
