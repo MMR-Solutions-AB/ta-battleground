@@ -13,7 +13,10 @@
     "lint": "next lint",
     "start": "next start",
     "format": "prettier --write ./src",
-    "test": "vitest"
+    "test": "vitest",
+    "count": "git ls-files --exclude-standard -- ':!:**/*.[pjs][npv]g' ':!:**/*.jpeg' ':!:**/*.webp' ':!:yarn.lock' ':!:package-lock.json' | xargs wc -l",
+    "count-all": "git ls-files | xargs wc -l",
+    "count-files": "git ls-files | wc -l"
   },
   "prisma": {
     "seed": "tsx ./prisma/seed.ts"
@@ -32,6 +35,7 @@
     "@uiw/react-codemirror": "^4.19.5",
     "classnames": "^2.3.2",
     "codemirror": "^6.0.1",
+    "js-beautify": "^1.14.7",
     "lodash": "^4.17.21",
     "marked": "^4.2.5",
     "next": "13.0.2",
@@ -50,6 +54,7 @@
     "@tailwindcss/typography": "^0.5.8",
     "@testing-library/react": "^13.4.0",
     "@types/inquirer": "^9.0.3",
+    "@types/js-beautify": "^1.13.3",
     "@types/lodash": "^4.14.191",
     "@types/marked": "^4.0.8",
     "@types/node": "^18.0.0",
