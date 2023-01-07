@@ -35,7 +35,7 @@ const Home: NextPage = () => {
             className="rounded-full bg-bg-dimmed px-10 py-3 font-semibold text-white no-underline transition hover:bg-bg-dimmed/60 max-md:text-sm"
             href="/problems"
           >
-            Start solving problems
+            Börja lösa problem!
           </Link>
         ) : (
           <button

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
-export const fontSizes = [10, 12, 14, 16, 18, 20, 22] as const;
+export const fontSizes = [10, 12, 14, 16, 18, 20, 22, 24] as const;
 export type FontSize = typeof fontSizes[number];
 export type CursorStyle =
   | "line"

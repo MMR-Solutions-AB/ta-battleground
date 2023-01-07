@@ -52,10 +52,10 @@ const EditorSettingsModal: React.FC = ({}) => {
             <div className="flex items-end">
               <div className="mr-auto pr-2">
                 <h4 className="m-0 -mb-1 text-base md:text-lg">
-                  Show line number
+                  Visa rad nummer
                 </h4>
                 <p className="m-0 text-xs text-text-dimmed md:text-sm">
-                  Line numbers will be displayed on the left of your code
+                  Rad nummer kommer visas till vänster av din kod
                 </p>
               </div>
 

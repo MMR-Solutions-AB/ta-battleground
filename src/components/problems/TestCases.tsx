@@ -92,7 +92,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
               )}
 
               <h4 className="my-5 font-black italic md:text-xl">
-                Score: {runCodeResponse.problemScore.toFixed(2)}{" "}
+                Poäng: {runCodeResponse.problemScore.toFixed(2)}{" "}
                 <span className="ml-1 text-text-dimmed">{`{ ${runCodeResponse.codeLength} }`}</span>
               </h4>
 

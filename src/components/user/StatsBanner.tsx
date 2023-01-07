@@ -21,13 +21,13 @@ const StatsBanner: React.FC<StatsBannerProps> = ({ user }) => {
         </h5>
       </div>
       <div className="px-3">
-        <p className="mb-1">Score</p>
+        <p className="mb-1">Poäng</p>
         <h5 className="text-2xl font-bold md:text-4xl">
           {user.score.toFixed(2)}
         </h5>
       </div>
       <div className="px-3">
-        <p className="mb-1">Targets</p>
+        <p className="mb-1">Uppgifter</p>
         <h5 className="text-2xl font-bold md:text-4xl">
           {user.submissions.length}
         </h5>

@@ -34,7 +34,12 @@ const Card: React.FC<CardProps> = ({ user, index }) => {
           #{index + 1}
         </div>
         <div className="relative h-10 w-10 flex-shrink-0 md:h-12 md:w-12">
-          <Image src={user.image} alt="" fill={true} className="rounded-full" />
+          <Image
+            src={user.image}
+            alt="profile image"
+            fill={true}
+            className="rounded-full"
+          />
         </div>
       </div>
 
@@ -48,7 +53,7 @@ const Card: React.FC<CardProps> = ({ user, index }) => {
           )}
         </h2>
         <p className="text-sm text-gray-400">
-          {user.score.toFixed(2)} - {`(${user.completedProblems} targets)`}
+          {user.score.toFixed(2)} - {`(${user.completedProblems} uppgifter)`}
         </p>
       </div>
     </Link>

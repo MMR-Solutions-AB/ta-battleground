@@ -50,10 +50,10 @@ const UserPage: React.FC<UsersPageProps> = ({ userId }) => {
           {isOwnUsersPage && !user.batch && (
             <div className="mb-3">
               <h2 className="mb-1 text-2xl font-bold">
-                Verkar inte som att du har valt vilken batch du går i 😔
+                Verkar inte som att du har valt vilken batch du gick/går i 😔
               </h2>
               <p className="mb-3 text-sm text-text-dimmed">
-                Var snäll och skriv in vilken batch du gick/går i
+                Var snäll och välj vilken batch du gick/går i
               </p>
 
               <select
@@ -137,7 +137,7 @@ const UserPage: React.FC<UsersPageProps> = ({ userId }) => {
                 {user.submissions.length} uppgifter
               </h2>
               <p className="mb-3 text-sm text-text-dimmed">
-                Uppgifterna är sorterade med högst score till lägst score
+                Uppgifterna är sorterade med högst poäng till lägst poäng
               </p>
               <SubmissionsTable submissions={user.submissions} />
             </div>
