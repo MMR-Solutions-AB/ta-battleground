@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import * as themes from "@uiw/codemirror-themes-all";
 
 export type FontSize = 10 | 12 | 14 | 16 | 18 | 20 | 22;
 export type CursorStyle =
@@ -10,21 +11,22 @@ export type CursorStyle =
   | "block-outline"
   | "underline-thin";
 
-export type Theme =
-  | "light"
-  | "vs-dark"
-  | "dracula"
-  | "monokai"
-  | "hallowsEve"
-  | "cobalt"
-  | "pastel";
+export type ThemeNames = keyof typeof themes;
+export type Theme = typeof themes["vscodeDark"];
+export const themeNames = Object.keys(themes).filter(
+  (t) => !t.includes("Init")
+) as ThemeNames[];
+export const allThemes = themes;
+console.log(themeNames.length);
+
+console.log(themes);
 
 export interface Settings {
   fontSize: FontSize;
   showLineNumber: boolean;
   minimap: boolean;
   cursorStyle: CursorStyle;
-  theme: Theme;
+  themeName: ThemeNames;
   zenMode: boolean;
 }
 
@@ -34,7 +36,7 @@ const defaultSettings: Settings = {
   showLineNumber: true,
   minimap: true,
   cursorStyle: "line",
-  theme: "vs-dark",
+  themeName: "vscodeDark",
   zenMode: false,
 };
 

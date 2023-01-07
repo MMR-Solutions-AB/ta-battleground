@@ -25,7 +25,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
   if (!id) return <></>;
 
   return (
-    <div className="bg-bg-dark p-2 pl-0">
+    <div className="flex-shrink-0 bg-bg-dark p-2 pl-0">
       <div className="flex-shrink-0 rounded-md bg-bg-dimmed p-4">
         <div className="flex flex-wrap items-center justify-end gap-3 text-sm">
           <button
