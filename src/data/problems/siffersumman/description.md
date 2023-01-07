@@ -20,7 +20,7 @@ n = 123
 
 Vi får siffersumman genom att addera alla individuella siffror, alltså **1 + 2 + 3 = 6**
 
-## Exempel 1
+## Exempel 2
 
 **_Input_**
 
