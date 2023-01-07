@@ -27,9 +27,6 @@ const Editor: React.FC<EditorProps> = ({
     starterCode || generateStarterCode(problemName, problemArgs)
   );
 
-  console.log(editorSettings.themeName);
-  console.log(editorSettings);
-
   return (
     <div className="grid grid-rows-[auto_1fr] overflow-y-scroll">
       <div className="flex flex-shrink-0 flex-wrap items-center justify-between bg-bg-dark pb-2 pr-2 pt-2 text-sm text-text-dimmed">

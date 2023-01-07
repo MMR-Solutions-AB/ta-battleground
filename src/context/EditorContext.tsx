@@ -17,9 +17,6 @@ export const themeNames = Object.keys(themes).filter(
   (t) => !t.includes("Init")
 ) as ThemeNames[];
 export const allThemes = themes;
-console.log(themeNames.length);
-
-console.log(themes);
 
 export interface Settings {
   fontSize: FontSize;

@@ -97,8 +97,6 @@ const EditorSettingsModal: React.FC = ({}) => {
                   id="editor-theme"
                   value={editorSettings.themeName}
                   onChange={(e) => {
-                    console.log(e.target.value);
-
                     setEditorSettings({
                       ...editorSettings,
                       themeName: e.target.value as any,
