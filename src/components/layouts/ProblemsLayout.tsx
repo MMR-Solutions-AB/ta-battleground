@@ -5,6 +5,7 @@ import Editor from "@/components/problems/Editor";
 import Link from "next/link";
 import classNames from "classnames";
 import BouncingBalls from "@/components/loaders/BouncingBalls";
+import Head from "next/head";
 
 interface ProblemsLayoutProps {
   children: React.ReactNode;
@@ -27,6 +28,9 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
 
   return (
     <div className="w-screen grid-cols-[1fr_1fr] gap-2 bg-bg-dark prose-pre:bg-bg-dark lg:grid lg:h-[calc(100vh-56px)]">
+      <Head>
+        <title>{problem.name} - Battleground</title>
+      </Head>
       <div className="flex flex-col lg:h-[calc(100vh-56px)]">
         <div className="flex flex-shrink-0 bg-bg-dark pt-2 text-sm text-text-dimmed">
           <Link

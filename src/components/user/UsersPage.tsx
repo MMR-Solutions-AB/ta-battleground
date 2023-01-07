@@ -8,6 +8,7 @@ import { signOut, useSession } from "next-auth/react";
 import classNames from "classnames";
 import Link from "next/link";
 import { ExternalLink } from "react-feather";
+import Head from "next/head";
 
 interface UsersPageProps {
   userId: string;
@@ -38,6 +39,9 @@ const UserPage: React.FC<UsersPageProps> = ({ userId }) => {
 
   return (
     <div className="p-5 md:py-10 lg:pt-20">
+      <Head>
+        <title>{user.name} - Battleground</title>
+      </Head>
       <div className="mx-auto h-full max-w-7xl lg:flex lg:gap-6">
         <ProfileInfo user={user} />
         <div className="mt-5 flex flex-1 flex-col lg:mt-0">
