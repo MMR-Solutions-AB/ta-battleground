@@ -112,15 +112,9 @@ const EditorSettingsModal: React.FC = ({}) => {
             <div className="flex items-end">
               <div className="mr-auto pr-2">
                 <h4 className="-mb-1 text-base md:text-lg">Editor theme</h4>
-                <a
-                  className="flex items-center gap-1 text-xs text-text-dimmed underline md:text-sm"
-                  href="https://uiwjs.github.io/react-codemirror/#/theme/home"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  För att enklare hitta rätt theme för dig
-                  <ExternalLink className="h-3 w-3" />
-                </a>
+                <p className="text-xs text-text-dimmed md:text-sm">
+                  Ändra theme på din editor
+                </p>
               </div>
 
               <div className="relative">

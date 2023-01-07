@@ -19,17 +19,21 @@ const FAQ: NextPage = () => {
       </div>
       <div className="mb-10">
         <h3 className="mb-1 text-2xl font-bold">
-          Hur är <b>score</b> beräknade?
+          Hur är <b>poäng</b> beräknade på varje uppgift?
         </h3>
         <p className="text-text-dimmed">
-          Score:en du får på en uppgift beror på två saker, vilken
-          svårighetsgrad uppgift du löst är samt hur få karaktärer du använde
-          för att lösa den uppgiften. Svårighetsgraden är en fast siffra och är{" "}
-          <b>50</b> för en <b className="text-green-600">enkel</b>, <b>300</b>{" "}
-          för en <b className="text-amber-600">medel</b> och sist <b>500</b> för
-          en <b className="text-red-600">svår</b> uppgift. Ytligare får du extra
-          poäng med hänsyn till hur lite karaktärer du har, desto mindre, desto
-          bättre.
+          Dina totala poäng du får på en uppgift beror på två saker, vilken
+          svårighetsgrad uppgiften du löst är och hur få karaktärer du använde
+          för att lösa uppgiften. Svårighetsgraden är den första faktorn och
+          kommer ge dig <b>600</b> poäng för en <b>enkel</b> uppgift, <b>850</b>{" "}
+          för en <b>medel</b> uppgift och <b>1100</b> för en <b>svår</b>{" "}
+          uppgift. Extra poäng kommer läggas till desto mindre karaktärer du har
+          löst uppgiften med, här kan du få allt från <b>300</b> till <b>0</b>{" "}
+          extra poäng. En viktigt grej att notera är att antalet extra poäng du
+          får är inte lineart, alltså antalet extra poäng du får för att gå från
+          en lösning med <b>150</b> karaktärer till <b>100</b> är inte samma som
+          om du hade gå från en lösning med <b>100</b> karaktärer till <b>50</b>
+          . Detta gör det lönsamt att verkligen försöka optimera sin lösning
         </p>
       </div>
     </WrappedLayout>
