@@ -14,9 +14,10 @@ export type CursorStyle =
 export type ThemeNames = keyof typeof themes;
 export type Theme = typeof themes["vscodeDark"];
 export const themeNames = Object.keys(themes).filter(
-  (t) => t !== "createTheme"
+  (t) => !t.includes("Init")
 ) as ThemeNames[];
 export const allThemes = themes;
+console.log(themeNames.length);
 
 console.log(themes);
 

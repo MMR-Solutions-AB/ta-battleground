@@ -78,7 +78,6 @@ const Editor: React.FC<EditorProps> = ({
             style={{
               width: "calc(50vw-8px)",
               fontSize: editorSettings.fontSize,
-              lineBreak: "anywhere",
             }}
             basicSetup={{
               crosshairCursor: true,
@@ -87,7 +86,7 @@ const Editor: React.FC<EditorProps> = ({
               (typeof allThemes[editorSettings.themeName] === "function"
                 ? (allThemes[editorSettings.themeName] as () => any)()
                 : allThemes[editorSettings.themeName] ||
-                  allThemes["abcdef"]) as any
+                  allThemes["vscodeDark"]) as any
             }
             extensions={[javascript(), EditorView.lineWrapping]}
           />
