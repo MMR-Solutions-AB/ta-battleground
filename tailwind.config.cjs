@@ -9,6 +9,7 @@ module.exports = {
 
         "bg-dark": "#101010",
         "bg-dimmed": "#1e1c1a",
+        text: "#fff",
         "text-dimmed": "#eff2f6aa",
 
         // "bg-dark": "#1a1a1a",

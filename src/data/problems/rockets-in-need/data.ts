@@ -2,7 +2,7 @@ import type { Problem } from "../../Problem";
 
 export const data: Problem<
   { name: string; distance: number; damaged: boolean }[],
-  { name: string; distance: number; damaged: boolean }
+  any
 > = {
   name: "Rockets in need",
   difficulty: "easy",
@@ -18,7 +18,16 @@ export const data: Problem<
           { name: "cc", distance: 45, damaged: true },
         ],
       ],
-      output: { name: "bb", distance: 12, damaged: true },
+      output: { bb: 12, cc: 45 },
+    },
+    {
+      input: [
+        [
+          { name: "m", distance: 9, damaged: true },
+          { name: "xyx", distance: 9, damaged: true },
+        ],
+      ],
+      output: { m: 9, xyx: 9 },
     },
   ],
 };
