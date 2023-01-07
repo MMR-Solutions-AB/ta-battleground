@@ -23,6 +23,19 @@ export const data: Problem<
     {
       input: [
         [
+          { name: "xx", distance: 5, damaged: false },
+          { name: "yy", distance: 98, damaged: false },
+        ],
+      ],
+      output: {},
+    },
+    {
+      input: [[]],
+      output: {},
+    },
+    {
+      input: [
+        [
           { name: "m", distance: 9, damaged: true },
           { name: "xyx", distance: 9, damaged: true },
         ],
