@@ -1,4 +1,8 @@
-import { useEditorSettings, themeNames } from "@/context/EditorContext";
+import {
+  useEditorSettings,
+  themeNames,
+  fontSizes,
+} from "@/context/EditorContext";
 import { useModal } from "@/context/ModalContext";
 import classNames from "classnames";
 import React from "react";
@@ -65,13 +69,11 @@ const EditorSettingsModal: React.FC = ({}) => {
                   }
                   className="rounded-lg bg-bg-dark py-1.5 pl-6 text-xs shadow-sm md:pl-7 md:text-sm"
                 >
-                  <option value={10}>10px</option>
-                  <option value={12}>12px</option>
-                  <option value={14}>14px</option>
-                  <option value={16}>16px</option>
-                  <option value={18}>18px</option>
-                  <option value={20}>20px</option>
-                  <option value={22}>22px</option>
+                  {fontSizes.map((size) => (
+                    <option key={size} value={size}>
+                      {size}px
+                    </option>
+                  ))}
                 </select>
                 <Type className="absolute top-1/2 left-1.5 h-3.5 w-3.5 -translate-y-1/2 text-text-dimmed md:h-4 md:w-4" />
               </div>
@@ -95,11 +97,11 @@ const EditorSettingsModal: React.FC = ({}) => {
                 <select
                   name="editor-theme"
                   id="editor-theme"
-                  value={editorSettings.themeName}
+                  value={editorSettings.theme}
                   onChange={(e) => {
                     setEditorSettings({
                       ...editorSettings,
-                      themeName: e.target.value as any,
+                      theme: e.target.value as any,
                     });
                   }}
                   className="rounded-lg bg-bg-dark py-1.5 pl-6 text-xs shadow-sm md:pl-7 md:text-sm"

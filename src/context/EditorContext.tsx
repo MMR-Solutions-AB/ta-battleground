@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
-import * as themes from "@uiw/codemirror-themes-all";
 
-export type FontSize = 10 | 12 | 14 | 16 | 18 | 20 | 22;
+export const fontSizes = [10, 12, 14, 16, 18, 20, 22] as const;
+export type FontSize = typeof fontSizes[number];
 export type CursorStyle =
   | "line"
   | "block"
@@ -10,20 +10,31 @@ export type CursorStyle =
   | "line-thin"
   | "block-outline"
   | "underline-thin";
-
-export type ThemeNames = keyof typeof themes;
-export type Theme = typeof themes["vscodeDark"];
-export const themeNames = Object.keys(themes).filter(
-  (t) => !t.includes("Init")
-) as ThemeNames[];
-export const allThemes = themes;
+export const themeNames = [
+  "light",
+  "vs-dark",
+  "hc-black",
+  "dracula",
+  "monokai",
+  "hallowsEve",
+  "cobalt",
+  "pastel",
+] as const;
+export type Theme = typeof themeNames[number];
+// | "light"
+// | "vs-dark"
+// | "dracula"
+// | "monokai"
+// | "hallowsEve"
+// | "cobalt"
+// | "pastel";
 
 export interface Settings {
   fontSize: FontSize;
   showLineNumber: boolean;
   minimap: boolean;
   cursorStyle: CursorStyle;
-  themeName: ThemeNames;
+  theme: Theme;
   zenMode: boolean;
 }
 
@@ -33,7 +44,7 @@ const defaultSettings: Settings = {
   showLineNumber: true,
   minimap: true,
   cursorStyle: "line",
-  themeName: "vscodeDark",
+  theme: "vs-dark",
   zenMode: false,
 };
 
