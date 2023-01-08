@@ -36,6 +36,18 @@ const FAQ: NextPage = () => {
           . Detta gör det lönsamt att verkligen försöka optimera sin lösning
         </p>
       </div>
+      <div className="mb-10">
+        <h3 className="mb-1 text-2xl font-bold">
+          Vad är det där konstiga kommentarerna högst upp i min kod?
+        </h3>
+        <p className="text-text-dimmed">
+          Det du förmodligen tänker på är en grej som kollas för <b>JSDocs</b>.
+          Allt det gör är att det hjälper din editor att ge dig bra farslag{" "}
+          <b>(intellisense)</b> på argumentet som din funktion tar emot. För att
+          få så hög highscore som möjligt är det bra att du tar bort de
+          kommentarerna när du löst uppgiften
+        </p>
+      </div>
     </WrappedLayout>
   );
 };
