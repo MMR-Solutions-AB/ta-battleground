@@ -65,7 +65,7 @@ En förklaring
     name: "${_.capitalize(problem_name)}",
     difficulty: "${difficulty}",
     number: ${highestNumber},
-    arguments: ["s"],
+    arguments: [{name: "s", type: "string"}],
     tags: [""],
     testCases: [
       {
