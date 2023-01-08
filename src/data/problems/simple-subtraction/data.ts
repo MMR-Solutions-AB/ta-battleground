@@ -4,7 +4,10 @@ export const data: Problem<number, number> = {
   name: "Simple subtraction",
   difficulty: "easy",
   number: 2,
-  arguments: ["a", "b"],
+  arguments: [
+    { name: "a", type: "number" },
+    { name: "b", type: "number" },
+  ],
   tags: ["basics", "numbers"],
   testCases: [
     {

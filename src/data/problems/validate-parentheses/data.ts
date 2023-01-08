@@ -4,7 +4,7 @@ export const data: Problem<string, boolean> = {
   name: "Validate parentheses",
   difficulty: "medium",
   number: 27,
-  arguments: ["s"],
+  arguments: [{ name: "s", type: "string" }],
   tags: ["strings"],
   testCases: [
     {

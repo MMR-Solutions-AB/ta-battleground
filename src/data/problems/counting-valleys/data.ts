@@ -4,7 +4,7 @@ export const data: Problem<string, number> = {
   name: "Counting Valleys",
   difficulty: "medium",
   number: 18,
-  arguments: ["path"],
+  arguments: [{ name: "path", type: "string" }],
   tags: ["strings"],
   testCases: [
     {

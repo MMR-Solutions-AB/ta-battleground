@@ -4,7 +4,7 @@ export const data: Problem<{ [key: string]: number }, [string, number][]> = {
   name: "Sort by key",
   difficulty: "medium",
   number: 26,
-  arguments: ["d"],
+  arguments: [{ name: "d", type: "Object.<string, number>" }],
   tags: ["numbers", "strings", "arrays", "objects"],
   testCases: [
     {

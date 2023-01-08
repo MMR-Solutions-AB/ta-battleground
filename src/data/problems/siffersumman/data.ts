@@ -4,7 +4,7 @@ export const data: Problem<number, number> = {
   name: "Siffersumman",
   difficulty: "easy",
   number: 46,
-  arguments: ["n"],
+  arguments: [{ name: "n", type: "number" }],
   tags: ["numbers"],
   testCases: [
     {

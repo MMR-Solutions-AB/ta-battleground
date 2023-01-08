@@ -4,7 +4,7 @@ export const data: Problem<string, string> = {
   name: "Longest palindromic substring",
   difficulty: "hard",
   number: 16,
-  arguments: ["s"],
+  arguments: [{ name: "s", type: "string" }],
   tags: ["strings"],
   testCases: [
     {

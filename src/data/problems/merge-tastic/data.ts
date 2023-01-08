@@ -7,7 +7,10 @@ export const data: Problem<
   name: "Merge tastic",
   difficulty: "medium",
   number: 22,
-  arguments: ["obj1", "obj2"],
+  arguments: [
+    { name: "obj1", type: "Object.<string, number>" },
+    { name: "obj2", type: "Object.<string, number>" },
+  ],
   tags: ["strings", "objects"],
   testCases: [
     {

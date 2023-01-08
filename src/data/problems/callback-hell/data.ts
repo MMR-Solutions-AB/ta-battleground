@@ -4,7 +4,10 @@ export const data: Problem<string | number, number> = {
   name: "Callback hell",
   difficulty: "easy",
   number: 41,
-  arguments: ["cb", "n"],
+  arguments: [
+    { name: "cb", type: "(n: number) => number" },
+    { name: "n", type: "number" },
+  ],
   tags: ["basics", "numbers", "functions"],
   testCases: [
     {

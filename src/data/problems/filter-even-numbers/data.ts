@@ -4,7 +4,7 @@ export const data: Problem<number[], number[]> = {
   name: "Filter even numbers",
   difficulty: "easy",
   number: 32,
-  arguments: ["numbers"],
+  arguments: [{ name: "numbers", type: "number[]" }],
   tags: ["basics", "numbers", "arrays"],
   testCases: [
     {

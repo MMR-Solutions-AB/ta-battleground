@@ -4,7 +4,7 @@ export const data: Problem<string, string> = {
   name: "Funny message",
   difficulty: "easy",
   number: 36,
-  arguments: ["s"],
+  arguments: [{ name: "s", type: "string" }],
   tags: ["strings"],
   testCases: [
     {

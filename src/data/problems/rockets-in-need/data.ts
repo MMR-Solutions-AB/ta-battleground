@@ -7,7 +7,12 @@ export const data: Problem<
   name: "Rockets in need",
   difficulty: "easy",
   number: 5,
-  arguments: ["rockets"],
+  arguments: [
+    {
+      name: "rockets",
+      type: "{name: string, distance: number, damaged: boolean}[]",
+    },
+  ],
   tags: ["arrays", "objects"],
   testCases: [
     {

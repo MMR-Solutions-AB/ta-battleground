@@ -4,7 +4,10 @@ export const data: Problem<string, number> = {
   name: "Count letters",
   difficulty: "easy",
   number: 45,
-  arguments: ["letter", "s"],
+  arguments: [
+    { name: "letter", type: "string" },
+    { name: "s", type: "string" },
+  ],
   tags: ["strings"],
   testCases: [
     {

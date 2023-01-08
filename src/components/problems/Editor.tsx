@@ -9,10 +9,12 @@ import { js_beautify } from "js-beautify";
 import MonacoEditor, { useMonaco } from "@monaco-editor/react";
 import BouncingBalls from "@/components/loaders/BouncingBalls";
 import { themes } from "@/themes";
+import type { ProblemArgument } from "@/data/Problem";
+
 interface EditorProps {
   starterCode?: string;
   problemName: string;
-  problemArgs: string[];
+  problemArgs: ProblemArgument[];
 }
 
 const Editor: React.FC<EditorProps> = ({

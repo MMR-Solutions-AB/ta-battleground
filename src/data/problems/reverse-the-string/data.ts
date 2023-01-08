@@ -4,7 +4,7 @@ export const data: Problem<string, string> = {
   name: "Reverse the string",
   difficulty: "easy",
   number: 13,
-  arguments: ["s"],
+  arguments: [{ name: "s", type: "string" }],
   tags: ["strings"],
   testCases: [
     {

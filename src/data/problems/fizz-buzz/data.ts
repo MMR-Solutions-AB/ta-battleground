@@ -4,7 +4,7 @@ export const data: Problem<number, (string | number)[]> = {
   name: "Fizz buzz",
   difficulty: "easy",
   number: 43,
-  arguments: ["n"],
+  arguments: [{ name: "n", type: "number" }],
   tags: ["strings", "arrays"],
   testCases: [
     {

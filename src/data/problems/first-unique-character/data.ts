@@ -4,7 +4,7 @@ export const data: Problem<string, string> = {
   name: "First unique character",
   difficulty: "medium",
   number: 35,
-  arguments: ["s"],
+  arguments: [{ name: "s", type: "string" }],
   tags: ["strings", "arrays", "objects"],
   testCases: [
     {

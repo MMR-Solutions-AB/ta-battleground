@@ -120,7 +120,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                     <code className="language-bash">
                       {runCodeResponse.arguments?.map(
                         (arg, i) =>
-                          `${arg} = ${
+                          `${arg.name} = ${
                             typeof currentSelectedTestCase.input[i] === "object"
                               ? JSON.stringify(
                                   currentSelectedTestCase.input[i],

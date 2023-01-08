@@ -4,7 +4,7 @@ export const data: Problem<number, boolean> = {
   name: "Is positive",
   difficulty: "easy",
   number: 9,
-  arguments: ["n"],
+  arguments: [{ name: "n", type: "number" }],
   tags: ["basics", "numbers"],
   testCases: [
     {

@@ -4,7 +4,10 @@ export const data: Problem<number[] | string, number[]> = {
   name: "Multiply array",
   difficulty: "easy",
   number: 42,
-  arguments: ["arr", "cb"],
+  arguments: [
+    { name: "arr", type: "number[]" },
+    { name: "cb", type: "(n: number) => number" },
+  ],
   tags: ["basics", "numbers", "arrays", "functions"],
   testCases: [
     {

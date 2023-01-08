@@ -6,6 +6,7 @@ import Link from "next/link";
 import classNames from "classnames";
 import BouncingBalls from "@/components/loaders/BouncingBalls";
 import Head from "next/head";
+import type { ProblemArgument } from "@/data/Problem";
 
 interface ProblemsLayoutProps {
   children: React.ReactNode;
@@ -74,7 +75,7 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
         <Editor
           starterCode={problem.submissions[0]?.code}
           problemName={problem.name}
-          problemArgs={problem.arguments as string[]}
+          problemArgs={problem.arguments as ProblemArgument[]}
         />
       </div>
 

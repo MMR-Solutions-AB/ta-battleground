@@ -4,7 +4,10 @@ export const data: Problem<number[] | number[][], boolean> = {
   name: "Fara vid havs",
   difficulty: "medium",
   number: 39,
-  arguments: ["cords", "boats"],
+  arguments: [
+    { name: "cords", type: "number[]" },
+    { name: "boats", type: "number[][]" },
+  ],
   tags: ["arrays", "numbers"],
   testCases: [
     {

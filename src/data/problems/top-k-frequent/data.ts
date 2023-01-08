@@ -4,7 +4,10 @@ export const data: Problem<number[] | number, number[]> = {
   name: "Top k-frequent",
   difficulty: "medium",
   number: 17,
-  arguments: ["nums", "k"],
+  arguments: [
+    { name: "nums", type: "number[]" },
+    { name: "k", type: "number" },
+  ],
   tags: ["arrays", "numbers"],
   testCases: [
     {

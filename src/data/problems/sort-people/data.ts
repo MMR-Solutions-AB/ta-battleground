@@ -7,7 +7,7 @@ export const data: Problem<
   name: "Sort people",
   difficulty: "easy",
   number: 34,
-  arguments: ["people"],
+  arguments: [{ name: "people", type: "{name: string, age: number}" }],
   tags: ["basics", "arrays", "objects"],
   testCases: [
     {

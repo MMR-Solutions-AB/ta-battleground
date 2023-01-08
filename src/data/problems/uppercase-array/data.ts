@@ -4,7 +4,7 @@ export const data: Problem<string[], string[]> = {
   name: "Uppercase array",
   difficulty: "easy",
   number: 37,
-  arguments: ["arr"],
+  arguments: [{ name: "arr", type: "string[]" }],
   tags: ["basics", "strings", "arrays"],
   testCases: [
     {

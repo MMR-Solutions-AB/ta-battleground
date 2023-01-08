@@ -4,7 +4,7 @@ export const data: Problem<number[], number> = {
   name: "Largest sum",
   difficulty: "medium",
   number: 28,
-  arguments: ["arr"],
+  arguments: [{ name: "arr", type: "number[]" }],
   tags: ["numbers", "arrays"],
   testCases: [
     {

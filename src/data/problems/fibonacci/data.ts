@@ -4,7 +4,7 @@ export const data: Problem<number, number> = {
   name: "Fibonacci",
   difficulty: "medium",
   number: 14,
-  arguments: ["n"],
+  arguments: [{ name: "n", type: "number" }],
   tags: ["numbers"],
   testCases: [
     {

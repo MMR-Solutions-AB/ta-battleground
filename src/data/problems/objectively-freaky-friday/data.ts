@@ -7,7 +7,7 @@ export const data: Problem<
   name: "Objectively freaky friday",
   difficulty: "medium",
   number: 20,
-  arguments: ["d"],
+  arguments: [{ name: "d", type: "Object.<string, number>" }],
   tags: ["strings", "objects"],
   testCases: [
     {

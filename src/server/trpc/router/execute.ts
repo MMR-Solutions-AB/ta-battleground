@@ -4,6 +4,7 @@ import fetch from "node-fetch";
 import type { TestCase } from "@/data/Problem";
 import _ from "lodash";
 import { generateScoreForProblem } from "@/utils/generateScoreForProblem";
+import type { ProblemArgument } from "@/data/Problem";
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -221,7 +222,7 @@ export const executeRouter = router({
         problemScore,
         codeLength: input.code.length,
         numberOfFailedTestCases,
-        arguments: problem.arguments as string[],
+        arguments: problem.arguments as ProblemArgument[],
       };
     }),
 });

@@ -4,7 +4,7 @@ export const data: Problem<string, { [key: string]: number }> = {
   name: "Count words",
   difficulty: "medium",
   number: 19,
-  arguments: ["s"],
+  arguments: [{ name: "s", type: "string" }],
   tags: ["strings", "objects"],
   testCases: [
     {
