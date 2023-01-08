@@ -5,7 +5,7 @@ import TagChips from "./TagChips";
 
 const ProblemsTable: React.FC = ({}) => {
   return (
-    <div className="text-sm">
+    <div>
       <div className="relative min-w-0 max-md:!overflow-y-visible max-md:overflow-x-scroll">
         <TagChips />
         <table className="my-0 mx-5 min-w-full text-xs sm:mx-0 md:text-sm">
