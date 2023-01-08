@@ -12,10 +12,39 @@ const FAQ: NextPage = () => {
         <h3 className="mb-1 text-2xl font-bold">
           Vad där Battleground och hur använder jag det?
         </h3>
-        <p className="text-text-dimmed">
-          Techover Battleground är en platform där du kan öva på dina javascript
-          kunskaper genom att lösa problem
+        <p className="mb-2 text-text-dimmed">
+          Techover Battleground är som gymmet för din programmeringshjärna! Du
+          väljer en uppgift, skriver koden som ska lösa den, och vi kör din kod
+          mot alla våra tester automatiskt. Om du får grönt ljus för alla
+          testerna har du klarat uppgiften, men om du får rött ljus får du
+          feedback på vad du behöver ändra för att få alla testerna att gå
+          igenom. Du kan också tävla mot resten av alla Techover elver och se
+          vem som är mästare på Javascript!
         </p>
+        <p className="text-text-dimmed">
+          Så här löser du en uppgift: Gå vidare till nästa uppgift och fortsätt
+          träna din programmeringsskills!
+        </p>
+        <div className="prose">
+          <ul className="text-text-dimmed">
+            <li>Välj en uppgift från listan</li>
+            <li>
+              Skriv din kod i texteditorn till höger i funktionen som du får i
+              starter koden
+            </li>
+            <li>
+              Tryck på <b>&quot;Submit&quot;</b> för att lämna in din lösning
+            </li>
+            <li>
+              Om du får grönt ljus för alla testerna, har du löst uppgiften! Om
+              inte, får du feedback på vad du behöver ändra
+            </li>
+            <li>
+              Gå vidare till nästa uppgift och fortsätt träna din
+              programmeringsskills!
+            </li>
+          </ul>
+        </div>
       </div>
       <div className="mb-10">
         <h3 className="mb-1 text-2xl font-bold">
