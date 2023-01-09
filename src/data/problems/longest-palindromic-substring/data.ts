@@ -20,7 +20,7 @@ export const data: Problem<string, string> = {
       output: "aba",
     },
     {
-      input: [`"lololalolol"`],
+      input: [`"loloalolol"`],
       output: "lolol",
     },
     {
