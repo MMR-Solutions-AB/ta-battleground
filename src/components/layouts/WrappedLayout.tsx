@@ -7,7 +7,7 @@ interface WrappedLayoutProps {
 const WrappedLayout: React.FC<WrappedLayoutProps> = ({ children }) => {
   return (
     <div className="p-10">
-      <div className="mx-auto max-w-6xl">{children}</div>
+      <div className="mx-auto max-w-7xl">{children}</div>
     </div>
   );
 };
