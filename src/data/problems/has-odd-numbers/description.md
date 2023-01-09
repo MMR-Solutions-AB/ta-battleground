@@ -1,6 +1,6 @@
 # Has odd numbers
 
-Skriv en funktion **hasEvenNumber(numbers)** som tar emot en array av heltal och returnerar **true** om array:n innehåller minst ett jämnt heltal, annars returnerar den **false**
+Skriv en funktion **hasOddNumbers(numbers)** som tar emot en array av heltal och returnerar **true** om array:n innehåller minst ett udda tal, annars returnerar den **false**
 
 Denna uppgift är bra tillfälle att träna på **array.some** metoden och **modulo-operatorn (%)**
 
