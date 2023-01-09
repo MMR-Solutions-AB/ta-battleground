@@ -1,6 +1,6 @@
 # Unique items
 
-Skriv en funktion **unique(a)** som returnerar en array med de unika elementen i array:n **a**. Array:n ska vara sorterad i stigande ordning.
+Skriv en funktion **uniqueItems(a)** som returnerar en array med de unika elementen i array:n **a**. Array:n ska vara sorterad i stigande ordning.
 
 ## Exempel 1
 
