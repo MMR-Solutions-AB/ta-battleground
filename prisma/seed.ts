@@ -9,7 +9,6 @@ async function main() {
   for (let i = 0; i < problems.length; i++) {
     const problem = problems[i];
     if (!problem) continue;
-    console.log("at : ", i);
 
     if (i % 10 === 0) {
       await Promise.all(promises);
@@ -55,6 +54,7 @@ async function main() {
       })
     );
   }
+  await Promise.all(promises);
 }
 
 main()
