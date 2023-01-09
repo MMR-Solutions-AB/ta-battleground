@@ -103,7 +103,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                     onClick={() => setSelectedTestCaseIndex(i)}
                     className="relative cursor-pointer rounded-md bg-bg-dark px-4 py-1 text-sm tracking-wider transition-opacity hover:opacity-80"
                   >
-                    Test #{i}
+                    Test #{i + 1}
                     <div
                       className={classNames(
                         "absolute top-0.5 right-0.5 h-2 w-2 -translate-y-1/2 translate-x-1/2 rounded-full",
