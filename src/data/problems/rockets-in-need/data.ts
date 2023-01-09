@@ -5,7 +5,7 @@ export const data: Problem<
   any
 > = {
   name: "Rockets in need",
-  difficulty: "easy",
+  difficulty: "medium",
   number: 5,
   arguments: [
     {
