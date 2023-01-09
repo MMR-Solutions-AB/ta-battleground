@@ -64,6 +64,8 @@ const SubmissionsTable: React.FC<SubmissionsTableProps> = ({ submissions }) => {
                               ? "bg-red-600"
                               : tag.name === "objects"
                               ? "bg-amber-600"
+                              : tag.name === "functions"
+                              ? "bg-pink-500"
                               : tag.name === "strings"
                               ? "bg-blue-600"
                               : tag.name === "arrays"
