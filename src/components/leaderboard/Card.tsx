@@ -44,10 +44,10 @@ const Card: React.FC<CardProps> = ({ user, index }) => {
       </div>
 
       <div>
-        <h2 className="text-xl font-bold text-white">
+        <h2 className="text-base font-bold text-white">
           {user.name}{" "}
           {user.batch && (
-            <span className="text-base text-text-dimmed">
+            <span className="text-xs text-text-dimmed">
               (batch {user.batch})
             </span>
           )}
