@@ -1,6 +1,6 @@
 # Reverse the string
 
-Skriv en funktion **reverse(s)** som returnerar en sträng som är omvänd versionen av strängen **s**.
+Skriv en funktion **reverseTheString(s)** som returnerar en sträng som är omvänd versionen av strängen **s**.
 
 ## Exempel 1
 
