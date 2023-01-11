@@ -41,7 +41,7 @@ const Leaderboard: NextPage = () => {
           )}
           onClick={() => setSelectedBatch(null)}
         >
-          All batches
+          Alla batches
         </div>
         {batches.map((batch) => (
           <div

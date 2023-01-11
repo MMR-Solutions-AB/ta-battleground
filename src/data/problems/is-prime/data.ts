@@ -16,12 +16,16 @@ export const data: Problem<number, boolean> = {
       output: false,
     },
     {
-      input: [13],
+      input: [54],
+      output: false,
+    },
+    {
+      input: [29],
       output: true,
     },
     {
-      input: [15],
-      output: false,
+      input: [97],
+      output: true,
     },
   ],
 };
