@@ -1,4 +1,4 @@
-# is-prime
+# Is prime
 
 Skriv en funktion **isPrime(n)** som returnerar **true** om **n** är ett **primtal**, annars **false**.
 
