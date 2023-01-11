@@ -37,7 +37,7 @@ rockets = [
 
 **_Förklaring_**
 
-Raketerna med namnen 'bb' och 'cc' är båda skadade, så vi returnera deras namn tillsammans med deras distans
+Raketerna med namnen 'bb' och 'cc' är båda skadade, så vi returnerar deras namn tillsammans med deras distans
 
 ## Exempel 2
 
