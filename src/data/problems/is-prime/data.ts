@@ -20,11 +20,23 @@ export const data: Problem<number, boolean> = {
       output: false,
     },
     {
+      input: [15],
+      output: false,
+    },
+    {
+      input: [97],
+      output: true,
+    },
+    {
       input: [29],
       output: true,
     },
     {
-      input: [97],
+      input: [77],
+      output: false,
+    },
+    {
+      input: [79],
       output: true,
     },
   ],
