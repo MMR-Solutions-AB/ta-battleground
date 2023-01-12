@@ -2,7 +2,7 @@
 
 Skriv en funktion **isAnagram(s1, s2)** som tar emot två strängar. Funktionen ska returnera **true** ifall det två strängarna är **anagram** av varandra, annars returnera **false**
 
-Frö att två ord ska vara **anagrams** så ska båda orden innehålla exakt samma bokstäver.
+För att två ord ska vara **anagrams** så ska båda orden innehålla exakt samma bokstäver.
 
 ## Exempel 1
 
