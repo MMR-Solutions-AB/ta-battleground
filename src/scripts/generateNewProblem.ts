@@ -74,7 +74,7 @@ En förklaring
     difficulty: "${difficulty}",
     number: ${highestNumber},
     arguments: [{name: "s", type: "string"}],
-    tags: [${selectedTags.join("")}],
+    tags: [${selectedTags.map((a: string) => `"${a}"`).join(", ")}],
     testCases: [
       {
         input: [\`"s"\`],
