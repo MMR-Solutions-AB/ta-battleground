@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import BouncingBalls from "@/components/loaders/BouncingBalls";
 import type { NextPageWithLayout } from "@/pages/_app";
 import Image from "next/image";
+import Link from "next/link";
 
 const Leaderboard: NextPageWithLayout = () => {
   const router = useRouter();
@@ -33,7 +34,8 @@ const Leaderboard: NextPageWithLayout = () => {
     <div className="p-5">
       <div className="space-y-3">
         {submissions.map((submission, i) => (
-          <div
+          <Link
+            href={`/users/${submission.user.id}`}
             key={submission.id}
             className="flex items-center gap-4 rounded-md bg-bg-dark p-4 font-semibold md:text-xl"
           >
@@ -61,7 +63,7 @@ const Leaderboard: NextPageWithLayout = () => {
             <p className="text-base text-text-dimmed">
               {`{ ${submission.code.length} }`}
             </p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

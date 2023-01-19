@@ -5,11 +5,11 @@ import type {
 
 export type Tags = PrismaTag["name"];
 export const tags: Tags[] = [
-  "arrays",
   "basics",
-  "numbers",
-  "objects",
   "strings",
+  "numbers",
+  "arrays",
+  "objects",
   "functions",
 ];
 type LooseAutocomplete<T extends string> = T | Omit<string, T>;
