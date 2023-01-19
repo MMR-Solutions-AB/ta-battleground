@@ -4,6 +4,7 @@ import { writeFileSync, mkdirSync } from "fs";
 import { getAllProblems } from "../data/getAllProblems";
 import chalk from "chalk";
 import _ from "lodash";
+import { tags } from "@/data/Problem";
 
 async function generateNewProblem() {
   const { problem_name } = await inquirer.prompt({
@@ -19,6 +20,13 @@ async function generateNewProblem() {
     type: "list",
     message: "Vilken svårighetsgrad ska uppgiften vara?",
     choices: ["easy", "medium", "hard"],
+  });
+
+  const { selectedTags } = await inquirer.prompt({
+    name: "selectedTags",
+    type: "checkbox",
+    message: "Vilka tags ska uppgiften ha?",
+    choices: tags,
   });
 
   const allProblems = await getAllProblems();
@@ -66,7 +74,7 @@ En förklaring
     difficulty: "${difficulty}",
     number: ${highestNumber},
     arguments: [{name: "s", type: "string"}],
-    tags: [""],
+    tags: [${selectedTags.join("")}],
     testCases: [
       {
         input: [\`"s"\`],
