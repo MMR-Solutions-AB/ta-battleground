@@ -29,6 +29,15 @@ async function generateNewProblem() {
     choices: tags,
   });
 
+  const { isHidden } = await inquirer.prompt({
+    name: "isHidden",
+    type: "confirm",
+    message: "Ska denna uppgift vara hidden?",
+    default: true,
+  });
+
+  console.log(isHidden);
+
   const allProblems = await getAllProblems();
   let highestNumber = 0;
   for (const problem of allProblems) {
@@ -73,7 +82,9 @@ En förklaring
     name: "${_.capitalize(problem_name)}",
     difficulty: "${difficulty}",
     number: ${highestNumber},
-    arguments: [{name: "s", type: "string"}],
+    arguments: [{name: "s", type: "string"}],${
+      isHidden ? `\n\t\tisHidden: true,` : ""
+    }
     tags: [${selectedTags.map((a: string) => `"${a}"`).join(", ")}],
     testCases: [
       {
