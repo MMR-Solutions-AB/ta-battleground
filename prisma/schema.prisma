@@ -44,34 +44,6 @@ model Session {
   @@index([userId])
 }
 
-model User {
-  id                String       @id @default(cuid())
-  name              String
-  email             String       @unique
-  bio               String?
-  blog              String?
-  company           String?
-  location          String?
-  twitter_username  String?
-  emailVerified     DateTime?
-  github_login      String
-  image             String
-  isTechoverStaff   Boolean      @default(false)
-  batch             Int?         @db.SmallInt
-  score             Float        @default(0)
-  completedProblems Int          @default(0)
-  createdAt         DateTime     @default(now())
-  updatedAt         DateTime     @default(now()) @updatedAt
-  accounts          Account[]
-  sessions          Session[]
-  submissions       Submission[]
-
-  @@index([name])
-  @@index([email])
-  @@index([completedProblems])
-  @@index([score])
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
@@ -81,6 +53,85 @@ model VerificationToken {
 }
 
 // Real Schema
+
+model User {
+  id                String         @id @default(cuid())
+  name              String
+  email             String         @unique
+  bio               String?
+  blog              String?
+  company           String?
+  location          String?
+  twitter_username  String?
+  emailVerified     DateTime?
+  github_login      String
+  image             String
+  isTechoverStaff   Boolean        @default(false)
+  batch             Int?           @db.SmallInt
+  score             Float          @default(0)
+  completedProblems Int            @default(0)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @default(now()) @updatedAt
+  accounts          Account[]
+  sessions          Session[]
+  submissions       Submission[]
+  faction           FactionMember?
+
+  @@index([name])
+  @@index([email])
+  @@index([completedProblems])
+  @@index([score])
+}
+
+model Faction {
+  id           String                @id @default(cuid())
+  name         String                @unique
+  allTimeScore Float                 @default(0)
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+  members      FactionMember[]
+  wars         FactionWarContenter[]
+}
+
+model FactionMember {
+  id        String   @id @default(cuid())
+  factionId String
+  faction   Faction  @relation(fields: [factionId], references: [id])
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([factionId, userId])
+  @@index([factionId])
+  @@index([userId])
+}
+
+model War {
+  id         String                @id @default(cuid())
+  name       String                @unique
+  startTime  DateTime
+  endTime    DateTime
+  createdAt  DateTime              @default(now())
+  updatedAt  DateTime              @updatedAt
+  problems   Problem[]
+  contenders FactionWarContenter[]
+}
+
+model FactionWarContenter {
+  id        String   @id @default(cuid())
+  score     Float
+  factionId String
+  faction   Faction  @relation(fields: [factionId], references: [id])
+  warId     String
+  war       War      @relation(fields: [warId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([score])
+  @@index([factionId])
+  @@index([warId])
+}
 
 enum ProblemDifficulty {
   easy
@@ -101,12 +152,15 @@ model Problem {
   submissions Submission[]      @relation("submsissions")
   tags        Tag[]
   topSolution Submission?       @relation("topSolution")
+  warId       String?
+  war         War?              @relation(fields: [warId], references: [id])
 
   @@index([name, difficulty, number])
   @@index([name])
   @@index([difficulty])
   @@index([createdAt])
   @@index([number])
+  @@index([warId])
 }
 
 enum TagNames {

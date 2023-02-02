@@ -26,6 +26,9 @@ const Navbar: React.FC = ({}) => {
         </Link>
         {user && user.image && (
           <div className="flex items-center gap-4 text-sm text-text-dimmed">
+            <Link href="/factions" className="hover:text-white">
+              Faction wars
+            </Link>
             <Link href="/leaderboard" className="hover:text-white">
               Leaderboard
             </Link>

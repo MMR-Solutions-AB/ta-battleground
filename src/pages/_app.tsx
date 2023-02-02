@@ -5,7 +5,7 @@ import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import Navbar from "@/components/Navbar";
 import { trpc } from "../utils/trpc";
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import Head from "next/head";
 import { EditorProvider } from "@/context/EditorContext";
 import { ModalProvider } from "@/context/ModalContext";
