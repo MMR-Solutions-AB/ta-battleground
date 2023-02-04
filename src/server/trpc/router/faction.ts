@@ -6,6 +6,7 @@ export const factionRouter = router({
       select: {
         id: true,
         name: true,
+        allTimeScore: true,
         members: {
           select: {
             id: true,
@@ -18,7 +19,9 @@ export const factionRouter = router({
             },
           },
         },
-        allTimeScore: true,
+        wars: {
+          include: { war: { include: { problems: true } } },
+        },
       },
     });
   }),

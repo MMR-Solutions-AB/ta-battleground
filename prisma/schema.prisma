@@ -110,6 +110,7 @@ model FactionMember {
 model War {
   id         String                @id @default(cuid())
   name       String                @unique
+  number     Int                   @unique
   startTime  DateTime
   endTime    DateTime
   createdAt  DateTime              @default(now())
