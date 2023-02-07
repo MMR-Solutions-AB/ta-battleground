@@ -2,19 +2,12 @@ import { readdirSync, readFileSync } from "fs";
 import { join } from "path";
 import type { Problem, ProblemCreate } from "./Problem";
 
-export async function getAllProblems(basePath?: string) {
-  const problemsNames = readdirSync(
-    join(__dirname, basePath ?? "", "./problems")
-  );
-
+export async function getAllProblems() {
   const problems: ProblemCreate<string, string>[] = [];
+  const problemsNames = readdirSync(join(__dirname, "./problems"));
 
   for (let i = 0; i < problemsNames.length; i++) {
-    const path = join(
-      __dirname,
-      basePath ?? "",
-      "./problems/" + problemsNames[i]
-    );
+    const path = join(__dirname, "./problems/" + problemsNames[i]);
     const description = readFileSync(join(path, "/description.md")).toString();
 
     const { data }: { data: Problem<string, string> } = await import(

@@ -2,6 +2,7 @@ import inquirer from "inquirer";
 import { join } from "path";
 import { writeFileSync, mkdirSync } from "fs";
 import { getAllProblems } from "../data/getAllProblems";
+import { getAllWars } from "../data/getAllWars";
 import chalk from "chalk";
 import _ from "lodash";
 
@@ -12,8 +13,6 @@ async function generateNewProblem() {
     message: "Vad ska ditt problem heta?",
   });
 
-  const folderName = problem_name.toLowerCase().split(" ").join("-");
-
   const { difficulty } = await inquirer.prompt({
     name: "difficulty",
     type: "list",
@@ -21,7 +20,41 @@ async function generateNewProblem() {
     choices: ["easy", "medium", "hard"],
   });
 
+  const { is_war_problem } = await inquirer.prompt({
+    name: "is_war_problem",
+    type: "confirm",
+    message: "Är denna uppgift en war uppgift?",
+  });
+
+  let war_folder = "";
+
+  if (is_war_problem) {
+    const wars = await getAllWars();
+
+    const { selected_war } = await inquirer.prompt({
+      name: "selected_war",
+      type: "list",
+      message: "Vilken war ska denna uppgift vara med i?",
+      choices: wars
+        .sort((a, b) => b.number - a.number)
+        .map((war) => `${war.number}. ${war.name}`),
+    });
+    const warPrefix = selected_war.split(". ")[1];
+    war_folder = warPrefix.toLowerCase().split(" ").join("-");
+  }
+
+  const folderName = war_folder
+    ? join(
+        `../data/wars`,
+        war_folder,
+        "/problems",
+        problem_name.toLowerCase().split(" ").join("-")
+      )
+    : join("../data/problems", problem_name.toLowerCase().split(" ").join("-"));
+
   const allProblems = await getAllProblems();
+  const allWars = await getAllWars();
+
   let highestNumber = 0;
   for (const problem of allProblems) {
     if (highestNumber < problem.number) {
@@ -29,11 +62,19 @@ async function generateNewProblem() {
     }
   }
 
+  for (const war of allWars) {
+    for (const problem of war.problems) {
+      if (highestNumber < problem.number) {
+        highestNumber = problem.number;
+      }
+    }
+  }
+
   highestNumber += 1;
 
-  mkdirSync(join(__dirname, "../data/problems", folderName));
+  mkdirSync(join(__dirname, folderName));
   writeFileSync(
-    join(__dirname, "../data/problems", folderName, "description.md"),
+    join(__dirname, folderName, "description.md"),
     `# ${_.capitalize(problem_name)}
 
 Skriv en funktion **${_.camelCase(
@@ -60,7 +101,9 @@ En förklaring
   `
   );
 
-  const code = `import type { Problem } from "../../Problem";
+  const code = `import type { Problem } from "${
+    war_folder ? "../../" : ""
+  }../../Problem";
   \nexport const data: Problem<string, string> = {
     name: "${_.capitalize(problem_name)}",
     difficulty: "${difficulty}",
@@ -75,10 +118,7 @@ En förklaring
     ],
   };
     `;
-  writeFileSync(
-    join(__dirname, "../data/problems", folderName, "data.ts"),
-    code
-  );
+  writeFileSync(join(__dirname, folderName, "data.ts"), code);
 
   console.log(chalk.blue("Skapade en ny map med följande info:"));
   console.log(chalk.magenta("folder name: " + folderName));

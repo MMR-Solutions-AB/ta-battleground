@@ -7,6 +7,7 @@
     "dev": "next dev",
     "postinstall": "prisma generate",
     "gen": "tsx ./src/scripts/generateNewProblem.ts",
+    "gen:w": "tsx ./src/scripts/generateNewWar.ts",
     "studio": "npx prisma studio",
     "db:push": "npx prisma db push",
     "db:seed": "NODE_ENV=development tsx ./prisma/seed-dev.ts",

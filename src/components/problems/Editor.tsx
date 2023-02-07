@@ -41,8 +41,6 @@ const Editor: React.FC<EditorProps> = ({
     }
   }, [monaco, editorSettings.theme]);
 
-  console.log(editorSettings);
-
   return (
     <>
       <div className="flex flex-shrink-0 flex-wrap items-center justify-between bg-bg-dark pb-2 pr-2 pt-2 text-sm text-text-dimmed">
