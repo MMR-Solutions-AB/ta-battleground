@@ -2,9 +2,10 @@ import type { Problem } from "../../Problem";
 
 export const data: Problem<any, number[]> = {
   name: "Den smala arrayn",
-  difficulty: "medium",
+  difficulty: "easy",
   number: 55,
-  arguments: [{ name: "arr", type: "array" }],
+  isHidden: true,
+  arguments: [{ name: "arr", type: "number[]" }],
   tags: ["numbers", "arrays"],
   testCases: [
     {

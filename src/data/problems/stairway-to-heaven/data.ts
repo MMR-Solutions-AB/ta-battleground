@@ -4,6 +4,7 @@ export const data: Problem<number, number> = {
   name: "Stairway to heaven",
   difficulty: "hard",
   number: 54,
+  isHidden: true,
   arguments: [{ name: "n", type: "number" }],
   tags: ["functions"],
   testCases: [
@@ -18,6 +19,22 @@ export const data: Problem<number, number> = {
     {
       input: [57],
       output: 111,
+    },
+    {
+      input: [1],
+      output: 1,
+    },
+    {
+      input: [0],
+      output: 1,
+    },
+    {
+      input: [14],
+      output: 25,
+    },
+    {
+      input: [9],
+      output: 15,
     },
   ],
 };
