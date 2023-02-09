@@ -121,7 +121,7 @@ model War {
 
 model FactionWarContenter {
   id        String   @id @default(cuid())
-  score     Float
+  score     Float    @default(0)
   factionId String
   faction   Faction  @relation(fields: [factionId], references: [id])
   warId     String

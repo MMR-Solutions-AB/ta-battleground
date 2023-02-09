@@ -4,6 +4,7 @@ import { writeFileSync, mkdirSync } from "fs";
 import { getAllProblems } from "../data/getAllProblems";
 import { getAllWars } from "../data/getAllWars";
 import chalk from "chalk";
+import { tags } from "../data/Problem";
 import _ from "lodash";
 
 async function generateNewProblem() {
@@ -42,6 +43,13 @@ async function generateNewProblem() {
     const warPrefix = selected_war.split(". ")[1];
     war_folder = warPrefix.toLowerCase().split(" ").join("-");
   }
+
+  const { selected_tags } = await inquirer.prompt({
+    name: "selected_tags",
+    type: "checkbox",
+    message: "Vilka tags ska uppgiften ha?",
+    choices: tags,
+  });
 
   const folderName = war_folder
     ? join(
@@ -109,7 +117,7 @@ En förklaring
     difficulty: "${difficulty}",
     number: ${highestNumber},
     arguments: [{name: "s", type: "string"}],
-    tags: [""],
+    tags: ["${selected_tags.map((tag: any) => tag).join('", "')}"],
     testCases: [
       {
         input: [\`"s"\`],
@@ -121,8 +129,13 @@ En förklaring
   writeFileSync(join(__dirname, folderName, "data.ts"), code);
 
   console.log(chalk.blue("Skapade en ny map med följande info:"));
-  console.log(chalk.magenta("folder name: " + folderName));
   console.log(chalk.green("namn: " + _.capitalize(problem_name)));
+  console.log(chalk.magenta("folder name: " + folderName));
+  console.log(
+    chalk.red(
+      'tags: "' + selected_tags.map((tag: any) => tag).join('", "') + '"'
+    )
+  );
   console.log(chalk.yellow("difficulty: " + difficulty));
   console.log(chalk.cyan("number: " + highestNumber));
 }

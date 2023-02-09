@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 interface CountdownProps {
-  time: Date;
+  startTime: Date;
+  endTime: Date;
 }
 
-const Countdown: React.FC<CountdownProps> = ({ time }) => {
+const Countdown: React.FC<CountdownProps> = ({ startTime, endTime }) => {
   const [now, setNow] = useState(new Date());
+  const from = now > startTime ? now : startTime;
+  const to = now > startTime ? endTime : now;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -18,7 +21,7 @@ const Countdown: React.FC<CountdownProps> = ({ time }) => {
   }, []);
 
   // get total seconds between the times
-  let delta = Math.abs(time.getTime() - now.getTime()) / 1000;
+  let delta = Math.abs(from.getTime() - to.getTime()) / 1000;
   const days = Math.floor(delta / 86400);
   delta -= days * 86400;
   const hours = Math.floor(delta / 3600) % 24;

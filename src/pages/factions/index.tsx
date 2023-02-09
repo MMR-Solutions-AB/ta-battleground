@@ -3,29 +3,39 @@ import type { NextPage } from "next";
 import { trpc } from "@/utils";
 import Countdown from "@/components/Countdown";
 import Image from "next/image";
+import WrappedLayout from "@/components/layouts/WrappedLayout";
+import ProblemsTable from "@/components/faction/ProblemsTable";
 
 const Faction: NextPage = () => {
-  const { data } = trpc.faction.getAll.useQuery();
-  const startTime = new Date("28 feb 2023");
+  const { data } = trpc.war.getCurrentWar.useQuery();
 
   return (
-    <div className="pb-10 md:pb-14">
-      <h1 className="relative overflow-visible py-10 text-center font-serif text-4xl font-black italic tracking-wider sm:text-5xl md:py-14 md:text-9xl">
-        Faction Wars
-      </h1>
-      <Image
-        src={"/faction-bg.svg"}
-        fill={true}
-        style={{ objectFit: "cover", zIndex: -1 }}
-        className="max-h-[300px] lg:max-h-[500px]"
-        alt="blob bg"
-      />
-      <p className="mt-4 text-center font-serif text-3xl font-bold">
-        Starts in
-      </p>
-      <Countdown time={startTime} />
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    </div>
+    <WrappedLayout>
+      <div className="pb-10">
+        <h1 className="relative mx-auto w-max overflow-visible bg-[url('/faction-bg-2.svg')] bg-cover bg-clip-text text-center text-4xl font-black italic tracking-wider text-transparent [-webkit-background-clip:text] sm:text-5xl md:text-9xl">
+          Faction Wars
+          {/* <Image
+          src={"/faction-bg.svg"}
+          fill={true}
+          style={{ objectFit: "cover", zIndex: -1 }}
+          // className="max-h-[300px] lg:max-h-[500px]"
+          alt="blob bg"
+        /> */}
+        </h1>
+        {data && (
+          <>
+            <p className="mt-10 text-center font-serif text-3xl font-bold">
+              {new Date() > data.startTime ? "Ends in" : "Starts in"}
+            </p>
+            <Countdown startTime={data.startTime} endTime={data.endTime} />
+
+            <h2 className="mb-3 text-3xl font-bold">Problems</h2>
+            <ProblemsTable problems={data.problems} />
+            <pre>{JSON.stringify(data, null, 2)}</pre>
+          </>
+        )}
+      </div>
+    </WrappedLayout>
   );
 };
 

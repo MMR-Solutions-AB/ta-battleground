@@ -44,6 +44,12 @@ export const problemRouter = router({
           name: true,
           number: true,
           difficulty: true,
+          war: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
           topSolution: {
             select: {
               code: true,
