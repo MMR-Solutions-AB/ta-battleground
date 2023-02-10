@@ -6,6 +6,8 @@ async function syncDBWithWars() {
   const wars = await getAllWars();
   let warPromises: Promise<any>[] = [];
 
+  const factions = await prisma.faction.findMany();
+
   for (let i = 0; i < wars.length; i++) {
     const war = wars[i];
     if (!war) continue;
@@ -67,6 +69,13 @@ async function syncDBWithWars() {
           number: war.number,
           startTime: war.startTime,
           endTime: war.endTime,
+          contenders: {
+            createMany: {
+              data: factions.map((faction) => ({
+                factionId: faction.id,
+              })),
+            },
+          },
           problems: {
             create: war.problems.map((problem) => ({
               description: problem.description,

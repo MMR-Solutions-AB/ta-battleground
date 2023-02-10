@@ -36,6 +36,7 @@ export const executeRouter = router({
           arguments: true,
           difficulty: true,
           name: true,
+          warId: true,
           topSolution: {
             select: {
               id: true,
@@ -160,6 +161,13 @@ export const executeRouter = router({
             },
           });
 
+        const scoreToIncrement = parseFloat(
+          (mostRecentSuccessfullySubmission
+            ? problemScore - mostRecentSuccessfullySubmission.score
+            : problemScore
+          ).toFixed(2)
+        );
+
         if (!mostRecentSuccessfullySubmission) {
           await ctx.prisma.user.update({
             where: {
@@ -170,10 +178,44 @@ export const executeRouter = router({
                 increment: 1,
               },
               score: {
-                increment: problemScore,
+                increment: scoreToIncrement,
               },
             },
           });
+
+          if (problem.warId) {
+            await ctx.prisma.factionWarContender.updateMany({
+              where: {
+                faction: {
+                  members: {
+                    some: {
+                      userId: ctx.session.user.id,
+                    },
+                  },
+                },
+              },
+              data: {
+                score: {
+                  increment: scoreToIncrement,
+                },
+              },
+            });
+
+            await ctx.prisma.faction.updateMany({
+              where: {
+                members: {
+                  some: {
+                    userId: ctx.session.user.id,
+                  },
+                },
+              },
+              data: {
+                allTimeScore: {
+                  increment: scoreToIncrement,
+                },
+              },
+            });
+          }
         } else if (problemScore > mostRecentSuccessfullySubmission.score) {
           await ctx.prisma.user.update({
             where: {
@@ -181,11 +223,43 @@ export const executeRouter = router({
             },
             data: {
               score: {
-                increment:
-                  problemScore - mostRecentSuccessfullySubmission.score,
+                increment: scoreToIncrement,
               },
             },
           });
+          if (problem.warId) {
+            await ctx.prisma.factionWarContender.updateMany({
+              where: {
+                faction: {
+                  members: {
+                    some: {
+                      userId: ctx.session.user.id,
+                    },
+                  },
+                },
+              },
+              data: {
+                score: {
+                  increment: scoreToIncrement,
+                },
+              },
+            });
+
+            await ctx.prisma.faction.updateMany({
+              where: {
+                members: {
+                  some: {
+                    userId: ctx.session.user.id,
+                  },
+                },
+              },
+              data: {
+                allTimeScore: {
+                  increment: scoreToIncrement,
+                },
+              },
+            });
+          }
         }
       }
 

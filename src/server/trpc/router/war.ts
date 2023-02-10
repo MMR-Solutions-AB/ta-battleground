@@ -60,8 +60,44 @@ export const warRouter = router({
         contenders: {
           select: {
             id: true,
-            faction: true,
+            faction: {
+              include: {
+                members: {
+                  include: {
+                    user: {
+                      include: {
+                        submissions: {
+                          distinct: ["problemId"],
+                          include: {
+                            problem: {
+                              select: {
+                                warId: true,
+                              },
+                            },
+                          },
+                          where: {
+                            problem: {
+                              war: {
+                                endTime: {
+                                  gt: new Date(),
+                                },
+                              },
+                            },
+                          },
+                          orderBy: {
+                            score: "desc",
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
             score: true,
+          },
+          orderBy: {
+            score: "desc",
           },
         },
       },

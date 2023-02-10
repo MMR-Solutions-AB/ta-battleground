@@ -87,10 +87,11 @@ model Faction {
   id           String                @id @default(cuid())
   name         String                @unique
   allTimeScore Float                 @default(0)
+  image        String                @default("")
   createdAt    DateTime              @default(now())
   updatedAt    DateTime              @updatedAt
   members      FactionMember[]
-  wars         FactionWarContenter[]
+  wars         FactionWarContender[]
 }
 
 model FactionMember {
@@ -116,10 +117,10 @@ model War {
   createdAt  DateTime              @default(now())
   updatedAt  DateTime              @updatedAt
   problems   Problem[]
-  contenders FactionWarContenter[]
+  contenders FactionWarContender[]
 }
 
-model FactionWarContenter {
+model FactionWarContender {
   id        String   @id @default(cuid())
   score     Float    @default(0)
   factionId String
