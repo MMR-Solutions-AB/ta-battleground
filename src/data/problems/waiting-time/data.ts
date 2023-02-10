@@ -18,7 +18,7 @@ export const data: Problem<object[], number> = {
           { arrivalTime: 29000, startTime: 29200 },
         ],
       ],
-      output: 100,
+      output: 167,
     },
     {
       input: [
@@ -28,7 +28,27 @@ export const data: Problem<object[], number> = {
           { arrivalTime: 29000, startTime: 29400 },
         ],
       ],
-      output: 150,
+      output: 300,
+    },
+    {
+      input: [
+        [
+          { arrivalTime: 28900, startTime: 29000 },
+          { arrivalTime: 28900, startTime: 29100 },
+          { arrivalTime: 29200, startTime: 29300 },
+        ],
+      ],
+      output: 100,
+    },
+    {
+      input: [
+        [
+          { arrivalTime: 28800, startTime: 29100 },
+          { arrivalTime: 28900, startTime: 29250 },
+          { arrivalTime: 29000, startTime: 29400 },
+        ],
+      ],
+      output: 350,
     },
   ],
 };
