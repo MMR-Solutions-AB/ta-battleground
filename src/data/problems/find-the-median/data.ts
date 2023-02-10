@@ -1,8 +1,8 @@
 import type { Problem } from "../../Problem";
 
-export const data: Problem<number[], number[]> = {
+export const data: Problem<number[], number> = {
   name: "Find the median",
-  difficulty: "easy",
+  difficulty: "medium",
   number: 56,
   isHidden: true,
   arguments: [{ name: "arr", type: "array" }],
@@ -10,7 +10,19 @@ export const data: Problem<number[], number[]> = {
   testCases: [
     {
       input: [[1, 2, 3, 4, 5]],
-      output: [10, 20, 30, 40, 50],
+      output: 3,
+    },
+    {
+      input: [[1, 3, 5, 7, 10]],
+      output: 5,
+    },
+    {
+      input: [[4, 40, 20, 9, 5]],
+      output: 9,
+    },
+    {
+      input: [[100, 7, 15]],
+      output: 15,
     },
   ],
 };

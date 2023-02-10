@@ -38,5 +38,15 @@ export const data: Problem<{ width: number; length: number }[], number> = {
       ],
       output: 160,
     },
+    {
+      input: [
+        [
+          { width: 5, length: 5 },
+          { width: 3, length: 2 },
+          { width: 10, length: 10 },
+        ],
+      ],
+      output: 131,
+    },
   ],
 };

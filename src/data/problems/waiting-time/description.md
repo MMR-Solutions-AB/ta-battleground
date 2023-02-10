@@ -1,6 +1,6 @@
 # Waiting time
 
-Skriv en funktion **waitingTime(patients)** som tar emot en lista av objekt, patients. Varje objekt representerar en patient och har två egenskaper, "arrivalTime" och "startTime" som representerar när patienten anlände till vårdcentralen och när behandlingen började i sekunder sedan midnatt. Funktionen ska returnera genomsnittlig väntetid för alla patienter i sekunder.
+Skriv en funktion **waitingTime(patients)** som tar emot en lista av objekt, patients. Varje objekt representerar en patient och har två egenskaper, "arrivalTime" och "startTime" som representerar när patienten anlände till vårdcentralen och när behandlingen började i sekunder sedan midnatt. Funktionen ska returnera genomsnittlig väntetid för alla patienter i sekunder. Avrunda till närmsta heltal.
 
 ## Exempel 1
 
@@ -17,7 +17,7 @@ patients = [
 **_Output_**
 
 ```bash
-100
+167
 ```
 
 ## Exempel 2
@@ -35,5 +35,5 @@ patients = [
 **_Output_**
 
 ```bash
-150
+300
 ```
