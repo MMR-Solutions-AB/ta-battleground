@@ -19,7 +19,8 @@ const Factions: NextPage = () => {
         </h1>
         {war && (
           <>
-            <p className="mt-10 text-center font-serif text-3xl font-bold">
+            <p className="text-center">{war.name}</p>
+            <p className="mt-10 text-center text-3xl font-bold">
               {new Date() > war.startTime ? "Ends in" : "Starts in"}
             </p>
             <Countdown startTime={war.startTime} endTime={war.endTime} />
@@ -27,7 +28,7 @@ const Factions: NextPage = () => {
               <>
                 <div className="my-5 grid gap-4 lg:my-10 lg:grid-cols-2">
                   <div className="">
-                    <h4 className="mb-3 text-3xl">
+                    <h4 className="mb-3 text-3xl font-bold">
                       {war.contenders[0]?.faction.name}
                     </h4>
                     <div className="grid gap-4 lg:grid-cols-2">
@@ -90,7 +91,6 @@ const Factions: NextPage = () => {
 
                 <h2 className="mb-3 text-3xl font-bold">Problems</h2>
                 <ProblemsTable problems={war.problems} />
-                <pre>{JSON.stringify(war, null, 2)}</pre>
               </>
             )}
           </>

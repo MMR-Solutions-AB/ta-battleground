@@ -130,6 +130,7 @@ model FactionWarContender {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([factionId, warId])
   @@index([score])
   @@index([factionId])
   @@index([warId])

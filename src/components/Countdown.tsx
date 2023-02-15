@@ -31,8 +31,8 @@ const Countdown: React.FC<CountdownProps> = ({ startTime, endTime }) => {
   const seconds = Math.floor(delta % 60);
 
   return (
-    <h3 className="text-center font-serif text-4xl font-bold italic md:text-6xl">
-      {days < 10 ? `0${days}` : days}:{hours < 10 ? `0${hours}` : hours}:
+    <h3 className="text-center text-4xl font-bold italic md:text-6xl">
+      {days}:{hours < 10 ? `0${hours}` : hours}:
       {minutes < 10 ? `0${minutes}` : minutes}:
       {seconds < 10 ? `0${seconds}` : seconds}
     </h3>
