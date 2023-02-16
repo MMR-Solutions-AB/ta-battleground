@@ -53,6 +53,11 @@ const SubmissionsTable: React.FC<SubmissionsTableProps> = ({ submissions }) => {
                   </Link>
                   {submission.problem.tags?.length > 0 && (
                     <div className="ml-3 flex items-center gap-2">
+                      {submission.problem.war && (
+                        <div className="cursor-pointer rounded-full bg-white py-0.5 px-1.5 text-xs text-black transition-opacity hover:opacity-50">
+                          War
+                        </div>
+                      )}
                       {submission.problem.tags.map((tag) => (
                         <div
                           key={tag.id}

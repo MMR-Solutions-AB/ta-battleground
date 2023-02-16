@@ -32,6 +32,7 @@ export const userRouter = router({
                   number: true,
                   difficulty: true,
                   tags: true,
+                  war: true,
                 },
               },
             },
