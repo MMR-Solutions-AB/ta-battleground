@@ -1,7 +1,7 @@
 # Popop
 
 Skriv en funktion **popop(s)** som tar emot en array av strängar. Funktionen ska returnera en samma array fast med varje sträng med stora bokstäver
-      
+
 ## Exempel 1
 
 **_Input_**
@@ -19,4 +19,3 @@ true
 **_Förklaring_**
 
 En förklaring
-  

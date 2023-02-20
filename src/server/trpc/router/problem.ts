@@ -79,11 +79,6 @@ export const problemRouter = router({
               name: true,
             },
           },
-          _count: {
-            select: {
-              submissions: true,
-            },
-          },
         },
         orderBy: !isValidOrdering
           ? {

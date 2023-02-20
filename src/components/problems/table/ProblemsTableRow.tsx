@@ -4,7 +4,6 @@ import Link from "next/link";
 import { CheckCircle, Activity } from "react-feather";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
 
 interface ProblemsTableRowProps {
   problem: RouterOutputs["problem"]["getAll"][number];
@@ -12,8 +11,6 @@ interface ProblemsTableRowProps {
 
 const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
   const router = useRouter();
-  const { data: sessionData } = useSession();
-  const user = sessionData?.user;
 
   return (
     <tr className="h-11 bg-bg-dark even:bg-bg-dimmed">
@@ -102,11 +99,6 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
             `${problem.topSolution.score.toFixed(2)} - { ${
               problem.topSolution.code.length
             } }`}
-        </div>
-      </td>
-      <td className="relative h-full">
-        <div className="h-ful peer flex max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
-          {problem._count.submissions}
         </div>
       </td>
     </tr>

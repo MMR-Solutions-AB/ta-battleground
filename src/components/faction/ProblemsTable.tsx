@@ -1,7 +1,7 @@
 import React from "react";
 import type { RouterOutputs } from "@/utils";
 import ProblemsTableHeadRow from "@/components/problems/table/ProblemsTableHeadRow";
-import { Activity, CheckCircle } from "react-feather";
+import { CheckCircle } from "react-feather";
 import Link from "next/link";
 import classNames from "classnames";
 

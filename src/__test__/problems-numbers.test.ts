@@ -1,6 +1,5 @@
 import { expect, test } from "vitest";
 import { getAllProblems } from "../data/getAllProblems";
-import { difficulties } from "../data/Problem";
 
 test("Check for same number on problems", async () => {
   const problems = (await getAllProblems()).sort((a, b) => a.number - b.number);

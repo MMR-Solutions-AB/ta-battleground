@@ -15,7 +15,7 @@ const Factions: NextPage = () => {
   return (
     <WrappedLayout>
       <div className="pb-10">
-        <h1 className="relative mx-auto w-max overflow-visible bg-[url('/faction-bg-2.svg')] bg-cover bg-clip-text text-center text-4xl font-black italic tracking-wider text-transparent [-webkit-background-clip:text] sm:text-5xl md:text-9xl">
+        <h1 className="relative mx-auto w-max overflow-visible bg-[url('/banners/banner-2.svg')] bg-cover bg-clip-text text-center text-4xl font-black italic tracking-wider text-transparent [-webkit-background-clip:text] sm:text-5xl md:text-9xl">
           Faction Wars
         </h1>
         {isLoading ? (
@@ -31,70 +31,6 @@ const Factions: NextPage = () => {
               <Countdown startTime={war.startTime} endTime={war.endTime} />
               {new Date() > war.startTime && (
                 <>
-                  <div className="my-5 grid gap-4 lg:my-10 lg:grid-cols-2">
-                    <div className="">
-                      <h4 className="mb-3 text-3xl font-bold">
-                        {war.contenders[0]?.faction.name}
-                      </h4>
-                      <div className="grid gap-4 lg:grid-cols-2">
-                        {war.contenders[0]?.faction.members?.map(
-                          ({ user }, i) => {
-                            const submissions = user.submissions.filter(
-                              (submission) =>
-                                submission.problem.warId === war.id
-                            );
-
-                            const score = submissions.reduce(
-                              (prev, curr) => prev + curr.score,
-                              0
-                            );
-
-                            return (
-                              <Card
-                                key={user.id}
-                                user={user}
-                                index={i}
-                                score={score}
-                                targets={submissions.length}
-                              />
-                            );
-                          }
-                        )}
-                      </div>
-                    </div>
-                    <div className="">
-                      <h4 className="mb-3 text-3xl font-bold">Contenders</h4>
-                      <div className="grid gap-4 lg:grid-cols-2">
-                        {war.contenders.map((contender, i) => (
-                          <div
-                            className="relative rounded-b-md bg-bg-dimmed"
-                            key={contender.id}
-                          >
-                            <div className="relative h-20 w-full bg-red-500 lg:h-28">
-                              <Image
-                                src={`/banners/${contender.faction.image}`}
-                                alt={`${contender.faction.name} banner image`}
-                                fill={true}
-                                style={{ objectFit: "cover" }}
-                              />
-                            </div>
-                            <div className="p-3">
-                              <h4 className="text-lg italic tracking-wider">
-                                {contender.faction.name}
-                              </h4>
-                              <p className="text-text-dimmed">
-                                Score: {contender.score.toFixed(2)}
-                              </p>
-                            </div>
-                            <div className="absolute top-1 right-1 flex h-8 w-8 items-center justify-center rounded-full bg-bg-dark text-sm">
-                              #{i + 1}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
                   <h2 className="mb-3 text-3xl font-bold">Problems</h2>
                   <ProblemsTable problems={war.problems} />
                 </>

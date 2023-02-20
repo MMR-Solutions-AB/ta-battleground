@@ -6,7 +6,7 @@ import {
 import { useModal } from "@/context/ModalContext";
 import classNames from "classnames";
 import React from "react";
-import { X, Type, MousePointer, Droplet, ExternalLink } from "react-feather";
+import { X, Type, Droplet } from "react-feather";
 
 const EditorSettingsModal: React.FC = ({}) => {
   const { setShowModal } = useModal();
