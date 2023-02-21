@@ -5,13 +5,20 @@ import type {
 
 export type Tags = PrismaTag["name"];
 export const tags: Tags[] = [
-  "arrays",
   "basics",
-  "numbers",
-  "objects",
   "strings",
+  "numbers",
+  "arrays",
+  "objects",
   "functions",
 ];
+
+export const difficulties: Problem<any, any>["difficulty"][] = [
+  "easy",
+  "medium",
+  "hard",
+];
+
 type LooseAutocomplete<T extends string> = T | Omit<string, T>;
 export type ProblemArgument = {
   name: string;
@@ -19,6 +26,7 @@ export type ProblemArgument = {
     "string" | "number" | "boolean" | "string[]" | "number[]"
   >;
 };
+
 export type TestCase<I = any, O = any> = { input: Array<I>; output: O };
 export type ProblemCreate<I = any, O = any> = Omit<
   PrismaProblem,
@@ -27,7 +35,9 @@ export type ProblemCreate<I = any, O = any> = Omit<
   testCases: TestCase<I, O>[];
   arguments: ProblemArgument[];
   tags: Tags[];
+  isHidden?: true;
 };
+
 export type Problem<I, O> = Omit<ProblemCreate<I, O>, "description" | "warId">;
 export const difficulties: Problem<any, any>["difficulty"][] = [
   "easy",

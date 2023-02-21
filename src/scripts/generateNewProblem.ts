@@ -6,6 +6,7 @@ import { getAllWars } from "../data/getAllWars";
 import chalk from "chalk";
 import { tags } from "../data/Problem";
 import _ from "lodash";
+import { tags } from "@/data/Problem";
 
 async function generateNewProblem() {
   const { problem_name } = await inquirer.prompt({
@@ -46,6 +47,7 @@ async function generateNewProblem() {
 
   const { selected_tags } = await inquirer.prompt({
     name: "selected_tags",
+
     type: "checkbox",
     message: "Vilka tags ska uppgiften ha?",
     choices: tags,

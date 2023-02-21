@@ -42,6 +42,7 @@ const TestCases: React.FC<TestCasesProps> = ({ code }) => {
                 {
                   onSuccess() {
                     utils.problem.getMySubmissions.invalidate();
+                    utils.problem.getLeaderboard.invalidate();
                   },
                 }
               );

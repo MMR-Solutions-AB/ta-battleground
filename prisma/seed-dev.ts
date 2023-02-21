@@ -102,7 +102,7 @@ async function syncDBWithProblems() {
 
   for (let i = 0; i < problems.length; i++) {
     const problem = problems[i];
-    if (!problem) continue;
+    if (!problem || problem.isHidden) continue;
 
     promises.push(
       prisma.problem.upsert({
