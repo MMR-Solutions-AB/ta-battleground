@@ -1,4 +1,4 @@
-import type { Problem } from "../../Problem";
+import type { Problem } from "../../../../Problem";
 
 export const data: Problem<string | string[], number> = {
   name: "Water borne",
