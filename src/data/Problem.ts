@@ -39,8 +39,3 @@ export type ProblemCreate<I = any, O = any> = Omit<
 };
 
 export type Problem<I, O> = Omit<ProblemCreate<I, O>, "description" | "warId">;
-export const difficulties: Problem<any, any>["difficulty"][] = [
-  "easy",
-  "medium",
-  "hard",
-];

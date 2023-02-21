@@ -4,7 +4,6 @@ import { writeFileSync, mkdirSync } from "fs";
 import { getAllProblems } from "../data/getAllProblems";
 import { getAllWars } from "../data/getAllWars";
 import chalk from "chalk";
-import { tags } from "../data/Problem";
 import _ from "lodash";
 import { tags } from "@/data/Problem";
 
