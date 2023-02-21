@@ -30,7 +30,7 @@ export type ProblemArgument = {
 export type TestCase<I = any, O = any> = { input: Array<I>; output: O };
 export type ProblemCreate<I = any, O = any> = Omit<
   PrismaProblem,
-  "id" | "createdAt" | "updatedAt"
+  "id" | "createdAt" | "updatedAt" | "warId"
 > & {
   testCases: TestCase<I, O>[];
   arguments: ProblemArgument[];
@@ -38,4 +38,9 @@ export type ProblemCreate<I = any, O = any> = Omit<
   isHidden?: true;
 };
 
-export type Problem<I, O> = Omit<ProblemCreate<I, O>, "description">;
+export type Problem<I, O> = Omit<ProblemCreate<I, O>, "description" | "warId">;
+export const difficulties: Problem<any, any>["difficulty"][] = [
+  "easy",
+  "medium",
+  "hard",
+];

@@ -1,15 +1,15 @@
 import React from "react";
 import type { RouterOutputs } from "@/utils";
 import ProblemsTableHeadRow from "@/components/problems/table/ProblemsTableHeadRow";
-import { Activity, CheckCircle } from "react-feather";
+import { CheckCircle } from "react-feather";
 import Link from "next/link";
 import classNames from "classnames";
 
-interface SubmissionsTableProps {
-  submissions: NonNullable<RouterOutputs["user"]["getById"]>["submissions"];
+interface ProblemTableProps {
+  problems: NonNullable<RouterOutputs["war"]["getCurrentWar"]>["problems"];
 }
 
-const SubmissionsTable: React.FC<SubmissionsTableProps> = ({ submissions }) => {
+const ProblemsTable: React.FC<ProblemTableProps> = ({ problems }) => {
   return (
     <div className="w-full overflow-x-scroll">
       <table className="my-0 w-full rounded-full text-xs sm:mx-0 md:text-sm">
@@ -20,45 +20,38 @@ const SubmissionsTable: React.FC<SubmissionsTableProps> = ({ submissions }) => {
             <ProblemsTableHeadRow>Namn</ProblemsTableHeadRow>
             <ProblemsTableHeadRow>Svårighet</ProblemsTableHeadRow>
             <ProblemsTableHeadRow>High score</ProblemsTableHeadRow>
+            <ProblemsTableHeadRow>Top team</ProblemsTableHeadRow>
           </tr>
         </thead>
 
         <tbody>
-          {submissions.map((submission) => (
-            <tr
-              key={submission.id}
-              className="h-11 bg-bg-dark even:bg-bg-dimmed"
-            >
+          {problems.map((problem) => (
+            <tr key={problem.id} className="h-11 bg-bg-dark even:bg-bg-dimmed">
               <td className="relative h-full">
                 <div className="peer flex h-full max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2 font-bold text-text-dimmed">
-                  {submission.problem.number}
+                  {problem.number}
                 </div>
               </td>
               <td className="relative h-full">
                 <div className="peer flex h-full max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
-                  {submission.score > 0 ? (
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                  ) : (
+                  {/* {submission.score > 0 ? ( */}
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  {/* ) : (
                     <Activity className="h-4 w-4 text-amber-500" />
-                  )}
+                  )} */}
                 </div>
               </td>
               <td className="relative h-full">
                 <div className="peer flex h-full max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
                   <Link
-                    href={`/problems/${submission.problem.id}`}
+                    href={`/problems/${problem.id}`}
                     className="overflow-hidden truncate hover:text-primary"
                   >
-                    {submission.problem.name}
+                    {problem.name}
                   </Link>
-                  {submission.problem.tags?.length > 0 && (
+                  {problem.tags?.length > 0 && (
                     <div className="ml-3 flex items-center gap-2">
-                      {submission.problem.war && (
-                        <div className="cursor-pointer rounded-full bg-white py-0.5 px-1.5 text-xs text-black transition-opacity hover:opacity-50">
-                          War
-                        </div>
-                      )}
-                      {submission.problem.tags.map((tag) => (
+                      {problem.tags.map((tag) => (
                         <div
                           key={tag.id}
                           className={classNames(
@@ -87,9 +80,9 @@ const SubmissionsTable: React.FC<SubmissionsTableProps> = ({ submissions }) => {
               </td>
               <td className="relative h-full">
                 <div className="peer flex h-full max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
-                  {submission.problem.difficulty === "hard" ? (
+                  {problem.difficulty === "hard" ? (
                     <span className="text-red-500">Svår</span>
-                  ) : submission.problem.difficulty === "medium" ? (
+                  ) : problem.difficulty === "medium" ? (
                     <span className="text-amber-500">Medel</span>
                   ) : (
                     <span className="text-green-500">Enkel</span>
@@ -98,9 +91,16 @@ const SubmissionsTable: React.FC<SubmissionsTableProps> = ({ submissions }) => {
               </td>
               <td className="relative h-full">
                 <div className="h-ful peer flex max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
-                  {`${submission.score.toFixed(2)} - { ${
-                    submission.code.length
-                  } }`}
+                  {problem.submissions[0] &&
+                    problem.submissions[0].score.toFixed(2) +
+                      " - " +
+                      `{${problem.submissions[0].code.length}}`}
+                </div>
+              </td>
+              <td className="relative h-full">
+                <div className="h-ful peer flex max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
+                  {problem.submissions[0] &&
+                    problem.submissions[0].user.faction?.faction.name}
                 </div>
               </td>
             </tr>
@@ -111,4 +111,4 @@ const SubmissionsTable: React.FC<SubmissionsTableProps> = ({ submissions }) => {
   );
 };
 
-export default SubmissionsTable;
+export default ProblemsTable;

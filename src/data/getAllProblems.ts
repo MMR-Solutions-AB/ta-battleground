@@ -3,16 +3,15 @@ import { join } from "path";
 import type { Problem, ProblemCreate } from "./Problem";
 
 export async function getAllProblems() {
-  const problemsNames = readdirSync(join(__dirname, "./problems"));
   const problems: ProblemCreate<string, string>[] = [];
+  const problemsNames = readdirSync(join(__dirname, "./problems"));
 
   for (let i = 0; i < problemsNames.length; i++) {
-    const description = readFileSync(
-      join(__dirname, "./problems/" + problemsNames[i] + "/description.md")
-    ).toString();
+    const path = join(__dirname, "./problems/" + problemsNames[i]);
+    const description = readFileSync(join(path, "/description.md")).toString();
 
     const { data }: { data: Problem<string, string> } = await import(
-      "./problems/" + problemsNames[i] + "/data.ts"
+      path + "/data.ts"
     );
 
     problems.push({ ...data, description });

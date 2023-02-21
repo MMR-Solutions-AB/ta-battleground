@@ -1,7 +1,108 @@
 import { prisma } from "../src/server/db/client";
 import { getAllProblems } from "../src/data/getAllProblems";
+import { getAllWars } from "../src/data/getAllWars";
 
-async function main() {
+async function syncDBWithWars() {
+  const wars = await getAllWars();
+  let warPromises: Promise<any>[] = [];
+
+  const factions = await prisma.faction.findMany();
+
+  for (let i = 0; i < wars.length; i++) {
+    const war = wars[i];
+    if (!war) continue;
+
+    if (i % 10 === 0) {
+      await Promise.all(warPromises);
+      warPromises = [];
+    }
+
+    warPromises.push(
+      prisma.war.upsert({
+        where: { number: war.number },
+        update: {
+          name: war.name,
+          number: war.number,
+          startTime: war.startTime,
+          endTime: war.endTime,
+          problems: {
+            upsert: war.problems.map((problem) => ({
+              where: { number: problem.number },
+              update: {
+                description: problem.description,
+                name: problem.name,
+                testCases: problem.testCases,
+                arguments: problem.arguments,
+                number: problem.number,
+                difficulty: problem.difficulty,
+                tags: {
+                  set: [],
+                  connectOrCreate: problem.tags.map((tag) => ({
+                    where: { name: tag },
+                    create: {
+                      name: tag,
+                    },
+                  })),
+                },
+              },
+              create: {
+                description: problem.description,
+                name: problem.name,
+                testCases: problem.testCases,
+                arguments: problem.arguments,
+                number: problem.number,
+                difficulty: problem.difficulty,
+                tags: {
+                  connectOrCreate: problem.tags.map((tag) => ({
+                    where: { name: tag },
+                    create: {
+                      name: tag,
+                    },
+                  })),
+                },
+              },
+            })),
+          },
+        },
+        create: {
+          name: war.name,
+          number: war.number,
+          startTime: war.startTime,
+          endTime: war.endTime,
+          contenders: {
+            createMany: {
+              data: factions.map((faction) => ({
+                factionId: faction.id,
+              })),
+            },
+          },
+          problems: {
+            create: war.problems.map((problem) => ({
+              description: problem.description,
+              name: problem.name,
+              testCases: problem.testCases,
+              arguments: problem.arguments,
+              number: problem.number,
+              difficulty: problem.difficulty,
+              tags: {
+                connectOrCreate: problem.tags.map((tag) => ({
+                  where: { name: tag },
+                  create: {
+                    name: tag,
+                  },
+                })),
+              },
+            })),
+          },
+        },
+      })
+    );
+  }
+
+  await Promise.all(warPromises);
+}
+
+async function syncDBWithProblems() {
   const problems = await getAllProblems();
 
   let promises: Promise<any>[] = [];
@@ -54,7 +155,13 @@ async function main() {
       })
     );
   }
+
   await Promise.all(promises);
+}
+
+async function main() {
+  await syncDBWithWars();
+  await syncDBWithProblems();
 }
 
 main()

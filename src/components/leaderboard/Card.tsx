@@ -7,9 +7,11 @@ import Link from "next/link";
 interface CardProps {
   user: RouterOutputs["leaderboard"]["getAll"][number];
   index: number;
+  score?: number;
+  targets?: number;
 }
 
-const Card: React.FC<CardProps> = ({ user, index }) => {
+const Card: React.FC<CardProps> = ({ user, index, score, targets }) => {
   return (
     <Link
       href={`/users/${user.id}`}
@@ -53,7 +55,8 @@ const Card: React.FC<CardProps> = ({ user, index }) => {
           )}
         </h2>
         <p className="text-sm text-gray-400">
-          {user.score.toFixed(2)} - {`(${user.completedProblems} uppgifter)`}
+          {score?.toFixed(2) ?? user.score.toFixed(2)} -{" "}
+          {`(${targets ?? user.completedProblems} uppgifter)`}
         </p>
       </div>
     </Link>

@@ -16,3 +16,25 @@ body * {
 body *::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
+
+.text-shadow-3d {
+  $color-green: #7400b8;
+  $color-blue: #64dfdf;
+  $shadow-number: 25;
+  color: $color-blue;
+  -webkit-font-smoothing: antialiased;
+  $offset-x: 1px;
+  $offset-y: 1px;
+  $value: ();
+
+  @for $i from 0 through ($shadow-number) {
+    $theShadow: $offset-x *
+      $i
+      $offset-y *
+      $i
+      0px
+      mix($color-green, $color-blue, 100% / $shadow-number * ($i));
+    $value: append($value, $theShadow, comma);
+  }
+  text-shadow: $value;
+}

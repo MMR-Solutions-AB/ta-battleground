@@ -18,9 +18,6 @@ const ProblemsTable: React.FC = ({}) => {
                 Svårighet
               </ProblemsTableHeadRow>
               <ProblemsTableHeadRow>High score</ProblemsTableHeadRow>
-              <ProblemsTableHeadRow sortBy="submissions">
-                Submissions
-              </ProblemsTableHeadRow>
             </tr>
           </thead>
           <ProblemsTablesRows />
