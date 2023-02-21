@@ -55,8 +55,8 @@ const Card: React.FC<CardProps> = ({ user, index, score, targets }) => {
           )}
         </h2>
         <p className="text-sm text-gray-400">
-          {score?.toFixed(2) || user.score.toFixed(2)} -{" "}
-          {`(${targets || user.completedProblems} uppgifter)`}
+          {score?.toFixed(2) ?? user.score.toFixed(2)} -{" "}
+          {`(${targets ?? user.completedProblems} uppgifter)`}
         </p>
       </div>
     </Link>

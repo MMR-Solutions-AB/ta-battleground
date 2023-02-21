@@ -7,6 +7,7 @@ import ProblemsTable from "@/components/faction/ProblemsTable";
 import Card from "@/components/leaderboard/Card";
 import BouncingBalls from "@/components/loaders/BouncingBalls";
 import Image from "next/image";
+import FactionsDisplay from "@/components/faction/FactionsDisplay";
 
 const Factions: NextPage = () => {
   const { data: war, isLoading } = trpc.war.getCurrentWar.useQuery();
@@ -31,6 +32,7 @@ const Factions: NextPage = () => {
               <Countdown startTime={war.startTime} endTime={war.endTime} />
               {new Date() > war.startTime && (
                 <>
+                  <FactionsDisplay contenders={war.contenders} warId={war.id} />
                   <h2 className="mb-3 text-3xl font-bold">Problems</h2>
                   <ProblemsTable problems={war.problems} />
                 </>
