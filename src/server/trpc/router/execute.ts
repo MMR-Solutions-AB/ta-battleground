@@ -1,23 +1,9 @@
 import { z } from "zod";
 import { router, protectedProcedure } from "../trpc";
-import fetch from "node-fetch";
-import type { TestCase } from "@/data/Problem";
-import _ from "lodash";
 import { generateScoreForProblem } from "@/utils/generateScoreForProblem";
 import type { ProblemArgument } from "@/data/Problem";
-
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-type PistonResponse = {
-  ran: boolean;
-  language: string;
-  version: string;
-  output: string;
-  stdout: string;
-  stderr: string;
-};
+import { generateTestCases } from "@/server/common/generateTestCases";
+import type { TestCase } from "@/data/Problem";
 
 export const executeRouter = router({
   runCode: protectedProcedure
@@ -37,6 +23,12 @@ export const executeRouter = router({
           difficulty: true,
           name: true,
           warId: true,
+          war: {
+            select: {
+              endTime: true,
+              startTime: true,
+            },
+          },
           topSolution: {
             select: {
               id: true,
@@ -47,97 +39,16 @@ export const executeRouter = router({
         },
       });
 
-      const testCases = problem.testCases as TestCase[];
-      const ranTestCases: (TestCase & {
-        valid: boolean;
-        receivedOutput: string | null;
-        timedOut: boolean;
-        debugOutput: string[];
-      })[] = [];
-
-      let correctSolution = true;
-      let numberOfFailedTestCases = 0;
-
-      for (let i = 0; i < testCases.length; i++) {
-        try {
-          const functionInputs = testCases[i]?.input
-            .map((test) =>
-              typeof test === "object" ? JSON.stringify(test) : test
-            )
-            .join(", ");
-
-          const requestOptions = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              language: "javascript",
-              source: `${input.code}\n
-              const MENDES_SUPER_SECRET_NAMN = JSON.stringify(${_.camelCase(
-                problem.name
-              )}(${functionInputs}))
-              console.log(JSON.stringify(${JSON.stringify(
-                testCases[i]?.output
-              )}) == MENDES_SUPER_SECRET_NAMN)
-              \nconsole.log(JSON.stringify(${JSON.stringify(
-                testCases[i]?.output
-              )}))
-              \nconsole.log(MENDES_SUPER_SECRET_NAMN)`,
-              stdin: "",
-              args: [],
-            }),
-          };
-
-          const res = await fetch(
-            "https://emkc.org/api/v1/piston/execute",
-            requestOptions
-          );
-          const data = (await res.json()) as PistonResponse;
-          console.log(data);
-          let timedOut = false;
-          if (!data.ran) {
-            timedOut = true;
-            correctSolution = false;
-          }
-
-          // piston api limits us to 2 request per secund, this stops us from exceeding that
-          await sleep(500);
-
-          const outputs = data.output.split("\n");
-          const debugOutput = outputs.slice(0, outputs.length - 4);
-          const expectedOutput = outputs[outputs.length - 3];
-          const receivedOutput = outputs[outputs.length - 2];
-
-          const completedTestCase =
-            timedOut ||
-            !expectedOutput ||
-            !receivedOutput ||
-            receivedOutput === "undefined"
-              ? false
-              : _.isEqual(
-                  JSON.parse(expectedOutput),
-                  JSON.parse(receivedOutput)
-                ) || outputs[outputs.length - 4] == "true";
-
-          ranTestCases.push({
-            input: testCases[i]?.input || [],
-            output: testCases[i]?.output,
-            valid: completedTestCase,
-            receivedOutput: (timedOut ? data.stderr : receivedOutput) || null,
-            timedOut,
-            debugOutput,
-          });
-          console.log(ranTestCases);
-
-          if (!completedTestCase) {
-            correctSolution = false;
-            numberOfFailedTestCases++;
-          }
-        } catch (error) {
-          correctSolution = false;
-          numberOfFailedTestCases++;
-          console.log(error);
-        }
-      }
+      const {
+        correctSolution,
+        numberOfFailedTestCases,
+        ranTestCases,
+        testCases,
+      } = await generateTestCases({
+        problemName: problem.name,
+        testCases: problem.testCases as TestCase[],
+        code: input.code,
+      });
 
       const problemScore = generateScoreForProblem(
         input.code.length,
@@ -145,22 +56,33 @@ export const executeRouter = router({
         problem.difficulty
       );
 
-      if (correctSolution && ranTestCases.length === testCases.length) {
-        const mostRecentSuccessfullySubmission =
-          await ctx.prisma.submission.findFirst({
-            where: {
-              userId: ctx.session.user.id,
-              status: "completed",
-              problemId: input.problemId,
-            },
-            select: {
-              score: true,
-            },
-            orderBy: {
-              score: "desc",
-            },
-          });
+      const mostRecentSuccessfullySubmission =
+        await ctx.prisma.submission.findFirst({
+          where: {
+            userId: ctx.session.user.id,
+            status: "completed",
+            problemId: input.problemId,
+          },
+          select: {
+            score: true,
+          },
+          orderBy: {
+            score: "desc",
+          },
+        });
 
+      const submission = await ctx.prisma.submission.create({
+        data: {
+          status: correctSolution ? "completed" : "failed",
+          testCases: ranTestCases,
+          problemId: input.problemId,
+          userId: ctx.session.user.id,
+          code: input.code,
+          score: problemScore,
+        },
+      });
+
+      if (correctSolution && ranTestCases.length === testCases.length) {
         const scoreToIncrement = parseFloat(
           (mostRecentSuccessfullySubmission
             ? problemScore - mostRecentSuccessfullySubmission.score
@@ -182,40 +104,6 @@ export const executeRouter = router({
               },
             },
           });
-
-          if (problem.warId) {
-            await ctx.prisma.factionWarContender.updateMany({
-              where: {
-                faction: {
-                  members: {
-                    some: {
-                      userId: ctx.session.user.id,
-                    },
-                  },
-                },
-              },
-              data: {
-                score: {
-                  increment: scoreToIncrement,
-                },
-              },
-            });
-
-            await ctx.prisma.faction.updateMany({
-              where: {
-                members: {
-                  some: {
-                    userId: ctx.session.user.id,
-                  },
-                },
-              },
-              data: {
-                allTimeScore: {
-                  increment: scoreToIncrement,
-                },
-              },
-            });
-          }
         } else if (problemScore > mostRecentSuccessfullySubmission.score) {
           await ctx.prisma.user.update({
             where: {
@@ -227,9 +115,83 @@ export const executeRouter = router({
               },
             },
           });
-          if (problem.warId) {
+        }
+
+        const currentTime = new Date();
+
+        if (
+          problem.warId &&
+          problem.war &&
+          currentTime > problem.war.startTime && // make sure that you can now update faction score when war is inactive
+          currentTime < problem.war.endTime
+        ) {
+          const submissions = await ctx.prisma.submission.findMany({
+            where: {
+              problem: {
+                warId: problem.warId,
+              },
+              user: {
+                faction: {
+                  faction: {
+                    members: {
+                      some: {
+                        userId: ctx.session.user.id,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            select: { score: true },
+            orderBy: { score: "desc" },
+            distinct: ["userId", "problemId"],
+          });
+
+          const membersCount = await ctx.prisma.faction.findFirst({
+            where: {
+              members: {
+                some: {
+                  userId: ctx.session.user.id,
+                },
+              },
+            },
+            select: {
+              _count: {
+                select: {
+                  members: true,
+                },
+              },
+            },
+          });
+
+          const newContenderScore =
+            submissions.reduce((a, b) => a + b.score, 0) /
+            (membersCount?._count.members || 1);
+
+          const currentFactionContenderScore =
+            await ctx.prisma.factionWarContender.findFirst({
+              where: {
+                faction: {
+                  members: {
+                    some: {
+                      userId: ctx.session.user.id,
+                    },
+                  },
+                },
+                warId: problem.warId,
+              },
+              select: {
+                score: true,
+              },
+            });
+
+          if (
+            currentFactionContenderScore &&
+            newContenderScore > currentFactionContenderScore?.score
+          ) {
             await ctx.prisma.factionWarContender.updateMany({
               where: {
+                warId: problem.warId,
                 faction: {
                   members: {
                     some: {
@@ -239,9 +201,7 @@ export const executeRouter = router({
                 },
               },
               data: {
-                score: {
-                  increment: scoreToIncrement,
-                },
+                score: newContenderScore,
               },
             });
 
@@ -262,17 +222,6 @@ export const executeRouter = router({
           }
         }
       }
-
-      const submission = await ctx.prisma.submission.create({
-        data: {
-          status: correctSolution ? "completed" : "failed",
-          testCases: ranTestCases,
-          problemId: input.problemId,
-          userId: ctx.session.user.id,
-          code: input.code,
-          score: problemScore,
-        },
-      });
 
       if (
         !problem.topSolution ||
