@@ -10,7 +10,7 @@
     "gen:w": "tsx ./src/scripts/generateNewWar.ts",
     "studio": "npx prisma studio",
     "db:push": "npx prisma db push",
-    "db:seed": "NODE_ENV=development tsx ./prisma/seed-dev.ts",
+    "db:seed": "NODE_ENV=development tsx ./prisma/seed.ts",
     "db:seed:prod": "NODE_ENV=production prisma db seed",
     "lint": "next lint",
     "start": "next start",
