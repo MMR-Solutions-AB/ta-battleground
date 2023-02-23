@@ -69,13 +69,6 @@ async function syncDBWithWars() {
           number: war.number,
           startTime: war.startTime,
           endTime: war.endTime,
-          contenders: {
-            createMany: {
-              data: factions.map((faction) => ({
-                factionId: faction.id,
-              })),
-            },
-          },
           problems: {
             create: war.problems.map((problem) => ({
               description: problem.description,
@@ -93,6 +86,11 @@ async function syncDBWithWars() {
                 })),
               },
             })),
+          },
+          contenders: {
+            createMany: {
+              data: factions.map((faction) => ({ factionId: faction.id })),
+            },
           },
         },
       })
@@ -159,7 +157,23 @@ async function syncDBWithProblems() {
   await Promise.all(promises);
 }
 
+async function syncWithFactions() {
+  const factionCount = await prisma.faction.count();
+
+  if (factionCount < 4) {
+    await prisma.faction.createMany({
+      data: [
+        { name: "Typescript Titans" },
+        { name: "Css Challengers" },
+        { name: "React Raiders" },
+        { name: "Node Ninjas" },
+      ],
+    });
+  }
+}
+
 async function main() {
+  await syncWithFactions();
   await syncDBWithWars();
   await syncDBWithProblems();
 }

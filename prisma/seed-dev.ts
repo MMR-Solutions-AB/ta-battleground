@@ -150,6 +150,11 @@ async function syncDBWithProblems() {
 async function main() {
   await syncDBWithWars();
   await syncDBWithProblems();
+  // const problems = await getAllProblems();
+  // problems.sort((a, b) => a.number - b.number);
+  // for (const problem of problems) {
+  //   console.log(problem.number);
+  // }
 }
 
 main()

@@ -4,9 +4,7 @@ import { trpc } from "@/utils";
 import Countdown from "@/components/Countdown";
 import WrappedLayout from "@/components/layouts/WrappedLayout";
 import ProblemsTable from "@/components/faction/ProblemsTable";
-import Card from "@/components/leaderboard/Card";
 import BouncingBalls from "@/components/loaders/BouncingBalls";
-import Image from "next/image";
 import FactionsDisplay from "@/components/faction/FactionsDisplay";
 
 const Factions: NextPage = () => {
@@ -16,7 +14,10 @@ const Factions: NextPage = () => {
   return (
     <WrappedLayout>
       <div className="pb-10">
-        <h1 className="relative mx-auto w-max overflow-visible bg-[url('/banners/banner-2.svg')] bg-cover bg-clip-text text-center text-4xl font-black italic tracking-wider text-transparent [-webkit-background-clip:text] sm:text-5xl md:text-9xl">
+        <h1
+          aria-label="Faction wars"
+          className="relative mx-auto w-max overflow-visible bg-[url('/faction-bg.svg')] bg-cover bg-clip-text text-center text-4xl font-black italic tracking-wider text-transparent [-webkit-background-clip:text] sm:text-5xl md:text-9xl"
+        >
           Faction Wars
         </h1>
         {isLoading ? (
@@ -26,7 +27,10 @@ const Factions: NextPage = () => {
         ) : (
           war && (
             <>
-              <p className="mt-10 text-center text-3xl font-bold">
+              <p className="mt-10 mb-2 text-center text-5xl font-bold italic md:text-6xl">
+                #{war.number} {war.name}
+              </p>
+              <p className="text-center text-3xl font-bold">
                 {new Date() > war.startTime ? "Ends in" : "Starts in"}
               </p>
               <Countdown startTime={war.startTime} endTime={war.endTime} />
