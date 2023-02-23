@@ -1,15 +1,14 @@
-import type { Problem } from "../../Problem";
+import type { Problem } from "../../../../Problem";
 
 export const data: Problem<number, string> = {
   name: "Triangeldrama",
   difficulty: "medium",
-  number: 69,
+  number: 64,
   arguments: [
     { name: "a", type: "number" },
     { name: "b", type: "number" },
     { name: "c", type: "number" },
   ],
-  isHidden: true,
   tags: ["strings", "numbers"],
   testCases: [
     {

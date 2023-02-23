@@ -3,12 +3,11 @@ import type { Problem } from "../../../../Problem";
 export const data: Problem<string, number> = {
   name: "Months between",
   difficulty: "medium",
-  number: 61,
+  number: 62,
   arguments: [
     { name: "date1", type: "string" },
     { name: "date2", type: "string" },
   ],
-  isHidden: true,
   tags: ["strings", "numbers", "functions"],
   testCases: [
     {

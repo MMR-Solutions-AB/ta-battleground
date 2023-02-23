@@ -1,11 +1,10 @@
-import type { Problem } from "../../Problem";
+import type { Problem } from "../../../../Problem";
 
 export const data: Problem<string, number> = {
   name: "Count vowels",
   difficulty: "easy",
-  number: 65,
+  number: 71,
   arguments: [{ name: "s", type: "string" }],
-  isHidden: true,
   tags: ["strings"],
   testCases: [
     {

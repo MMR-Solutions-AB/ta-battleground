@@ -3,11 +3,10 @@ import type { Problem } from "../../../../Problem";
 export const data: Problem<object[], number> = {
   name: "Waiting time",
   difficulty: "easy",
-  number: 73,
+  number: 68,
   arguments: [
     { name: "patients", type: "{arrivalTime: number, startTime: number}[]" },
   ],
-  isHidden: true,
   tags: ["numbers", "objects", "functions"],
   testCases: [
     {

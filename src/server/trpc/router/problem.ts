@@ -29,16 +29,30 @@ export const problemRouter = router({
       const validTags = _.intersection(allTags, tags) as Tags[] | undefined;
 
       return ctx.prisma.problem.findMany({
-        where:
-          validTags && validTags.length > 0
-            ? {
-                tags: {
-                  some: {
-                    name: { in: validTags },
+        where: {
+          AND: [
+            {
+              // don't show problems where the war has not started yet
+              OR: [
+                { war: null },
+                {
+                  war: {
+                    startTime: { lt: new Date() },
                   },
                 },
-              }
-            : {},
+              ],
+            },
+            validTags && validTags.length > 0
+              ? {
+                  tags: {
+                    some: {
+                      name: { in: validTags },
+                    },
+                  },
+                }
+              : {},
+          ],
+        },
         select: {
           id: true,
           name: true,

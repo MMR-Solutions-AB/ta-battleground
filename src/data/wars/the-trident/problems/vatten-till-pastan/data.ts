@@ -3,9 +3,8 @@ import type { Problem } from "../../../../Problem";
 export const data: Problem<number, number> = {
   name: "Vatten till pastan",
   difficulty: "easy",
-  number: 57,
+  number: 67,
   arguments: [{ name: "n", type: "number" }],
-  isHidden: true,
   tags: ["numbers", "functions"],
   testCases: [
     {

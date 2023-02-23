@@ -4,13 +4,18 @@ import { getAllWars } from "../src/data/getAllWars";
 
 async function syncDBWithWars() {
   const wars = await getAllWars();
-  const warPromises: Promise<any>[] = [];
+  let warPromises: Promise<any>[] = [];
 
   const factions = await prisma.faction.findMany();
 
   for (let i = 0; i < wars.length; i++) {
     const war = wars[i];
     if (!war) continue;
+
+    if (i % 10 === 0) {
+      await Promise.all(warPromises);
+      warPromises = [];
+    }
 
     warPromises.push(
       prisma.war.upsert({
@@ -98,11 +103,16 @@ async function syncDBWithWars() {
 async function syncDBWithProblems() {
   const problems = await getAllProblems();
 
-  const promises: Promise<any>[] = [];
+  let promises: Promise<any>[] = [];
 
   for (let i = 0; i < problems.length; i++) {
     const problem = problems[i];
-    if (!problem || problem.isHidden) continue;
+    if (!problem) continue;
+
+    if (i % 10 === 0) {
+      await Promise.all(promises);
+      promises = [];
+    }
 
     promises.push(
       prisma.problem.upsert({
@@ -147,7 +157,22 @@ async function syncDBWithProblems() {
   await Promise.all(promises);
 }
 
+async function syncWithFactions() {
+  const factionCount = await prisma.faction.count();
+
+  if (factionCount < 4) {
+    await prisma.faction.createMany({
+      data: [
+        { name: "Typescript Titans" },
+        { name: "Css Challengers" },
+        { name: "React Raiders" },
+        { name: "Node Ninjas" },
+      ],
+    });
+  }
+}
 async function main() {
+  await syncWithFactions();
   await syncDBWithWars();
   await syncDBWithProblems();
   // const problems = await getAllProblems();

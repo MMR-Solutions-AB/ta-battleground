@@ -4,7 +4,6 @@ export const data: Problem<any, number[]> = {
   name: "Den smala arrayn",
   difficulty: "easy",
   number: 55,
-  isHidden: true,
   arguments: [{ name: "arr", type: "number[]" }],
   tags: ["numbers", "arrays"],
   testCases: [

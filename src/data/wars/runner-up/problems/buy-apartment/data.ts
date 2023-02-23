@@ -3,12 +3,11 @@ import type { Problem } from "../../../../Problem";
 export const data: Problem<number, string> = {
   name: "Buy apartment",
   difficulty: "easy",
-  number: 68,
+  number: 60,
   arguments: [
     { name: "price", type: "number" },
     { name: "bank", type: "number" },
   ],
-  isHidden: true,
   tags: ["numbers"],
   testCases: [
     {

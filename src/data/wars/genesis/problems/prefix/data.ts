@@ -3,9 +3,8 @@ import type { Problem } from "../../../../Problem";
 export const data: Problem<string[], string> = {
   name: "Prefix",
   difficulty: "medium",
-  number: 67,
+  number: 57,
   arguments: [{ name: "s", type: "string[]" }],
-  isHidden: true,
   tags: ["strings", "arrays"],
   testCases: [
     {

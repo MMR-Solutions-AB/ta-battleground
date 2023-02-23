@@ -35,7 +35,6 @@ export type ProblemCreate<I = any, O = any> = Omit<
   testCases: TestCase<I, O>[];
   arguments: ProblemArgument[];
   tags: Tags[];
-  isHidden?: true;
 };
 
 export type Problem<I, O> = Omit<ProblemCreate<I, O>, "description" | "warId">;

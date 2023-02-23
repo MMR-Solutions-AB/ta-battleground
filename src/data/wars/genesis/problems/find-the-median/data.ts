@@ -4,7 +4,6 @@ export const data: Problem<number[], number> = {
   name: "Find the median",
   difficulty: "medium",
   number: 56,
-  isHidden: true,
   arguments: [{ name: "arr", type: "array" }],
   tags: ["numbers", "arrays"],
   testCases: [
@@ -17,8 +16,8 @@ export const data: Problem<number[], number> = {
       output: 5,
     },
     {
-      input: [[4, 40, 20, 9, 5]],
-      output: 9,
+      input: [[4, 20, 10, 5]],
+      output: 15,
     },
     {
       input: [[100, 7, 15]],

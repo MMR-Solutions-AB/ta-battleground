@@ -107,7 +107,7 @@ async function syncDBWithProblems() {
 
   for (let i = 0; i < problems.length; i++) {
     const problem = problems[i];
-    if (!problem || problem.isHidden) continue;
+    if (!problem) continue;
 
     if (i % 10 === 0) {
       await Promise.all(promises);

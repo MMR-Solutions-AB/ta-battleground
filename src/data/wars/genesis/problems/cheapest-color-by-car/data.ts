@@ -11,7 +11,7 @@ export const data: Problem<
 > = {
   name: "Cheapest color by car",
   difficulty: "medium",
-  number: 60,
+  number: 54,
   arguments: [
     {
       name: "cars",
@@ -19,7 +19,6 @@ export const data: Problem<
     },
     { name: "color", type: "string" },
   ],
-  isHidden: true,
   tags: ["numbers", "arrays", "objects"],
   testCases: [
     {

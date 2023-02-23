@@ -1,11 +1,10 @@
-import type { Problem } from "../../Problem";
+import type { Problem } from "../../../../Problem";
 
 export const data: Problem<{ name: string; type: string }[], number> = {
   name: "Obj diff",
   difficulty: "easy",
-  number: 64,
+  number: 66,
   arguments: [{ name: "objects", type: "{name: string, type:string}[]" }],
-  isHidden: true,
   tags: ["strings", "arrays", "objects"],
   testCases: [
     {
