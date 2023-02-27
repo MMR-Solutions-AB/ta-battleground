@@ -55,7 +55,7 @@ const FactionsDisplay: React.FC<FactionsDisplayProps> = ({
               key={contender.id}
               onClick={() => setSelectedIndex(i)}
             >
-              <div className="relative h-20 w-full bg-red-500 lg:h-28">
+              <div className="relative h-20 w-full lg:h-28">
                 <Image
                   src={`/banners/${contender.faction.image}`}
                   alt={`${contender.faction.name} banner image`}
