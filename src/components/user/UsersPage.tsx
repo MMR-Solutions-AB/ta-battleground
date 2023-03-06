@@ -143,7 +143,7 @@ const UserPage: React.FC<UsersPageProps> = ({ userId }) => {
             </div>
           )}
           {isOwnUsersPage && (
-            <div className="mt-auto">
+            <div className="mt-auto ml-auto">
               <button
                 className="rounded-md bg-red-600 px-5 py-1.5 text-sm font-semibold text-white no-underline transition hover:opacity-80"
                 onClick={() => signOut({ callbackUrl: "/auth/sign-in" })}
