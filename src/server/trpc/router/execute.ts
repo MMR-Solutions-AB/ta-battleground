@@ -90,32 +90,32 @@ export const executeRouter = router({
           ).toFixed(2)
         );
 
-        // if (!mostRecentSuccessfullySubmission) {
-        //   await ctx.prisma.user.update({
-        //     where: {
-        //       id: ctx.session.user.id,
-        //     },
-        //     data: {
-        //       completedProblems: {
-        //         increment: 1,
-        //       },
-        //       score: {
-        //         increment: scoreToIncrement,
-        //       },
-        //     },
-        //   });
-        // } else if (problemScore > mostRecentSuccessfullySubmission.score) {
-        //   await ctx.prisma.user.update({
-        //     where: {
-        //       id: ctx.session.user.id,
-        //     },
-        //     data: {
-        //       score: {
-        //         increment: scoreToIncrement,
-        //       },
-        //     },
-        //   });
-        // }
+        if (!mostRecentSuccessfullySubmission) {
+          await ctx.prisma.user.update({
+            where: {
+              id: ctx.session.user.id,
+            },
+            data: {
+              completedProblems: {
+                increment: 1,
+              },
+              score: {
+                increment: scoreToIncrement,
+              },
+            },
+          });
+        } else if (problemScore > mostRecentSuccessfullySubmission.score) {
+          await ctx.prisma.user.update({
+            where: {
+              id: ctx.session.user.id,
+            },
+            data: {
+              score: {
+                increment: scoreToIncrement,
+              },
+            },
+          });
+        }
 
         const currentTime = new Date();
 
