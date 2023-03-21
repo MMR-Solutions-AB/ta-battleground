@@ -1,5 +1,5 @@
 import { prisma } from "../src/server/db/client";
-import { syncDBWithFactions } from "./runners/syncDbWithFactions";
+import { syncDBWithFactions } from "./runners/syncDBWithFactions";
 import { syncDBWithProblems } from "./runners/syncDBWithProblems";
 import { syncDBWithWars } from "./runners/syncDBWithWars";
 import { syncDBWithUserScores } from "./runners/syncDBWithUserScores";
