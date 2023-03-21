@@ -41,7 +41,7 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
           {problem.tags.length > 0 && (
             <div className="ml-3 flex items-center gap-2">
               {problem.war && (
-                <div className="cursor-pointer rounded-full bg-white py-0.5 px-1.5 text-xs text-black transition-opacity hover:opacity-50">
+                <div className="rounded-full bg-white py-0.5 px-1.5 text-xs text-black">
                   War
                 </div>
               )}

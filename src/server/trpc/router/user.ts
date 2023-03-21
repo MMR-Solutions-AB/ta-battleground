@@ -18,6 +18,18 @@ export const userRouter = router({
           score: true,
           batch: true,
           createdAt: true,
+          faction: {
+            select: {
+              createdAt: true,
+              faction: {
+                select: {
+                  allTimeScore: true,
+                  name: true,
+                  image: true,
+                },
+              },
+            },
+          },
           submissions: {
             select: {
               id: true,
@@ -59,8 +71,6 @@ export const userRouter = router({
   updateBatch: protectedProcedure
     .input(z.object({ batch: z.number().gt(0) }))
     .mutation(async ({ ctx, input }) => {
-      console.log(input);
-
       const user = await ctx.prisma.user.update({
         where: {
           id: ctx.session.user.id,
