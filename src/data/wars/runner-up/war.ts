@@ -1,8 +1,0 @@
-import type { WarCreate } from "../../War";
-
-export const data: WarCreate = {
-  name: "Runner up",
-  number: 2,
-  startTime: new Date("23 april 2024"),
-  endTime: new Date("24 april 2024"),
-};

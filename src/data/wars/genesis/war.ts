@@ -3,6 +3,6 @@ import type { WarCreate } from "../../War";
 export const data: WarCreate = {
   name: "Genesis",
   number: 1,
-  startTime: new Date("26 mars 2024"),
-  endTime: new Date("27 mars 2024"),
+  startTime: new Date("30 mars 2023 19:00"),
+  endTime: new Date("30 april 2023 19:00"),
 };

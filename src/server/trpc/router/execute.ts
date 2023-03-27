@@ -119,12 +119,24 @@ export const executeRouter = router({
 
         const currentTime = new Date();
 
+        const userFaction = await ctx.prisma.faction.findFirst({
+          where: {
+            members: {
+              some: {
+                userId: ctx.session.user.id,
+              },
+            },
+          },
+        });
+
         if (
+          userFaction && // make sure only to do this if user is in faction
           problem.warId &&
           problem.war &&
           currentTime > problem.war.startTime && // make sure that you can now update faction score when war is inactive
           currentTime < problem.war.endTime
         ) {
+          // get all the best solutions for this problem from this users facction
           const submissions = await ctx.prisma.submission.findMany({
             where: {
               problem: {
