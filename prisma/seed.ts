@@ -15,6 +15,7 @@ async function main() {
   await syncDBWithProblems();
 
   // make sure all scores are up to date
+  // this does not to be used unless user table gets out of sync
   // await syncDBWithUserScores();
 }
 

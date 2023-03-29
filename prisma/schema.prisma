@@ -97,9 +97,9 @@ model Faction {
 model FactionMember {
   id        String   @id @default(cuid())
   factionId String
-  faction   Faction  @relation(fields: [factionId], references: [id])
+  faction   Faction  @relation(fields: [factionId], references: [id], onDelete: Cascade)
   userId    String   @unique
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -124,9 +124,9 @@ model FactionWarContender {
   id        String   @id @default(cuid())
   score     Float    @default(0)
   factionId String
-  faction   Faction  @relation(fields: [factionId], references: [id])
+  faction   Faction  @relation(fields: [factionId], references: [id], onDelete: Cascade)
   warId     String
-  war       War      @relation(fields: [warId], references: [id])
+  war       War      @relation(fields: [warId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -156,7 +156,7 @@ model Problem {
   tags        Tag[]
   topSolution Submission?       @relation("topSolution")
   warId       String?
-  war         War?              @relation(fields: [warId], references: [id])
+  war         War?              @relation(fields: [warId], references: [id], onDelete: SetNull)
 
   @@index([name, difficulty, number])
   @@index([name])
@@ -198,11 +198,11 @@ model Submission {
   score                Float
   testCases            Json
   problemId            String
-  problem              Problem          @relation("submsissions", fields: [problemId], references: [id])
+  problem              Problem          @relation("submsissions", fields: [problemId], references: [id], onDelete: Cascade)
   topSolutionProblemId String?          @unique
   topSolutionProblem   Problem?         @relation("topSolution", fields: [topSolutionProblemId], references: [id])
   userId               String
-  user                 User             @relation(fields: [userId], references: [id])
+  user                 User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt            DateTime         @default(now())
   updatedAt            DateTime         @updatedAt
 
