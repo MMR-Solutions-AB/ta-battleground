@@ -24,11 +24,11 @@ export const warRouter = router({
             difficulty: true,
             number: true,
             tags: true,
-            submissions: {
+            topSolution: {
               select: {
                 id: true,
-                score: true,
                 code: true,
+                score: true,
                 user: {
                   select: {
                     faction: {
@@ -44,13 +44,23 @@ export const warRouter = router({
                   },
                 },
               },
-              take: 1,
+            },
+            submissions: {
+              where: {
+                userId: ctx.session.user.id,
+              },
+              select: {
+                status: true,
+                score: true,
+                code: true,
+                createdAt: true,
+              },
               orderBy: [
                 {
                   score: "desc",
                 },
-                { createdAt: "asc" },
               ],
+              take: 1,
             },
           },
           orderBy: {

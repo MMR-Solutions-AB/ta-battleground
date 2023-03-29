@@ -4,12 +4,26 @@ import { Edit } from "react-feather";
 interface DescriptionProps {
   description: string;
   problemName: string;
+  warName: string | undefined;
 }
 
 const Description: React.FC<DescriptionProps> = ({
   description,
   problemName,
+  warName,
 }) => {
+  const trimmedProblemName = problemName
+    .trim()
+    .toLowerCase()
+    .split(" ")
+    .join("-");
+
+  const trimmedWarName = (warName || "")
+    .trim()
+    .toLowerCase()
+    .split(" ")
+    .join("-");
+
   return (
     <div className="py-5 px-3">
       <div
@@ -25,11 +39,9 @@ const Description: React.FC<DescriptionProps> = ({
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-1 text-sm text-primary underline"
-          href={`https://github.com/imMatheus/ta-battleground/tree/main/src/data/problems/${problemName
-            .trim()
-            .toLowerCase()
-            .split(" ")
-            .join("-")}/description.md`}
+          href={`https://github.com/MMR-Solutions-AB/ta-battleground/tree/main/src/data/${
+            warName ? `wars/${trimmedWarName}/` : ""
+          }problems/${trimmedProblemName}/description.md`}
         >
           Redigera denna uppgift
           <Edit className="h-3 w-3" />

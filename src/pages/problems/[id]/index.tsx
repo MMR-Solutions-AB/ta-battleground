@@ -18,10 +18,15 @@ const Problem: NextPageWithLayout = () => {
         <BouncingBalls />
       </div>
     );
+
   if (!problem) return <p>hmm, error</p>;
 
   return (
-    <Description description={problem.description} problemName={problem.name} />
+    <Description
+      description={problem.description}
+      problemName={problem.name}
+      warName={problem.war?.name}
+    />
   );
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import type { RouterOutputs } from "@/utils";
 import ProblemsTableHeadRow from "@/components/problems/table/ProblemsTableHeadRow";
-import { CheckCircle } from "react-feather";
+import { Activity, CheckCircle } from "react-feather";
 import Link from "next/link";
 import classNames from "classnames";
 
@@ -34,11 +34,13 @@ const ProblemsTable: React.FC<ProblemTableProps> = ({ problems }) => {
               </td>
               <td className="relative h-full">
                 <div className="peer flex h-full max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
-                  {/* {submission.score > 0 ? ( */}
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  {/* ) : (
+                  {!problem.submissions || !problem.submissions[0] ? (
+                    ""
+                  ) : problem.submissions[0]?.score > 0 ? (
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                  ) : (
                     <Activity className="h-4 w-4 text-amber-500" />
-                  )} */}
+                  )}
                 </div>
               </td>
               <td className="relative h-full">
@@ -91,16 +93,16 @@ const ProblemsTable: React.FC<ProblemTableProps> = ({ problems }) => {
               </td>
               <td className="relative h-full">
                 <div className="h-ful peer flex max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
-                  {problem.submissions[0] &&
-                    problem.submissions[0].score.toFixed(2) +
+                  {problem.topSolution &&
+                    problem.topSolution.score.toFixed(2) +
                       " - " +
-                      `{${problem.submissions[0].code.length}}`}
+                      `{${problem.topSolution.code.length}}`}
                 </div>
               </td>
               <td className="relative h-full">
                 <div className="h-ful peer flex max-w-lg items-center overflow-hidden text-ellipsis whitespace-nowrap px-2">
-                  {problem.submissions[0] &&
-                    problem.submissions[0].user.faction?.faction.name}
+                  {problem.topSolution &&
+                    problem.topSolution.user.faction?.faction.name}
                 </div>
               </td>
             </tr>

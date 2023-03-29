@@ -23,28 +23,35 @@ const FactionsDisplay: React.FC<FactionsDisplayProps> = ({
         <h4 className="mb-3 text-3xl font-bold">
           {selectedContenders.faction.name}
         </h4>
-        <div className="grid gap-4 lg:grid-cols-2">
-          {selectedContenders.faction.members?.map(({ user }, i) => {
-            const submissions = user.submissions.filter(
-              (submission) => submission.problem.warId === warId
-            );
+        {selectedContenders.faction.members.length > 0 ? (
+          <div className="grid gap-4 lg:grid-cols-2">
+            {selectedContenders.faction.members?.map(({ user }, i) => {
+              const submissions = user.submissions.filter(
+                (submission) => submission.problem.warId === warId
+              );
 
-            const score = submissions.reduce(
-              (prev, curr) => prev + curr.score,
-              0
-            );
+              const score = submissions.reduce(
+                (prev, curr) => prev + curr.score,
+                0
+              );
 
-            return (
-              <Card
-                key={user.id}
-                user={user}
-                index={i}
-                score={score}
-                targets={submissions.length}
-              />
-            );
-          })}
-        </div>
+              return (
+                <Card
+                  key={user.id}
+                  user={user}
+                  index={i}
+                  score={score}
+                  targets={submissions.length}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <p className="pr-8 text-lg tracking-wider">
+            Verkar som att denna Faction är tom! Var snäll att meddela techover
+            teamet angående det :)
+          </p>
+        )}
       </div>
       <div className="">
         <h4 className="mb-3 text-3xl font-bold">Factions</h4>

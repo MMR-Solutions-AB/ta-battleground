@@ -161,6 +161,12 @@ export const problemRouter = router({
               createdAt: "desc",
             },
           },
+          war: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
         },
       });
     }),
