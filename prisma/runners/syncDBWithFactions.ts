@@ -6,7 +6,7 @@ export async function syncDBWithFactions() {
 
   const baseFactions = [
     { name: "Typescript Titans" },
-    { name: "Css Challengers" },
+    { name: "CSS Challengers" },
     { name: "React Raiders" },
     { name: "Node Ninjas" },
   ];
