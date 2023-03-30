@@ -9,7 +9,7 @@ export const data: Problem<
   | string,
   number
 > = {
-  name: "Cheapest color by car",
+  name: "Cheapest car by color",
   difficulty: "medium",
   number: 54,
   arguments: [

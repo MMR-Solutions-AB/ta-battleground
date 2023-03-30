@@ -32,6 +32,4 @@ arr = [12, 14, 16, 10, 8]
 
 **_Förklaring_**
 
-```bash
 En array där man först har sorterat elementen i stigande ordning och därefter tagit ut medianen.
-```

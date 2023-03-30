@@ -21,7 +21,11 @@ export const data: Problem<number[], number> = {
     },
     {
       input: [[100, 7, 15]],
-      output: 15,
+      output: 7,
+    },
+    {
+      input: [[1, 2, 100, 120, 3, 4]],
+      output: 110,
     },
   ],
 };
