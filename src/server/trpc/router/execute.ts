@@ -213,7 +213,7 @@ export const executeRouter = router({
                 },
               },
               data: {
-                score: newContenderScore,
+                score: parseFloat(newContenderScore.toFixed(2)),
               },
             });
 
