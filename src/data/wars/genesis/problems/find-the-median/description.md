@@ -21,15 +21,15 @@ arr = [1, 2, 3, 4, 5]
 **_Input_**
 
 ```bash
-arr = [12, 14, 16, 10, 8]
+arr = [4, 20, 10, 5]
 ```
 
 **_Output_**
 
 ```bash
- 12
+ 15
 ```
 
 **_Förklaring_**
 
-En array där man först har sorterat elementen i stigande ordning och därefter tagit ut medianen.
+Det två mittersta numrena är **20** och **10**, och det talet mellan är **15**

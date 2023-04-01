@@ -12,12 +12,12 @@ export const data: Problem<number[], number> = {
       output: 3,
     },
     {
-      input: [[1, 3, 5, 7, 10]],
-      output: 5,
-    },
-    {
       input: [[4, 20, 10, 5]],
       output: 15,
+    },
+    {
+      input: [[1, 3, 5, 7, 10]],
+      output: 5,
     },
     {
       input: [[100, 7, 15]],
