@@ -17,15 +17,24 @@ const FactionsDisplay: React.FC<FactionsDisplayProps> = ({
 
   if (!selectedContenders) return null;
 
+  const members = selectedContenders.faction.members
+    .map((member) => ({
+      ...member,
+      score: member.user.submissions
+        .filter((submission) => submission.problem.warId === warId)
+        .reduce((prev, curr) => prev + curr.score, 0),
+    }))
+    .sort((a, b) => b.score - a.score);
+
   return (
     <div className="my-5 grid gap-4 lg:my-10 lg:grid-cols-2">
       <div className="">
         <h4 className="mb-3 text-3xl font-bold">
           {selectedContenders.faction.name}
         </h4>
-        {selectedContenders.faction.members.length > 0 ? (
+        {members.length > 0 ? (
           <div className="grid gap-4 lg:grid-cols-2">
-            {selectedContenders.faction.members?.map(({ user }, i) => {
+            {members?.map(({ user }, i) => {
               const submissions = user.submissions.filter(
                 (submission) => submission.problem.warId === warId
               );
