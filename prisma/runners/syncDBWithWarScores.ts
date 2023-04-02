@@ -44,7 +44,7 @@ export async function syncDBWithWarScores() {
       const newContenderScore =
         submissions.reduce((a, b) => a + b.score, 0) /
         (faction.members.length || 1);
-      console.log(newContenderScore.toFixed(2));
+      console.log(parseFloat(newContenderScore.toFixed(2)));
 
       await prisma.factionWarContender.update({
         where: {
@@ -54,7 +54,7 @@ export async function syncDBWithWarScores() {
           },
         },
         data: {
-          score: newContenderScore,
+          score: parseFloat(newContenderScore.toFixed(2)),
         },
       });
 

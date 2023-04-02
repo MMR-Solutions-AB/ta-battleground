@@ -24,7 +24,7 @@ const FactionBanner: React.FC<FactionBannerProps> = ({ faction }) => {
       <div className="relative z-10">
         <h2 className="text-3xl font-bold">
           {faction.faction.name}{" "}
-          <span>{faction.faction.allTimeScore} Poäng</span>
+          <span>{faction.faction.allTimeScore.toFixed(2)} Poäng</span>
         </h2>
         <p className="font-semibold">
           Medlem sen {time.format(faction.createdAt.getTime())}
