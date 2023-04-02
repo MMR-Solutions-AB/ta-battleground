@@ -10,6 +10,9 @@ export async function syncDBWithUserScores() {
     const topSubmissions = await prisma.submission.findMany({
       where: {
         userId: user.id,
+        score: {
+          gt: 0,
+        },
       },
       select: {
         score: true,

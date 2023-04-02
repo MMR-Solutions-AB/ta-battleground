@@ -2,7 +2,7 @@ import type { Problem } from "../../../../Problem";
 
 export const data: Problem<number, number> = {
   name: "Stairway to heaven",
-  difficulty: "medium",
+  difficulty: "hard",
   number: 58,
   arguments: [{ name: "n", type: "number" }],
   tags: ["functions"],
@@ -16,8 +16,8 @@ export const data: Problem<number, number> = {
       output: 5,
     },
     {
-      input: [57],
-      output: 111,
+      input: [30],
+      output: 1346269,
     },
     {
       input: [1],
@@ -25,15 +25,15 @@ export const data: Problem<number, number> = {
     },
     {
       input: [0],
-      output: 1,
+      output: 0,
     },
     {
       input: [14],
-      output: 25,
+      output: 610,
     },
     {
       input: [9],
-      output: 15,
+      output: 55,
     },
   ],
 };
