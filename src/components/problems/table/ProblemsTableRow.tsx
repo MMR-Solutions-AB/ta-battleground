@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CheckCircle, Activity } from "react-feather";
 import classNames from "classnames";
 import { useRouter } from "next/router";
+import { ProblemsTags } from "./ProblemsTags";
 
 interface ProblemsTableRowProps {
   problem: RouterOutputs["problem"]["getAll"][number];
@@ -38,46 +39,7 @@ const ProblemsTableRow: React.FC<ProblemsTableRowProps> = ({ problem }) => {
           >
             {problem.name}
           </Link>
-          {problem.tags.length > 0 && (
-            <div className="ml-3 flex items-center gap-2">
-              {problem.war && (
-                <div className="rounded-full bg-white py-0.5 px-1.5 text-xs text-black">
-                  War
-                </div>
-              )}
-              {problem.tags.map((tag) => (
-                <div
-                  key={tag.id}
-                  onClick={() => {
-                    router.push({
-                      query: {
-                        ...router.query,
-                        tags: [tag.name],
-                      },
-                    });
-                  }}
-                  className={classNames(
-                    "cursor-pointer rounded-full py-0.5 px-1.5 text-xs transition-opacity hover:opacity-50",
-                    tag.name === "basics"
-                      ? "bg-green-600"
-                      : tag.name === "numbers"
-                      ? "bg-red-600"
-                      : tag.name === "objects"
-                      ? "bg-amber-600"
-                      : tag.name === "functions"
-                      ? "bg-pink-500"
-                      : tag.name === "strings"
-                      ? "bg-blue-600"
-                      : tag.name === "arrays"
-                      ? "bg-purple-600"
-                      : "bg-black"
-                  )}
-                >
-                  {tag.name}
-                </div>
-              ))}
-            </div>
-          )}
+          <ProblemsTags tags={problem.tags} isWar={!!problem.war} />
         </div>
       </td>
 
