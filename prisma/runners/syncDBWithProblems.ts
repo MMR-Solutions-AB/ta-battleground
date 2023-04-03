@@ -14,6 +14,7 @@ export async function syncDBWithProblems() {
     const problem = problems[i];
     if (!problem) continue;
 
+    // för att inte overloada prisma så kör vi alla requests
     if (i % 10 === 0) {
       await Promise.all(promises);
       promises = [];
