@@ -105,7 +105,6 @@ model Comment {
 }
 
 // du kommer också vara tvungen att ändra Problem och User tablen för att detta ska funka
-
 model User {
  ...
  comments Comment[]
@@ -116,6 +115,9 @@ model Problem {
  comments Comment[]
 }
 ```
+
+2. När det är gjort kan ska du pusha din changes så Planetscale kan ändra din riktiga databas, det gör du med **yarn db:push** och kom ihåg att du måste vara connectad till **dev** branchen
+3. Nu är det dags att skriva lite backend tRPC kod. Eftersom att detta är en ny sektion av vår databas vill vi nog skapa en ny fil i vår [src/server/trpc/router](./src/server/trpc/router) som vi kan kalla för **comment.ts**. Här kommer all backend kod leva för att läsa och skriva till våra kommentarer. I vår nya fil lägger vi till två funktioner, **getCommentsForProblem** och **sendComment**, namnen här spelar ju egenetligen ingen roll utan är enbart till
 
 Återigen rekommenderas att du sitter lite med hela **create t3 app** stacken själv för att väldigt enkelt komma in i kodbasen, men annars kan du nog gissa dig fram lite.
 
