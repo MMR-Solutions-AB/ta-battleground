@@ -194,6 +194,7 @@ enum SubmissionStatus {
 model Submission {
   id                   String           @id @default(cuid())
   code                 String           @db.MediumText
+  codeLength           Int              @default(0)
   status               SubmissionStatus
   score                Float
   testCases            Json
