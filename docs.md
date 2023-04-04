@@ -58,7 +58,7 @@ För att kunna förstå koden och faktiskt kunna utveckla vidare kommer du behö
 
 ### Database
 
-**Planetscale** är en hosting platform för att hosta MySQL databaser. Deras fokus ligger på att ha en sån bra developer experience som möjligt och samtidigt vara så absolut billigt som möjligt. Exempelvis får man på deras free tier **1 miljard** row reads i månaden vilket är absort mycket, för lite kontext så har vi inte kommit över **1.5 miljoner** en enda månad. En viktigt del utav Planetscale är att du kan ha olika **branches** som du jobbar på för att ha olika schemas och olika databaser. Så exempelvis har **Battleground** projektet på Planetscale två **branches**, **main** som är vår _production_ databas där alla riktigt användare data lever, sen har den också en **dev** branch som används för att utveckla på. För att gör en **schema change** i din **main** branch måste du göra en **pull request** liknade action på Planetscale hemsidan. Tillsammans med Planetscale används **Prisma** för att faktiskt beskriva scheman och faktiskt interagera med databasen genom hela applikationen. Du kan hitta hela Prisma scheman [här](./prisma/schema.prisma). Prisma är väldigt bra att du har koll på ifall du vill hålla på backend delen, som tur är så är Prisma väldigt enkelt att hänge med på ifall du redan har lite erfarenhet av **SQL**. Du kan hitta ett diagram på hela scheman i länken nedan.
+**Planetscale** är en hosting platform för att hosta MySQL databaser. Deras fokus ligger på att ha en sån bra developer experience som möjligt och samtidigt vara så absolut billigt som möjligt. Exempelvis får man på deras free tier **1 miljard** row reads i månaden vilket är absort mycket, för lite kontext så har vi inte kommit över **1.5 miljoner** en enda månad. En viktigt del utav Planetscale är att du kan ha olika **branches** som du jobbar på för att ha olika schemas och olika databaser. Så exempelvis har **Battleground** projektet på Planetscale två **branches**, **main** som är Battlegrounds _production_ databas där alla riktigt användare data lever, sen har den också en **dev** branch som används för att utveckla på. För att gör en **schema change** i din **main** branch måste du göra en **pull request** liknade action på Planetscale hemsidan. Tillsammans med Planetscale används **Prisma** för att faktiskt beskriva scheman och faktiskt interagera med databasen genom hela applikationen. Du kan hitta hela Prisma scheman [här](./prisma/schema.prisma). Prisma är väldigt bra att du har koll på ifall du vill hålla på backend delen, som tur är så är Prisma väldigt enkelt att hänge med på ifall du redan har lite erfarenhet av **SQL**. Du kan hitta ett diagram på hela scheman i länken nedan.
 
 **Så här gör du ifall du vill göra en schema ändring:**
 
@@ -75,7 +75,7 @@ Här hittar du en länk till ett diagram som visar hur scheman för hela projekt
 
 ### Backend
 
-Hela backend använder sig utav **tRPC** för att definiera massa olika funktioner som du kan se som **end-points**. Den enda riktiga viktiga mappen som du ska vara in och röra i ifall du vill ändra saker i backenden är [src/server/trpc/router](./src/server/trpc/router), där lever filerna som deklarerar alla funktioner som våran frontend kommer kunna använda. Exempelvis finns filen [src/server/trpc/router/leaderboard](./src/server/trpc/router/leaderboard.ts) som enbart har en simple liten funktion, **getAll**. Den funktion returnerat enbart en **Prisma** query som hämtar alla användare i ordning av deras score. Vilket är hela principen med hela backenden, många funktioner som är som endpoints men egentligen är vanliga funktioner. Det fina med tRPC är att man får **end-to-end typesafety** vilket innebär att på frontend koden vet vi exakt hur datan vi får tillbaka kommer att se ut. Vi kan se ett exempel på hur vi använder vår **getAll** funktion från vår **leaderboard.ts** fil i frontend i filen [src/pages/leaderboard.tsx](./src/pages/leaderboard.tsx), där kan du se om du hovrar över **data** variabeln att vi har exakt rätt typescript type. Mer om exakt hur den relationen hittar du i **Frontend** sektion i detta dokument
+Hela backend använder sig utav **tRPC** för att definiera massa olika funktioner som du kan se som **end-points**. Den enda riktiga viktiga mappen som du ska vara in och röra i ifall du vill ändra saker i backenden är [src/server/trpc/router](./src/server/trpc/router), där lever filerna som deklarerar alla funktioner som frontenden kommer kunna använda. Exempelvis finns filen [src/server/trpc/router/leaderboard](./src/server/trpc/router/leaderboard.ts) som enbart har en simple liten funktion, **getAll**. Den funktion returnerat enbart en **Prisma** query som hämtar alla användare i ordning av deras score. Vilket är hela principen med hela backenden, många funktioner som är som endpoints men egentligen är vanliga funktioner. Det fina med tRPC är att man får **end-to-end typesafety** vilket innebär att på frontend koden vet vi exakt hur datan vi får tillbaka kommer att se ut. Vi kan se ett exempel på hur vi använder vår **getAll** funktion från vår **leaderboard.ts** fil i frontend i filen [src/pages/leaderboard.tsx](./src/pages/leaderboard.tsx), där kan du se om du hovrar över **data** variabeln att vi har exakt rätt typescript type. Mer om exakt hur den relationen hittar du i **Frontend** sektion i detta dokument
 
 Projektet använder sig utav **Next auth** för att hantera inloggning med **Github** OAuth provider. Det finns väldigt lite som behövs göra här och väldigt lite kommer faktiskt ändras nånsin. Men för att få tillgång till användarens id på backenden så får du den från **ctx.session.user.id**, du kan se ett exempel av detta i [problem.ts](./src/server/trpc/router/problem.ts) filen i **router** mappen längst ner i **getMySubmissions**
 
@@ -85,4 +85,46 @@ Hela servern hostas via **Next.js api routes** och start filen för det ligger i
 
 ### Frontend
 
-På frontenden används Next.js och Tailwind primärt för all UI. Tailwind går ganska snabbt att lära sig och du hittar
+På frontenden används Next.js och Tailwind för all UI. Tailwind går ganska snabbt att lära sig och du hittar config filen [tailwind.config.cjs](./tailwind.config.cjs), den ska du förmodligen inte röra ofta alls om du inte vill ändra färgerna på sidan exempelvis.
+
+Här är alla mappar du behöver hålla koll på när det kommer till frontenden:
+
+- [components](./src/components/) - Innehåller alla allmäna komponeter genom projektet
+- [context](./src/context/) - Innehåller två context filer för React context,
+  - EditorContext.tsx - För att hantera settings för själva editorn, så som **font size** eller **theme**
+  - ModalContext.tsx - För att visa och gömma hela editor modal
+- [pages](./src/pages/) - Definierar alla olika url:er och vad som ska visas på det olika url:erna. Exempelvis i [pages/leaderboard.tsx](./src/pages/leaderboard.tsx) så kan du se vad som visas på **"/leaderboard"** url:en
+
+När det kommer till att hämta data från backenden till frontenden så används **tRPC** vilket är ett ramverk för att både backend men även frontend, och med det får vi extremt bra developer experience tack vara den **end-to-end typesafety** vi får. Hur tRPC funkar från ett backend perspektiv hittar du i **Backend** sektion ovanför. Men på frontend delen av applikation så använder tRPC **useQuery**, vilket är ett annat populärt npm paket, _under the hood_.
+
+För att fetcha en endpoint så börjar du med att importera **trpc** från **utils** mappen vilket du enkelt kan göra med **path alias "@/../"**. Sen använder du den variabel i din komponent för att välja vilken route du vill fetcha från samt vilken function du vill köra. Exempelvis nedan kan du se en komponent som fetchar från en route som heter **test** och kör **getNumber** function, samt hur backend koden för den routen hade sett ut
+
+```tsx
+// src/components/MyComponent.tsx
+
+import { trpc } from "@/utils/trpc";
+
+export const MyComponent = () => {
+  const { data: number, isLoading, isError } = trpc.test.getNumber.useQuery();
+
+  if (isLoading) return <p>Loading...</p>;
+
+  if (isError || !number) return <p>Kunde inte hämta ditt nummer</p>;
+
+  return <p>Ditt nummer är {number}</p>;
+};
+```
+
+```tsx
+// src/server/trpc/router/test.ts
+
+import { router, protectedProcedure } from "../trpc";
+
+export const testRouter = router({
+  getNumber: protectedProcedure.query(async () => {
+    return 8;
+  }),
+});
+```
+
+Om allting i exemplet ovan var correct, så som att lägga

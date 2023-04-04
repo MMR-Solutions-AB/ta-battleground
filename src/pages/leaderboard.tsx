@@ -11,6 +11,7 @@ const Leaderboard: NextPage = () => {
   const batches = [1, 2, 3, 4, 5];
   const [selectedBatch, setSelectedBatch] = useState<number | null>(null);
   const filteredUsers = users?.filter((user) =>
+    // ifall ingen selected bach, ska vi visa alla så vi bara returnerar true
     selectedBatch ? user.batch === selectedBatch : true
   );
 
