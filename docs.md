@@ -68,6 +68,8 @@ För att kunna förstå koden och faktiskt kunna utveckla vidare kommer du behö
 4. Nu borde du se att **dev** branchen i Planetscale hemsidan har fått en schema ändring, nu trycker du på **"Create deploy request"**
 5. Sist är det bara trycka på **"Deploy changes"** på den så kommer dina ändring komma in i **main** branchen på Planetscale
 
+Med Prisma vår vi även tillgång till **Prisma studio** vilket är en liten sida för se vår databas i ett UI och interagera med den där ifrån. För att starta upp prisma studio, skriv **yarn studio** i terminalen så borde ett den öppna upp [localhost:5555](https://localhost:5555) där du kan se prisma studio
+
 ### SQL Schema
 
 Här hittar du en länk till ett diagram som visar hur scheman för hela projektet är upp strukturerat
@@ -80,6 +82,40 @@ Hela backend använder sig utav **tRPC** för att definiera massa olika funktion
 Projektet använder sig utav **Next auth** för att hantera inloggning med **Github** OAuth provider. Det finns väldigt lite som behövs göra här och väldigt lite kommer faktiskt ändras nånsin. Men för att få tillgång till användarens id på backenden så får du den från **ctx.session.user.id**, du kan se ett exempel av detta i [problem.ts](./src/server/trpc/router/problem.ts) filen i **router** mappen längst ner i **getMySubmissions**
 
 Hela servern hostas via **Next.js api routes** och start filen för det ligger i [src/pages/api](./src/pages/api/trpc/%5Btrpc%5D.ts). Den filen ska du dock aldrig röra
+
+Exempelvis, säg att du vill skapa en ny sektion på sidan som låter användare kommentera på uppgifterna och du vill skapa den funktionaliteten på backend, då hade du gjort följande.
+
+1. Först måste du faktiskt ändra scheman så att din databas kan spara den datan. Så du börjar med att ändra att din [prisma fil](./prisma/schema.prisma) får följande
+
+```prisma
+// skapar en ny table för att hålla
+model Comment {
+  id         String    @id @default(cuid())
+  text       String
+  problemId  String    // säger att den ska en column ska länka till ett problem
+  problem    Problem   @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  userId     String    // säger att den ska en column ska länka till en user
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  // long story short, dessa behövs för att sql ska vara snabbare
+  @@index([problemId])
+  @@index([userId])
+}
+
+// du kommer också vara tvungen att ändra Problem och User tablen för att detta ska funka
+
+model User {
+ ...
+ comments Comment[]
+}
+
+model Problem {
+ ...
+ comments Comment[]
+}
+```
 
 Återigen rekommenderas att du sitter lite med hela **create t3 app** stacken själv för att väldigt enkelt komma in i kodbasen, men annars kan du nog gissa dig fram lite.
 
