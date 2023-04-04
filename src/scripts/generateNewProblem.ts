@@ -46,7 +46,6 @@ async function generateNewProblem() {
 
   const { selected_tags } = await inquirer.prompt({
     name: "selected_tags",
-
     type: "checkbox",
     message: "Vilka tags ska uppgiften ha?",
     choices: tags,
