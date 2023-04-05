@@ -457,3 +457,19 @@ export default Comments;
 ```
 
 Och bara så, så har vi gjort en ny feature på Battleground som är redo att deploya.
+
+## Hur lägger jag till nya problem, factions, medlemmar i factions och wars
+
+Denna process är super enkel och smidig samt väldigt automatiserad. För **problem, factions och wars** är det väldigt enkelt och kan nästan helt göras vi din terminal får ett kommando.
+
+Du hittar egentligen all data om både **problems och wars** i [src/data](./src/data) mappen. I den mappen hittar du ett par olika filer och mappar. Men enda du egentligen kommer att röra är i [problems](./src/data/problems/) eller i [wars](./src/data/wars) mappen. I **problems** mappen hittar du alla uppgifter som INTE är en **war** uppgift, varje uppgift är uppbyggt av exakt två filer, en **data.ts** fil som innehåller alla metadata om uppgiften som svårighetsgrad samt testcases bland annat, och en **description.md** fil som är en helt enkel markdown fil som är själva uppgiftens beskriven. Dessa fil namn är **väldigt** viktiga och ska heta så.
+
+### Lägga till Problems
+
+I din terminal skriv
+
+```bash
+yarn gen
+```
+
+Den kommer nu fråga dig ett par olika frågor, så som namnet på problemet, svårighetsgrad, samt ifall du vill att detta ska vara en uppgift till en **war**

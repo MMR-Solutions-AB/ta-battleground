@@ -18,7 +18,7 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children }) => {
 
   return (
     <Link
-      href={`/problems/${router.query.id}{href}`}
+      href={`/problems/${router.query.id}${href}`}
       className={classNames(
         "rounded-t-md py-2 px-4",
         router.pathname === `/problems/[id]${href}`
