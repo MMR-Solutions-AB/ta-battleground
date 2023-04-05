@@ -6,10 +6,9 @@ I denna fil kommer du hitta all info du behöver angående battleground, allt fr
 
 1. Hur startar jag projekt på min dator?
 2. Tech och prerequisite
-3. SQL Schema
-4. Vart ligger alla filer och mappar?
-5. Hur lägger jag till nya **problem, factions, medlemmar i factions och wars**
-6. Hur deployar jag?
+3. Vart ligger alla filer och mappar?
+4. Hur lägger jag till nya **problem, factions, medlemmar i factions och wars**
+5. Hur deployar jag?
 
 ## Hur startar jag projektet på min dator?
 
@@ -312,11 +311,8 @@ Nu kommer vår sida ha en ny länk till till **/comments**
 
 ```tsx
 // src/pages/problems/[id]/comments.tsx
-import ProblemsLayout from "@/components/layouts/ProblemsLayout";
-import { trpc } from "@/utils/trpc";
-import { useRouter } from "next/router";
-import BouncingBalls from "@/components/loaders/BouncingBalls";
-import type { NextPageWithLayout } from "@/pages/_app";
+
+// alla andra import går här...
 import { useState } from "react";
 
 // Att vår komponent har NextPageWithLayout om type låter oss lägga till .getLayout delen längre ner
@@ -329,22 +325,11 @@ const Comments: NextPageWithLayout = () => {
   } = trpc.comment.getCommentsForProblem.useQuery({
     id: router.query.id as string,
   });
+  const utils = trpc.useContext();
   const sendCommentMutation = trpc.comment.sendComment.useMutation();
   const [comment, setComment] = useState("");
 
-  if (isLoading)
-    return (
-      <div className="mt-10 flex justify-center">
-        <BouncingBalls />
-      </div>
-    );
-
-  if (isError || !comments || comments.length === 0)
-    return (
-      <p className="p-6 text-xl font-bold">
-        Verkar som att det inte fanns några kommentarer
-      </p>
-    );
+  // loading och error states:en från förra code snippet:en går här ...
 
   return (
     <div>
@@ -358,10 +343,19 @@ const Comments: NextPageWithLayout = () => {
           onClick={async () => {
             // Det här är när vi faktiskt gör vår "POST" request
             // om du kollar på vår sendComment funktion i vår backend kan du se att den tog två saker i vår input, id och text
-            const res = await sendCommentMutation.mutateAsync({
-              id: router.query.id as string,
-              text: comment,
-            });
+            const res = await sendCommentMutation.mutateAsync(
+              {
+                id: router.query.id as string,
+                text: comment,
+              },
+              {
+                // när request:en går igenom, ska vi invalidate:a "getCommentsForProblem" så att den kommer fetcha den på nytt
+                // long story short, fetcha alla comments igen så att användaren kan se den som precis skapats
+                onSuccess() {
+                  utils.comment.getCommentsForProblem.invalidate();
+                },
+              }
+            );
 
             console.log(res);
           }}
@@ -377,3 +371,89 @@ Comments.getLayout = (page) => <ProblemsLayout>{page}</ProblemsLayout>;
 
 export default Comments;
 ```
+
+Nu kan du faktiskt skicka comments som borde spara i databasen
+
+> Notera att detta inte tar hand om att visa errors eller loading state för när själva mutationen går fel. Det borde du ha med, du kan hitta hur det hade sett ut på tRPCs dokumentation
+
+4. Dags att visa våra kommentarer genom att skapa en ny komponent.
+
+```tsx
+// src/components/Comment.tsx
+import React from "react";
+import Image from "next/image";
+import type { RouterOutputs } from "@/utils";
+
+interface CommentProps {
+  // denna typescript type är lite svårt att förstå vid första glans
+  // men det den gör är att den kommer ta ut det som vår getCommentsForProblem funktion returnerar
+  // vilket är en array av kommentarer eller undefined
+  // NonNullable kommer göra så att vi enbart tar det "non-nullable" värdena, alltså inte undefined i detta fall
+  comment: NonNullable<
+    RouterOutputs["comment"]["getCommentsForProblem"]
+  >[number];
+}
+
+export const Comment: React.FC<CommentProps> = ({ comment }) => {
+  return (
+    <div className="flex gap-2">
+      <div className="relative h-10 w-10">
+        <Image
+          src={comment.user.image}
+          fill={true}
+          alt="user image"
+          className="inset-0 rounded-full object-cover"
+        />
+      </div>
+      <div>
+        <p>{comment.user.name}</p>
+        <p>{comment.text}</p>
+      </div>
+    </div>
+  );
+};
+```
+
+5. Nu kan vi använda den komponenten i **comments** pagen.
+
+```tsx
+// src/pages/problems/[id]/comments.tsx
+
+// alla andra import går här...
+
+import { Comment } from "@/components/Comment";
+
+// Att vår komponent har NextPageWithLayout om type låter oss lägga till .getLayout delen längre ner
+const Comments: NextPageWithLayout = () => {
+  const router = useRouter();
+  const {
+    data: comments,
+    isLoading,
+    isError,
+  } = trpc.comment.getCommentsForProblem.useQuery({
+    id: router.query.id as string,
+  });
+
+  // mutation och input staten går här ...
+
+  // loading och error states:en går här ...
+
+  return (
+    <div>
+      <div>
+        {/* Vi visar uppa alla våra kommentarer */}
+        {comments.map((comment) => (
+          <Comment key={comment.id} comment={comment} />
+        ))}
+      </div>
+      <div>{/* input fältet och knappen går här ... */}</div>
+    </div>
+  );
+};
+
+Comments.getLayout = (page) => <ProblemsLayout>{page}</ProblemsLayout>;
+
+export default Comments;
+```
+
+Och bara så, så har vi gjort en ny feature på Battleground som är redo att deploya.
