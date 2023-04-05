@@ -1,0 +1,44 @@
+{
+  // Place your ta-battleground workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  // Example:
+  "Typescript React functional component": {
+    "prefix": "rh",
+    "body": [
+      "import React from 'react'",
+      "",
+      "interface ${TM_FILENAME_BASE}Props {",
+      "$1",
+      "}",
+      "",
+      "export const $TM_FILENAME_BASE: React.FC<${TM_FILENAME_BASE}Props> = ({$2}) => {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t$3",
+      "\t\t</div>",
+      "\t)",
+      "}"
+    ]
+  },
+  "Next page": {
+    "prefix": "np",
+    "body": [
+      "import React from 'react'",
+      "import type { NextPage } from 'next'",
+      "",
+      "const $TM_FILENAME_BASE: NextPage = () => {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t$1",
+      "\t\t</div>",
+      "\t)",
+      "}",
+      "",
+      "export default $TM_FILENAME_BASE"
+    ]
+  }
+}

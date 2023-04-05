@@ -8,6 +8,29 @@ import BouncingBalls from "@/components/loaders/BouncingBalls";
 import Head from "next/head";
 import type { ProblemArgument } from "@/data/Problem";
 
+interface NavLinkProps {
+  href: string;
+  children: React.ReactNode;
+}
+
+const NavLink: React.FC<NavLinkProps> = ({ href, children }) => {
+  const router = useRouter();
+
+  return (
+    <Link
+      href={`/problems/${router.query.id}{href}`}
+      className={classNames(
+        "rounded-t-md py-2 px-4",
+        router.pathname === `/problems/[id]${href}`
+          ? "bg-bg-dimmed text-white"
+          : "transition-colors hover:bg-bg-dimmed/50"
+      )}
+    >
+      {children}
+    </Link>
+  );
+};
+
 interface ProblemsLayoutProps {
   children: React.ReactNode;
 }
@@ -34,39 +57,9 @@ const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
       </Head>
       <div className="flex flex-col lg:h-[calc(100vh-56px)]">
         <div className="flex flex-shrink-0 bg-bg-dark pt-2 text-sm text-text-dimmed">
-          <Link
-            href={`/problems/${router.query.id}`}
-            className={classNames(
-              "rounded-t-md py-2 px-4",
-              router.pathname === "/problems/[id]"
-                ? "bg-bg-dimmed text-white"
-                : "transition-colors hover:bg-bg-dimmed/50"
-            )}
-          >
-            Description
-          </Link>
-          <Link
-            href={`/problems/${router.query.id}/submissions`}
-            className={classNames(
-              "rounded-t-md py-2 px-4",
-              router.pathname === "/problems/[id]/submissions"
-                ? "bg-bg-dimmed text-white"
-                : "transition-colors hover:bg-bg-dimmed/50"
-            )}
-          >
-            Submissions
-          </Link>
-          <Link
-            href={`/problems/${router.query.id}/leaderboard`}
-            className={classNames(
-              "rounded-t-md py-2 px-4",
-              router.pathname === "/problems/[id]/leaderboard"
-                ? "bg-bg-dimmed text-white"
-                : "transition-colors hover:bg-bg-dimmed/50"
-            )}
-          >
-            Leaderboard
-          </Link>
+          <NavLink href="">Description</NavLink>
+          <NavLink href="/submissions">Submissions</NavLink>
+          <NavLink href="/leaderboard">Leaderboard</NavLink>
         </div>
         <div className="flex-1 overflow-scroll bg-bg-dimmed">{children}</div>
       </div>

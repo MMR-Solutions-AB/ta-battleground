@@ -117,13 +117,16 @@ model Problem {
 ```
 
 2. När det är gjort kan ska du pusha din changes så Planetscale kan ändra din riktiga databas, det gör du med **yarn db:push** och kom ihåg att du måste vara connectad till **dev** branchen
-3. Nu är det dags att skriva lite backend tRPC kod. Eftersom att detta är en ny sektion av vår databas vill vi nog skapa en ny fil i vår [src/server/trpc/router](./src/server/trpc/router) som vi kan kalla för **comment.ts**. Här kommer all backend kod leva för att läsa och skriva till våra kommentarer. I vår nya fil lägger vi till två funktioner, **getCommentsForProblem** och **sendComment**, namnen här spelar ju egentligen ingen roll så länge du tar något som du förstår. Detta hade kunnat sett ut så här exempelvis
+3. Nu är det dags att skriva lite backend tRPC kod. Eftersom att detta är en ny sektion av vår databas vill vi nog skapa en ny fil i vår [src/server/trpc/router](./src/server/trpc/router) som vi kan kalla för **comment.ts**, detta är dock absolut inte nödvändigt och vi kunde lika gärna skriva allt i vår **problem.ts** fil om vi vill men detta blir lite enklare att läsa. Här kommer all backend kod leva för att läsa och skriva till våra kommentarer. I vår nya fil lägger vi till två funktioner, **getCommentsForProblem** och **sendComment**, namnen här spelar ju egentligen ingen roll så länge du tar något som du förstår. Detta hade kunnat sett ut så här exempelvis
 
 ```ts
+// src/server/trpc/router/comment.ts
+import { z } from "zod";
 import { router, protectedProcedure } from "../trpc";
 
 export const commentRouter = router({
   getCommentsForProblem: protectedProcedure
+    // vi använder zod för att bestämma hur inputen till denna rout ska se ut
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       return ctx.prisma.comment.findMany({
@@ -140,12 +143,13 @@ export const commentRouter = router({
           },
         },
         orderBy: {
-          createdAt: "desc",
+          createdAt: "desc", // sortera på nyast till äldst
         },
       });
     }),
   sendComment: protectedProcedure
     .input(z.object({ id: z.string(), text: z.string() }))
+    // en mutation route kan du se som POST, PATCH och DELETE tillsammans
     .mutation(async ({ ctx, input }) => {
       return ctx.prisma.comment.create({
         data: {
@@ -157,6 +161,26 @@ export const commentRouter = router({
     }),
 });
 ```
+
+4. Nu måste vi länka denna kod in i vår router, det gör vi i vår [\_app.ts](./src/server/trpc/router/_app.ts) fil
+
+```ts
+// src/server/trpc/router/_app.ts
+import { router } from "../trpc";
+// alla andra import är här ...
+import { commentRouter } from "./comment";
+
+export const appRouter = router({
+  // alla andra routers är här ...
+  // vi säger att denna router heter "comment", detta kommer bestämma namnet vi kommer referera till i vår frontend kod
+  comment: commentRouter,
+});
+
+// export type definition of API
+export type AppRouter = typeof appRouter;
+```
+
+5. Nu är vår backend klar, väldigt smidigt och väldigt enkelt. Nu är det bara att faktiskt använde den koden i vår frontend, för att se hur man gör det, kolla på **Frontend** sektion.
 
 Återigen rekommenderas att du sitter lite med hela **create t3 app** stacken själv för att väldigt enkelt komma in i kodbasen, men annars kan du nog gissa dig fram lite.
 
@@ -172,13 +196,12 @@ Här är alla mappar du behöver hålla koll på när det kommer till frontenden
   - ModalContext.tsx - För att visa och gömma hela editor modal
 - [pages](./src/pages/) - Definierar alla olika url:er och vad som ska visas på det olika url:erna. Exempelvis i [pages/leaderboard.tsx](./src/pages/leaderboard.tsx) så kan du se vad som visas på **"/leaderboard"** url:en
 
-När det kommer till att hämta data från backenden till frontenden så används **tRPC** vilket är ett ramverk för att både backend men även frontend, och med det får vi extremt bra developer experience tack vara den **end-to-end typesafety** vi får. Hur tRPC funkar från ett backend perspektiv hittar du i **Backend** sektion ovanför. Men på frontend delen av applikation så använder tRPC **useQuery**, vilket är ett annat populärt npm paket, _under the hood_.
+När det kommer till att hämta data från backenden till frontenden så används **tRPC** vilket är ett ramverk för att både backend men även frontend, och med det får vi extremt bra developer experience tack vara den **end-to-end typesafety** vi får. Hur tRPC funkar från ett backend perspektiv hittar du i **Backend** sektion ovanför. Men på frontend delen av applikation så använder tRPC **useQuery**, vilket är ett annat populärt npm paket, _under the hood_. Så har du använt **useQuery** tidigare kommer mycket kännas bekant.
 
 För att fetcha en endpoint så börjar du med att importera **trpc** från **utils** mappen vilket du enkelt kan göra med **path alias "@/../"**. Sen använder du den variabel i din komponent för att välja vilken route du vill fetcha från samt vilken function du vill köra. Exempelvis nedan kan du se en komponent som fetchar från en route som heter **test** och kör **getNumber** function, samt hur backend koden för den routen hade sett ut
 
 ```tsx
 // src/components/MyComponent.tsx
-
 import { trpc } from "@/utils/trpc";
 
 export const MyComponent = () => {
@@ -192,9 +215,8 @@ export const MyComponent = () => {
 };
 ```
 
-```tsx
+```ts
 // src/server/trpc/router/test.ts
-
 import { router, protectedProcedure } from "../trpc";
 
 export const testRouter = router({
@@ -204,4 +226,154 @@ export const testRouter = router({
 });
 ```
 
-Om allting i exemplet ovan var correct, så som att lägga
+```ts
+// src/server/trpc/router/_app.ts
+import { router } from "../trpc";
+import { testRouter } from "./test";
+
+export const appRouter = router({
+  test: testRouter,
+});
+
+export type AppRouter = typeof appRouter;
+```
+
+Exemplet ovan var ett väldigt simpelt exempel som visade hur du kan fetcha lite data ifrån en komponent, nu ska vi gå igenom hur detta hade sett ut för ett större exempel genom att fortsatte på det exemplet vi hade i **Backend** delen med att skapa en kommentar sektion på alla problem.
+
+1. Först behöver vi skapa en url, något i stilen av **/problems/:id/comments** där vår sida för alla kommentarer ska visas. Så vi skapar filen **src/pages/problems/[id]/comments.tsx**. I den filen stoppar vi ner följande kod, som kommer fetcha alla comments för det problem vi är inne på och visa upp det som en json sträng (vi byter ut strängen i ett senare steg). Sidan kommer visa **BouncingBalls** komponenten ifall den håller på att ladda och ifall ett fel skulle inträffa eller vi inte fick någon data visar den ett simpelt litet error meddelande
+
+```tsx
+// src/pages/problems/[id]/comments.tsx
+import ProblemsLayout from "@/components/layouts/ProblemsLayout";
+import { trpc } from "@/utils/trpc";
+import { useRouter } from "next/router";
+import BouncingBalls from "@/components/loaders/BouncingBalls";
+import type { NextPageWithLayout } from "@/pages/_app";
+
+// Att vår komponent har NextPageWithLayout om type låter oss lägga till .getLayout delen längre ner
+const Comments: NextPageWithLayout = () => {
+  const router = useRouter();
+  const {
+    data: comments,
+    isLoading,
+    isError,
+  } = trpc.comment.getCommentsForProblem.useQuery({
+    id: router.query.id as string,
+  });
+
+  if (isLoading)
+    return (
+      <div className="mt-10 flex justify-center">
+        <BouncingBalls />
+      </div>
+    );
+
+  if (isError || !comments || comments.length === 0)
+    return (
+      <p className="p-6 text-xl font-bold">
+        Verkar som att det inte fanns några kommentarer
+      </p>
+    );
+
+  return <div>{JSON.stringify(comments)}</div>;
+};
+
+// Detta är en väldigt viktigt del då den kommer se till att hela vår komponent kommer hamna i den layouten som alla sidor på problems sektion av sidan har
+// Alltså att det editorn ligger till höger och all styling runt det
+Comments.getLayout = (page) => <ProblemsLayout>{page}</ProblemsLayout>;
+
+export default Comments;
+```
+
+Med det så borde vi nu kunna navigera till **/comments** väl inne på en uppgift och se våran sida. Däremot så behöver vi uppdatera navigationen på problems sidan så att det finns någonstans att trycka för att se kommentarerna.
+
+2. Så vi gör det i [src/components/layouts/ProblemsLayout](./src/components/layouts/ProblemsLayout.tsx)
+
+```tsx
+const ProblemsLayout: React.FC<ProblemsLayoutProps> = ({ children }) => {
+  // all annan kod ...
+
+  return (
+    // all annan kod ...
+    <div className="bg-bg-dark text-text-dimmed flex flex-shrink-0 pt-2 text-sm">
+      <NavLink href="">Description</NavLink>
+      <NavLink href="/submissions">Submissions</NavLink>
+      <NavLink href="/leaderboard">Leaderboard</NavLink>
+      <NavLink href="/comments">Comments</NavLink> // den här lägger vi till
+    </div>
+    // all annan kod ...
+  );
+};
+```
+
+Nu kommer vår sida ha en ny länk till till **/comments**
+
+3. Nästa steg blir nog att faktisk kunna skicka meddelanden. Vi har ju redan gjort en **sendComment** funktion på våran backend, nu behöver vi bara använda den. Eftersom att **sendComments** funktionen är en tRPC mutation så ska vi använda oss utav useMutation hooken. Så här hade koden för det sett ut
+
+```tsx
+// src/pages/problems/[id]/comments.tsx
+import ProblemsLayout from "@/components/layouts/ProblemsLayout";
+import { trpc } from "@/utils/trpc";
+import { useRouter } from "next/router";
+import BouncingBalls from "@/components/loaders/BouncingBalls";
+import type { NextPageWithLayout } from "@/pages/_app";
+import { useState } from "react";
+
+// Att vår komponent har NextPageWithLayout om type låter oss lägga till .getLayout delen längre ner
+const Comments: NextPageWithLayout = () => {
+  const router = useRouter();
+  const {
+    data: comments,
+    isLoading,
+    isError,
+  } = trpc.comment.getCommentsForProblem.useQuery({
+    id: router.query.id as string,
+  });
+  const sendCommentMutation = trpc.comment.sendComment.useMutation();
+  const [comment, setComment] = useState("");
+
+  if (isLoading)
+    return (
+      <div className="mt-10 flex justify-center">
+        <BouncingBalls />
+      </div>
+    );
+
+  if (isError || !comments || comments.length === 0)
+    return (
+      <p className="p-6 text-xl font-bold">
+        Verkar som att det inte fanns några kommentarer
+      </p>
+    );
+
+  return (
+    <div>
+      <div>{JSON.stringify(comments)}</div>
+      <div>
+        {/* För att hålla koll på det som användaren skriver */}
+        <input value={comment} onChange={(e) => setComment(e.target.value)} />
+        <button
+          // Man ska inte kunna trycka på knappen ifall den ifall vi har en mutation igång som håller på att laddas
+          disabled={sendCommentMutation.isLoading}
+          onClick={async () => {
+            // Det här är när vi faktiskt gör vår "POST" request
+            // om du kollar på vår sendComment funktion i vår backend kan du se att den tog två saker i vår input, id och text
+            const res = await sendCommentMutation.mutateAsync({
+              id: router.query.id as string,
+              text: comment,
+            });
+
+            console.log(res);
+          }}
+        >
+          Send comment
+        </button>
+      </div>
+    </div>
+  );
+};
+
+Comments.getLayout = (page) => <ProblemsLayout>{page}</ProblemsLayout>;
+
+export default Comments;
+```
