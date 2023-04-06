@@ -3,7 +3,7 @@ import type { Problem } from "../../../../Problem";
 export const data: Problem<string, number> = {
   name: "Count vowels",
   difficulty: "easy",
-  number: 71,
+  number: 61,
   arguments: [{ name: "s", type: "string" }],
   tags: ["strings"],
   testCases: [

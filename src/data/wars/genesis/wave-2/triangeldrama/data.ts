@@ -3,7 +3,7 @@ import type { Problem } from "../../../../Problem";
 export const data: Problem<number, string> = {
   name: "Triangeldrama",
   difficulty: "hard",
-  number: 64,
+  number: 63,
   arguments: [
     { name: "a", type: "number" },
     { name: "b", type: "number" },

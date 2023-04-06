@@ -1,4 +1,4 @@
-import type { Problem } from "../../Problem";
+import type { Problem } from "../../../../Problem";
 
 export const data: Problem<
   { [key: string]: number },
@@ -6,7 +6,7 @@ export const data: Problem<
 > = {
   name: "Objectively freaky friday",
   difficulty: "medium",
-  number: 20,
+  number: 62,
   arguments: [{ name: "d", type: "Object.<string, number>" }],
   tags: ["strings", "objects"],
   testCases: [

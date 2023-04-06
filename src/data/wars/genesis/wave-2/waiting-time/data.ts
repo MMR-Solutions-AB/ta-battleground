@@ -3,7 +3,7 @@ import type { Problem } from "../../../../Problem";
 export const data: Problem<object[], number> = {
   name: "Waiting time",
   difficulty: "easy",
-  number: 68,
+  number: 65,
   arguments: [
     { name: "patients", type: "{arrivalTime: number, startTime: number}[]" },
   ],

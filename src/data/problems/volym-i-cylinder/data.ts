@@ -1,9 +1,9 @@
-import type { Problem } from "../../../../Problem";
+import type { Problem } from "../../Problem";
 
 export const data: Problem<number, number> = {
   name: "Volym i cylinder",
   difficulty: "easy",
-  number: 72,
+  number: 27,
   arguments: [
     { name: "r", type: "number" },
     { name: "h", type: "number" },

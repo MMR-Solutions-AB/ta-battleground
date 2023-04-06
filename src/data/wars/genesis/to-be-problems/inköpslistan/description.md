@@ -22,4 +22,4 @@ s = [
 
 **_Förklaring_**
 
-Priset för att köpa en mango, mandarin och jordgubbar är $22
+Priset för att köpa en mango, mandarin och jordgubbar är **22**

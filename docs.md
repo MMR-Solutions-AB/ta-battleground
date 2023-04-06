@@ -460,9 +460,7 @@ Och bara så, så har vi gjort en ny feature på Battleground som är redo att d
 
 ## Hur lägger jag till nya problem, factions, medlemmar i factions och wars
 
-Denna process är super enkel och smidig samt väldigt automatiserad. För **problem, factions och wars** är det väldigt enkelt och kan nästan helt göras vi din terminal får ett kommando.
-
-Du hittar egentligen all data om både **problems och wars** i [src/data](./src/data) mappen. I den mappen hittar du ett par olika filer och mappar. Men det enda du egentligen kommer att röra är i [problems](./src/data/problems/) eller i [wars](./src/data/wars) mapparna. I **problems** mappen hittar du alla uppgifter som INTE är en **war** uppgift, varje uppgift är uppbyggt av exakt två filer, en **data.ts** fil som innehåller alla metadata om uppgiften som svårighetsgrad samt testcases bland annat, och en **description.md** fil som är en helt enkel markdown fil som är själva uppgiftens beskriven. Dessa filnamn är **väldigt** viktiga och måste heta så. Alla **wars** i **wars** mappen består utav en **war.ts** fil som innehåller all meta data om den war:en, så som namn och startdatum, här igen måste filen heta **war.ts**. Det finns även en **problems** map som innehåller alla problem för just den war:en som följer exakt samma struktur som i den vanliga **problems** mappen.
+Du hittar egentligen all data om både **problems och wars** i [src/data](./src/data) mappen. I den mappen hittar du ett par olika filer och mappar. Men det enda du egentligen kommer att röra är i [problems](./src/data/problems/) eller i [wars](./src/data/wars) mapparna. I **problems** mappen hittar du alla uppgifter som INTE är en **war** uppgift, varje uppgift är uppbyggt av exakt två filer, en **data.ts** fil som innehåller alla metadata om uppgiften så som **svårighetsgrad** samt **testcases** bland annat, och en **description.md** fil som är en helt enkel markdown fil som är själva uppgiftens beskriven. Dessa filnamn är **väldigt** viktiga och måste heta så. Alla **wars** i **wars** mappen består utav en **war.ts** fil som innehåller all meta data om den war:en, så som namn och startdatum, här igen måste filen heta **war.ts**. Det finns även en **problems** map som innehåller alla problem för just den war:en som följer exakt samma struktur som i den vanliga **problems** mappen.
 
 ### Lägga till Problems
 
@@ -472,4 +470,4 @@ I din terminal skriv
 yarn gen
 ```
 
-Den kommer nu fråga dig ett par olika frågor, så som namnet på problemet, svårighetsgrad, samt ifall du vill att detta ska vara en uppgift till en **war**
+Den kommer nu fråga dig ett par olika frågor, så som namnet på problemet, svårighetsgrad, samt ifall du vill att detta ska vara en uppgift till en **war**. När du valt allting så kommer en ny map skapas för din nya uppgift
