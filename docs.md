@@ -483,6 +483,7 @@ Nedan ser du ett exempel ifrån **Simple addition** uppgiften. Här kommer även
 3. Det första vi stoppar in i objektet är vilket namn den ska ha, denna kommer redan var ifylld med det du valde när du gjorde den nya uppgiften
 4. Sedan väljer vi svårighetsgrad, denna kommer redan var ifylld med det du valde när du gjorde den nya uppgiften
 5. Efter det kommer uppgiftens nummer, detta är en väldigt viktig del. Alla uppgifter måste ha en unikt nummer eftersom att när du ska lägga upp uppgifterna till databasen så kommer den använda numrerna för att veta vilken den ska lägga till samt vilka den ska uppdatera. Numret kommer redan vara ifylld när du skapar uppgiften, detta är inget du behöver lägga till. Hur den vet vilket nummer den ska skapa är att den läser igenom alla uppgifter som finns och hittar det största numret och tar det plus 1. Detta innebär att ifall du skulle exempelvis ha **5** uppgifter med följande nummer **1, 2, 3, 4, 5** så kommer den nya uppgiften få nummer **6**. Men ifall du har **5** uppgifter med följande nummer **1, 2, 4, 5, 6** så kommer du få nummer **7** och inte **3** även om det saknas en uppgift för det numret
+6. Arguments delen är där du speciefera vilka argument funktionen ska ha och vilka typer det argumenten ska vara. Exemplvis nedan säger vi funktionen ska ta emot två argument, **a** och **b** som båda ska vara nummer.
 
 ```ts
 import type { Problem } from "../../Problem";
