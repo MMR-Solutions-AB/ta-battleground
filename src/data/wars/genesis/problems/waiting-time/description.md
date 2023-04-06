@@ -17,7 +17,7 @@ patients = [
 **_Output_**
 
 ```bash
-167
+200
 ```
 
 ## Exempel 2

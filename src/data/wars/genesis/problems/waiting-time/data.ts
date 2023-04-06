@@ -17,7 +17,7 @@ export const data: Problem<object[], number> = {
           { arrivalTime: 29000, startTime: 29200 },
         ],
       ],
-      output: 167,
+      output: 200,
     },
     {
       input: [[{ arrivalTime: 1000, startTime: 1500 }]],

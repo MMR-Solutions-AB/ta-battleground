@@ -483,7 +483,9 @@ Nedan ser du ett exempel ifrån **Simple addition** uppgiften. Här kommer även
 3. Det första vi stoppar in i objektet är vilket namn den ska ha, denna kommer redan var ifylld med det du valde när du gjorde den nya uppgiften
 4. Sedan väljer vi svårighetsgrad, denna kommer redan var ifylld med det du valde när du gjorde den nya uppgiften
 5. Efter det kommer uppgiftens nummer, detta är en väldigt viktig del. Alla uppgifter måste ha en unikt nummer eftersom att när du ska lägga upp uppgifterna till databasen så kommer den använda numrerna för att veta vilken den ska lägga till samt vilka den ska uppdatera. Numret kommer redan vara ifylld när du skapar uppgiften, detta är inget du behöver lägga till. Hur den vet vilket nummer den ska skapa är att den läser igenom alla uppgifter som finns och hittar det största numret och tar det plus 1. Detta innebär att ifall du skulle exempelvis ha **5** uppgifter med följande nummer **1, 2, 3, 4, 5** så kommer den nya uppgiften få nummer **6**. Men ifall du har **5** uppgifter med följande nummer **1, 2, 4, 5, 6** så kommer du få nummer **7** och inte **3** även om det saknas en uppgift för det numret
-6. Arguments delen är där du speciefera vilka argument funktionen ska ha och vilka typer det argumenten ska vara. Exemplvis nedan säger vi funktionen ska ta emot två argument, **a** och **b** som båda ska vara nummer.
+6. Arguments delen är där du speciefera vilka argument funktionen ska ha och vilka typer det argumenten ska vara. Exempelvis nedan säger vi att funktionen ska ta emot två argument, **a** och **b** som båda ska vara nummer. Det du skriver i **type** key:n ska vara i **JSDocs** format. Du får gärna googla det för att se hur du gör olika grejer där
+7. Tags delen specificerar vilka tags som ska finnas. Dessa kommer vara ifyllda redan från att du valde det i terminalen när du skapade uppgiften
+8. Sist men absolut inte minst har vi **testCases**. Här är det där du bestämmer alla testcases som kommer köras när en elev submittar deras kod. Alla objekt innan för ska ha exakt två keys, **input** och **output**. Hur dessa ska se ut beror lite på vilka types du la när du defienerade din data variabel. Däremot så måste **input** alltid vara en array, sen vad som står innanför den spelar inte lika stor roll, men oavsett vad ska **input** vara en array
 
 ```ts
 import type { Problem } from "../../Problem";
@@ -513,3 +515,54 @@ export const data: Problem<number, number> = {
   ],
 };
 ```
+
+##### description.md
+
+Denna fil är själva förklaringen på uppgiften som eleverna kommer se. Filen är en **markdown** fil. Denna fil kommer redan ha lite start text som du kan använda som ett start spår på hur det ska se ut, men du kommer vara tvungen att ändra en hel del för att faktiskt ha din egna fråga
+
+### Lägg upp ditt problem på databasen eller uppdatera befintliga problem
+
+Nu när du har gjort dina problem och faktiskt vill pusha upp dessa på databasen. Då är det bara två saker att göra:
+
+1. Först, navigera till [prisma/seed.ts](./prisma/seed.ts) filen, och se till att både **syncDBWithWars** och **syncDBWithProblems** funktionerna inte är ut-kommenterade. Det spelar ingen roll ifall det andra funktioner är ut-kommenterade eller inte. Du hittar mer om info om denna fil och vad alla funktioner gör längre ner i dokumentet
+
+```ts
+import { prisma } from "../src/server/db/client";
+import { syncDBWithFactions } from "./runners/syncDBWithFactions";
+import { syncDBWithProblems } from "./runners/syncDBWithProblems";
+import { syncDBWithWars } from "./runners/syncDBWithWars";
+import { syncDBWithUserScores } from "./runners/syncDBWithUserScores";
+import { syncDBWithWarScores } from "./runners/syncDBWithWarScores";
+
+async function main() {
+  // await syncDBWithFactions();
+
+  // add and update all wars
+  await syncDBWithWars();
+
+  // add and update all problems
+  await syncDBWithProblems();
+
+  // await syncDBWithWarScores();
+
+  // await syncDBWithUserScores();
+}
+
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
+```
+
+2. Nu är det bara att skriva följande kommando i terminalen. Detta kommer köra ett script som syncar alla problem bland dina filer med det som finns i databasen
+
+```bash
+   yarn db:seed
+```
+
+Nu kommer dina problem vara syncade i den databasen du är connected till. Så ifall du är connectad till **main** databasen så kommer riktiga **battelground** få det ändringar du gjort. Denna funktion kommer inte bara skapa nya problem, utan den kommer också uppdatera alla befintliga problem med hjälp utav alla nummer som problemen har
