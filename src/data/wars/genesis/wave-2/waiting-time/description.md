@@ -6,12 +6,12 @@ Skriv en funktion **waitingTime(patients)** som tar emot en lista av objekt, pat
 
 **_Input_**
 
-```bash
+```js
 patients = [
-{ "arrivalTime": 28800, "startTime": 29000 },
-{ "arrivalTime": 28900, "startTime": 29100 },
-{ "arrivalTime": 29000, "startTime": 29200 }
-]
+  { arrivalTime: 28800, startTime: 29000 },
+  { arrivalTime: 28900, startTime: 29100 },
+  { arrivalTime: 29000, startTime: 29200 },
+];
 ```
 
 **_Output_**
@@ -24,16 +24,12 @@ patients = [
 
 **_Input_**
 
-```bash
-patients = [
-{ "arrivalTime": 28800, "startTime": 29000 },
-{ "arrivalTime": 28900, "startTime": 29200 },
-{ "arrivalTime": 29000, "startTime": 29400 }
-]
+```js
+patients = [{ arrivalTime: 1000, startTime: 1500 }];
 ```
 
 **_Output_**
 
 ```bash
-300
+500
 ```

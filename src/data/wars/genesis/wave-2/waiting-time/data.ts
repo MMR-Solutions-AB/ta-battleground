@@ -20,24 +20,19 @@ export const data: Problem<object[], number> = {
       output: 167,
     },
     {
-      input: [
-        [
-          { arrivalTime: 28800, startTime: 29000 },
-          { arrivalTime: 28900, startTime: 29200 },
-          { arrivalTime: 29000, startTime: 29400 },
-        ],
-      ],
-      output: 300,
+      input: [[{ arrivalTime: 1000, startTime: 1500 }]],
+      output: 500,
     },
     {
       input: [
         [
-          { arrivalTime: 28900, startTime: 29000 },
-          { arrivalTime: 28900, startTime: 29100 },
-          { arrivalTime: 29200, startTime: 29300 },
+          { arrivalTime: 0, startTime: 100 },
+          { arrivalTime: 0, startTime: 500 },
+          { arrivalTime: 0, startTime: 200 },
+          { arrivalTime: 0, startTime: 420 },
         ],
       ],
-      output: 100,
+      output: 305,
     },
     {
       input: [

@@ -470,4 +470,45 @@ I din terminal skriv
 yarn gen
 ```
 
-Den kommer nu fråga dig ett par olika frågor, så som namnet på problemet, svårighetsgrad, samt ifall du vill att detta ska vara en uppgift till en **war**. När du valt allting så kommer en ny map skapas för din nya uppgift
+Den kommer nu fråga dig ett par olika frågor, så som namnet på problemet, svårighetsgrad, samt ifall du vill att detta ska vara en uppgift till en **war**. När du valt allting så kommer en ny map skapas för din nya uppgift, den nya mappen kommer ligga [src/data/problems](./src/data/problems) ifall du inte ville ha en war uppgift annars hamnar den i **problems** mappen för den waren du valde.
+
+Som sagt kommer alla uppgifter bestå utav två filer, **data.ts** och **description.md**. Låt oss kolla på dessa två filer för att första vad det gör och hur du ska använda det.
+
+##### data.ts
+
+Nedan ser du ett exempel ifrån **Simple addition** uppgiften. Här kommer även förklaring på vad det olika raderna gör och bra saker du måste hålla koll på
+
+1. Vi börjar med att importera **Problem** typen ifrån [Problem.ts](./src/data/Problem.ts) filen. Denna type kommer hjälpa oss att undvika fel i våran kod tack vare typescript
+2. Vi exporterar sedan en variabel som heter **data**, det är viktigt att den heter **data** eftersom att när vi sen ska pusha våra uppgifter till vår databas så kommer inte det gå om den heter någon annat. En annan viktig del här är att vi skriver att denna **data** variabel ska vara type **Problem<number, number>** vilket kortfattat kommer ge oss intellisense. Denna del kan vara lite förvirrande ifall du är ny till Typescript men just **<number, number>** delen är vad som kallas för generics i Typescript och är lite som att stoppa in argument i en type för att ändra den lite. I detta fall så bestämmer det två vilken type vår **input** och **output** ska ha i våra testcase längre ner. Vi säger att båda ska vara nummer eftersom att vår funktion ska ta in nummer som argument och ska returnera ett nummer också, detta betyder att ifall du skulle försöka skriva att en av testcasen skulle returnera en sträng så kommer VS code bli röd och varna dig. Denna del är lite förvirrandde och det blir nog mycket svårare ifall du inte använt Typescript tidigare. Ifall du blir väldigt frustrerad på att det inte går kan du säga att båda är type **any**, alltså **Problem<any, any>**, detta kommer låta dig skriva vad som helst som input och output. Hela type grejen här är egentligen inte super viktig utan är enbart till för att underlätta för oss när vi jobbar på, så om det bara ställer till det med problem kan du bara köra **any**, det är fine
+3. Det första vi stoppar in i objektet är vilket namn den ska ha, denna kommer redan var ifylld med det du valde när du gjorde den nya uppgiften
+4. Sedan väljer vi svårighetsgrad, denna kommer redan var ifylld med det du valde när du gjorde den nya uppgiften
+5. Efter det kommer uppgiftens nummer, detta är en väldigt viktig del. Alla uppgifter måste ha en unikt nummer eftersom att när du ska lägga upp uppgifterna till databasen så kommer den använda numrerna för att veta vilken den ska lägga till samt vilka den ska uppdatera. Numret kommer redan vara ifylld när du skapar uppgiften, detta är inget du behöver lägga till. Hur den vet vilket nummer den ska skapa är att den läser igenom alla uppgifter som finns och hittar det största numret och tar det plus 1. Detta innebär att ifall du skulle exempelvis ha **5** uppgifter med följande nummer **1, 2, 3, 4, 5** så kommer den nya uppgiften få nummer **6**. Men ifall du har **5** uppgifter med följande nummer **1, 2, 4, 5, 6** så kommer du få nummer **7** och inte **3** även om det saknas en uppgift för det numret
+
+```ts
+import type { Problem } from "../../Problem";
+
+export const data: Problem<number, number> = {
+  name: "Simple addition",
+  difficulty: "easy",
+  number: 1,
+  arguments: [
+    { name: "a", type: "number" },
+    { name: "b", type: "number" },
+  ],
+  tags: ["basics", "numbers"],
+  testCases: [
+    {
+      input: [1, 2],
+      output: 3,
+    },
+    {
+      input: [100, 12],
+      output: 112,
+    },
+    {
+      input: [87, 0],
+      output: 87,
+    },
+  ],
+};
+```
