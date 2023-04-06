@@ -1,6 +1,6 @@
 # Count vowels
 
-Skriv en funktion **countVowels(s)** som tar emot en sträng s. Funktionen ska returnera antalet vokaler i strängen s.
+Skriv en funktion **countVowels(s)** som tar emot en sträng s. Funktionen ska returnera antalet vokaler i strängen s. Vokalerna i det engelska alfabetet är **"a, e, i, o ,u"**
 
 ## Exempel 1
 

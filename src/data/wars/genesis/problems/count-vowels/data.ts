@@ -13,11 +13,19 @@ export const data: Problem<string, number> = {
     },
     {
       input: [`"techover"`],
-      output: 2,
+      output: 3,
     },
     {
       input: [`"happy"`],
       output: 1,
+    },
+    {
+      input: [`"bbc"`],
+      output: 0,
+    },
+    {
+      input: [`"aeiou"`],
+      output: 5,
     },
     {
       input: [`"vowels"`],
