@@ -3,7 +3,7 @@ import type { Problem } from "../../../../Problem";
 export const data: Problem<number[], number> = {
   name: "Average grade",
   difficulty: "easy",
-  number: 69,
+  number: 66,
   arguments: [{ name: "grades", type: "number[]" }],
   tags: ["numbers", "arrays"],
   testCases: [
