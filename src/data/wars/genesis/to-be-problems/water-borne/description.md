@@ -8,7 +8,7 @@ Skriv en funktion **waterBorne(transport,hamn)** som tar emot två argument, tra
 
 ```bash
 transport = "båt"
-port = ["fartyg","båt""kryssningsfartyg" "båt"]
+port = ["fartyg", "båt", "kryssningsfartyg", "båt"]
 ```
 
 **_Output_**
@@ -23,7 +23,7 @@ port = ["fartyg","båt""kryssningsfartyg" "båt"]
 
 ```bash
 transport = "kryssningsfartyg"
-port = ["fartyg", "båt", "kryssningsfartyg","båt","färja",]
+port = ["fartyg", "båt", "kryssningsfartyg", "båt", "färja"]
 ```
 
 **_Output_**

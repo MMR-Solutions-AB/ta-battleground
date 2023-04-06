@@ -19,6 +19,10 @@ export const data: Problem<string, string> = {
       output: "lo",
     },
     {
+      input: [`"marcus"`, `"filip"`],
+      output: "",
+    },
+    {
       input: [`"matheus"`, `"mendes"`],
       output: "ems",
     },

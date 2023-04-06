@@ -1,6 +1,6 @@
 # Total area
 
-Skriv en funktion **totalArea(houses)** som tar emot en lista av objekt, **houses**. Varje objekt representerar ett hus och har två egenskaper, "width" och "length" som representerar husets bredd och längd i meter. Funktionen ska returnera totala ytan för alla hus i kvadratmeter.
+Skriv en funktion **totalArea(houses)** som tar emot en lista av objekt, **houses**. Varje objekt representerar ett hus och har två egenskaper, **"width"** och **"length"** som representerar husets bredd och längd i meter. Funktionen ska returnera totala ytan för alla hus i kvadratmeter.
 
 ## Exempel 1
 

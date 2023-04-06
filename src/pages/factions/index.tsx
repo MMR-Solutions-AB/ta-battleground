@@ -9,7 +9,6 @@ import FactionsDisplay from "@/components/faction/FactionsDisplay";
 
 const Factions: NextPage = () => {
   const { data: war, isLoading } = trpc.war.getCurrentWar.useQuery();
-  console.log(war);
 
   return (
     <WrappedLayout>
