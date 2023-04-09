@@ -559,10 +559,48 @@ main()
   });
 ```
 
-2. Nu är det bara att skriva följande kommando i terminalen. Detta kommer köra ett script som syncar alla problem bland dina filer med det som finns i databasen
+2. Nu är det bara att skriva följande kommando i terminalen. Detta kommer köra ett script som syncar alla problem bland dina filer med det som finns i databasen. Hur koden gör det kan du lista ut om du följer koden, men det är inte super viktigt, utan den viktiga är **ATT** den gör det.
 
 ```bash
    yarn db:seed
 ```
 
-Nu kommer dina problem vara syncade i den databasen du är connected till. Så ifall du är connectad till **main** databasen så kommer riktiga **battelground** få det ändringar du gjort. Denna funktion kommer inte bara skapa nya problem, utan den kommer också uppdatera alla befintliga problem med hjälp utav alla nummer som problemen har
+Nu kommer dina problem vara syncade i den databasen du är connected till. Så ifall du är connectad till **main** databasen så kommer riktiga **battelground** få det ändringar du gjort. Denna funktion kommer inte bara skapa nya problem, utan den kommer också uppdatera alla befintliga problem med hjälp utav alla nummer som problemen har. Så skulle du hitta ett stav fel i vilken uppgift som helst exempelvis så är det bara att fixa det felet i den file, sen köra **yarn db:seed** igen så kommer det uppdateras.
+
+### Hur skapar jag nya factions.
+
+I [prisma/runners/syncDBWithFactions.ts](./prisma/runners/syncDBWithFactions.ts) filen finns det en variabel som heter **baseFactions**, lägger du till en ny faction där och sen ser till att **syncDBWithFactions** funktionen inte är utkommenderad i [prisma/seed.ts](./prisma/seed.ts) filen så kommer den nya factinen skapas. Notera dock att den kommer skapa en ny faction i databasen och inte lägga till denna faction i alla befintliga wars. Vill du se till att den nya factionen ska vara med i den nya war:en, så får du göra det i prisma studio på enklast sätt. Alla factions har en **image** key som referar till en bild i [/public/banners](./public/banners/) mappen, så när du skapar en ny faction bör du också skapa en ny banner. Alla banners är skapa på [haikei](https://app.haikei.app/)
+
+```ts
+// prisma/runners/syncDBWithFactions.ts
+const baseFactions: Prisma.FactionCreateInput[] = [
+  ...{ name: "New faction", image: "banner-5.svg" },
+];
+
+// prisma/seed.ts
+async function main() {
+  // make sure all factions are there
+  await syncDBWithFactions();
+}
+```
+
+### Hur skapar jag nya wars
+
+Du börjar med att skriva följande i terminalen:
+
+```bash
+yarn gen:w
+```
+
+Efter du valt ett namn kommer en ny map skapas i [/data/wars](./data/wars) mappen för den war:en. I den mappen finns en fil som heter **war.ts** och en tom map som heter **problems**.
+
+När det kommer till metadatan du hittar i **war.ts** filen så är det ganska straight forward men ett par saker att hålla koll på är.
+
+1. Se till att inte byta nummer på din war om du inte verkligen har en bra anledning. Precis som alla uppgifter så är nummrerna till för att enkelt kunna uppdatera och skapa nya wars.
+2. Start och slutdatumen kan vara lite tricky eftersom att tidszoner kan vara lite förvirrande. Här la jag aldrig riktigt super mycket tid på att testa det men det man hade möjligtvis kunna bestämma i vilken tidszon tiden du bestämmer är i, men det testade jag aldrig. Var bara lite vaksam att tiden du bestämt är den som hemsidan visar
+
+För att lägga till problem så gäller det bara att du har dina problem i **problems** mappen. När du skapar nya problem med `yarn gen` så kommer du bli frågad ifall du vill ha den uppgiften i en war, så det borde gå på automatik
+
+För att lägga upp din war och alla dess problem så är det bara att se till att **syncDBWithWars** och **syncDBWithProblems** funktionerna i [prisma/seed.ts](./prisma/seed.ts) inte är utkommenderade och sen köra `yarn db:seed`.
+
+Själva hemsidan kommer se till att bara visa den nuvarande war:en, så det är helt okej att du pushar nya wars till databasen även om den nuvarande waren inte är klar. Samma sak med alla uppgifter för den waren. Ifall war:en som en uppgift är till för inte har börjat än så kommer man inte kunna se den på hemsidan någonstans. Med det sagt så komemr det bara funka om dina tider för start- och slutdatum inte överlappar med varanda för det olika warsen.
