@@ -603,4 +603,25 @@ För att lägga till problem så gäller det bara att du har dina problem i **pr
 
 För att lägga upp din war och alla dess problem så är det bara att se till att **syncDBWithWars** och **syncDBWithProblems** funktionerna i [prisma/seed.ts](./prisma/seed.ts) inte är utkommenderade och sen köra `yarn db:seed`.
 
-Själva hemsidan kommer se till att bara visa den nuvarande war:en, så det är helt okej att du pushar nya wars till databasen även om den nuvarande waren inte är klar. Samma sak med alla uppgifter för den waren. Ifall war:en som en uppgift är till för inte har börjat än så kommer man inte kunna se den på hemsidan någonstans. Med det sagt så komemr det bara funka om dina tider för start- och slutdatum inte överlappar med varanda för det olika warsen.
+Själva hemsidan kommer se till att bara visa den nuvarande war:en, så det är helt okej att du pushar nya wars till databasen även om den nuvarande waren inte är klar. Samma sak med alla uppgifter för den waren. Ifall war:en som en uppgift är till för inte har börjat än så kommer man inte kunna se den på hemsidan någonstans. Med det sagt så kommer det bara funka om dina tider för start- och slutdatum inte överlappar med varanda för det olika warsen.
+
+### Hur lägger jag till medlemmar i en faction och redigerar befintliga
+
+Detta gör du i **prisma studio** enklast. Du öppnar den via att skriva `yarn studio` i terminalen.
+
+1. Välj **FactionMember** tablen
+2. Tryck på **Add record**
+3. Tryck på **faction** columnen, välj den factionen du vill att den nya membern ska vara med i
+4. Tryck på **user** columnen, välj den användaren du vill ska gå med i factionen
+5. Tryck på den gröna knappen där det står **Save 1 change**
+6. Klart!
+
+Här har du ett exemempel på hur det ska se ut precis innan du sparat den nya medlemmen. För att lite enklare förstå varför detta funkar kan du kolla på hur [SQL Schema](https://drawsql.app/teams/matheus-mendes/diagrams/battleground) ser ut
+
+![Prisma studio](public/prisma-studio.png)
+
+För att radera användare är det bara att markera den användaren via checkboxen till vänster i prisma studio och sen trycka på **Delete 1 record**
+
+## Hur deployar jag
+
+För att deploya gäller det bara att du pushar din ändringar till **main** branchen på GitHub. Vercel, vilket är det som används för att deploya, kommer automatiskt redeploya. När Vercel redeployar så kommer den bygga hela ditt projekt och ifall
