@@ -13,7 +13,7 @@ export const data: Problem<number[], number> = {
     },
     {
       input: [[90, 85, 100, 95, 80]],
-      output: 91,
+      output: 90,
     },
     {
       input: [[80, 91, 65, 30, 76, 98]],
