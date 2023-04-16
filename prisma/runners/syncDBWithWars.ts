@@ -1,5 +1,5 @@
-import { getAllWars } from "@/data/getAllWars";
 import { prisma } from "../../src/server/db/client";
+import { getAllWars } from "../../src/data/getAllWars";
 
 // This function populates the DB with all wars
 // It uses the number column on each war to create and override
