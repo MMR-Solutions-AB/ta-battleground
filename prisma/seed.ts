@@ -12,12 +12,12 @@ async function main() {
   // add and update all wars
   // await syncDBWithWars();
   // add and update all problems
-  // await syncDBWithProblems();
+  await syncDBWithProblems();
   // sync db with correct war scores
-  // await syncDBWithWarScores();
+  await syncDBWithWarScores();
   // make sure all scores are up to date
   // this does not to be used unless user table gets out of sync
-  // await syncDBWithUserScores();
+  await syncDBWithUserScores();
 }
 
 main()
