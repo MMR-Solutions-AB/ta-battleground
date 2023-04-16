@@ -21,44 +21,6 @@ export async function syncDBWithWars() {
         number: war.number,
         startTime: war.startTime,
         endTime: war.endTime,
-        problems: {
-          upsert: war.problems.map((problem) => ({
-            where: { number: problem.number },
-            update: {
-              description: problem.description,
-              name: problem.name,
-              testCases: problem.testCases,
-              arguments: problem.arguments,
-              number: problem.number,
-              difficulty: problem.difficulty,
-              tags: {
-                set: [],
-                connectOrCreate: problem.tags.map((tag) => ({
-                  where: { name: tag },
-                  create: {
-                    name: tag,
-                  },
-                })),
-              },
-            },
-            create: {
-              description: problem.description,
-              name: problem.name,
-              testCases: problem.testCases,
-              arguments: problem.arguments,
-              number: problem.number,
-              difficulty: problem.difficulty,
-              tags: {
-                connectOrCreate: problem.tags.map((tag) => ({
-                  where: { name: tag },
-                  create: {
-                    name: tag,
-                  },
-                })),
-              },
-            },
-          })),
-        },
       },
       create: {
         name: war.name,
