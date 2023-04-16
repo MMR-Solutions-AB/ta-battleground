@@ -7,7 +7,7 @@ import { syncDBWithWarScores } from "./runners/syncDBWithWarScores";
 
 async function main() {
   // make sure all factions are there
-  // await syncDBWithFactions();
+  await syncDBWithFactions();
 
   // add and update all wars
   await syncDBWithWars();
@@ -16,11 +16,11 @@ async function main() {
   await syncDBWithProblems();
 
   // sync db with correct war scores
-  // await syncDBWithWarScores();
+  await syncDBWithWarScores();
 
   // make sure all scores are up to date
   // this does not to be used unless user table gets out of sync
-  // await syncDBWithUserScores();
+  await syncDBWithUserScores();
 }
 
 main()
