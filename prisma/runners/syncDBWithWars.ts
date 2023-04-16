@@ -14,7 +14,7 @@ export async function syncDBWithWars() {
     const war = wars[i];
     if (!war) continue;
 
-    await prisma.war.upsert({
+    const warDB = await prisma.war.upsert({
       where: { number: war.number },
       update: {
         name: war.name,
@@ -27,24 +27,6 @@ export async function syncDBWithWars() {
         number: war.number,
         startTime: war.startTime,
         endTime: war.endTime,
-        problems: {
-          create: war.problems.map((problem) => ({
-            description: problem.description,
-            name: problem.name,
-            testCases: problem.testCases,
-            arguments: problem.arguments,
-            number: problem.number,
-            difficulty: problem.difficulty,
-            tags: {
-              connectOrCreate: problem.tags.map((tag) => ({
-                where: { name: tag },
-                create: {
-                  name: tag,
-                },
-              })),
-            },
-          })),
-        },
         contenders: {
           createMany: {
             data: factions.map((faction) => ({ factionId: faction.id })),
@@ -52,5 +34,46 @@ export async function syncDBWithWars() {
         },
       },
     });
+
+    for (const problem of war.problems) {
+      await prisma.problem.upsert({
+        where: { number: problem.number },
+        update: {
+          description: problem.description,
+          name: problem.name,
+          testCases: problem.testCases,
+          arguments: problem.arguments,
+          number: problem.number,
+          difficulty: problem.difficulty,
+          warId: warDB.id,
+          tags: {
+            set: [],
+            connectOrCreate: problem.tags.map((tag) => ({
+              where: { name: tag },
+              create: {
+                name: tag,
+              },
+            })),
+          },
+        },
+        create: {
+          description: problem.description,
+          name: problem.name,
+          arguments: problem.arguments,
+          testCases: problem.testCases,
+          number: problem.number,
+          difficulty: problem.difficulty,
+          warId: warDB.id,
+          tags: {
+            connectOrCreate: problem.tags.map((tag) => ({
+              where: { name: tag },
+              create: {
+                name: tag,
+              },
+            })),
+          },
+        },
+      });
+    }
   }
 }
