@@ -3,7 +3,7 @@ import { router, protectedProcedure } from "../trpc";
 
 export const warRouter = router({
   getCurrentWar: protectedProcedure.query(async ({ ctx }) => {
-    const warSelector: Prisma.WarSelect = {
+    const warSelector = {
       id: true,
       name: true,
       number: true,
@@ -102,9 +102,9 @@ export const warRouter = router({
           score: "desc",
         },
       },
-    };
+    } satisfies Prisma.WarSelect;
 
-    const currentActiveWar = ctx.prisma.war.findFirst({
+    const currentActiveWar = await ctx.prisma.war.findFirst({
       where: {
         endTime: {
           gt: new Date(), // exclude war that has finished already
@@ -118,12 +118,12 @@ export const warRouter = router({
 
     return (
       currentActiveWar ||
-      ctx.prisma.war.findFirst({
+      (await ctx.prisma.war.findFirst({
         orderBy: {
           startTime: "desc",
         },
         select: warSelector,
-      })
+      }))
     );
   }),
 });
