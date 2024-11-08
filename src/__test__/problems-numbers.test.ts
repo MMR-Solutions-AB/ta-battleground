@@ -1,6 +1,8 @@
 import { expect, test } from "vitest";
 import { getAllProblems } from "../data/getAllProblems";
 
+console.log("Running Node.js version:", process.version);
+
 test("Check for same number on problems", async () => {
   const problems = (await getAllProblems()).sort((a, b) => a.number - b.number);
   const problemNumbers = problems.map((problem) => problem.number);
